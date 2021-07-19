@@ -1,2 +1,2 @@
 # VGAE 
-variational graph autoencoder model implementation
+variational graph autoencoder 
