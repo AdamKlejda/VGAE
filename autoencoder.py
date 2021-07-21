@@ -1,6 +1,6 @@
 from tensorflow.keras.models import Model
 import tensorflow.keras.layers as layers
-from spektral.layers import GCNConv, 
+from spektral.layers import GCNConv
 import tensorflow as tf
 
 
@@ -30,11 +30,11 @@ class Sampling(layers.Layer):
 
 
 class Autoencoder(Model):
-    def __init__(self, latent_dim,n_hidden,n_samples):
+    def __init__(self, latent_dim,n_hidden,n_samples,adjency_size):
         super(Autoencoder, self).__init__()
         self.n_samples= n_samples
         self.latent_dim = latent_dim
-        
+        self.adjency_size = adjency_size
 #         encoder
         self.conv1 = GCNConv(n_hidden, activation='relu')
         self.flat1 = layers.Flatten()
@@ -46,13 +46,13 @@ class Autoencoder(Model):
         self.z_log_var = layers.Dense(latent_dim,name="z_log_var")
         
         # decoder A        
-        self.dense2 = layers.Dense(100, activation='sigmoid')
-        self.reshape2 = layers.Reshape((10, 10))
+        self.dense2 = layers.Dense(self.adjency_size*self.adjency_size, activation='sigmoid')
+        self.reshape2 = layers.Reshape((self.adjency_size, self.adjency_size))
         
         # decoder X
 #         self.conv3 = GCNConv(n_hidden, activation='tanh')
-        self.dense3  = layers.Dense(140, activation='tanh')
-        self.reshape3 = layers.Reshape((10, 14))
+        self.dense3  = layers.Dense(self.adjency_size*14, activation='tanh')
+        self.reshape3 = layers.Reshape((self.adjency_size, 14))
     
     def call(self, x):
         x,a = x

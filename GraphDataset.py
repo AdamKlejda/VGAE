@@ -36,7 +36,6 @@ class GraphDataset(Dataset):
                         out.append(self.transformer.getGrafFromString(g['genotype']))
                 except Exception as e:
                     print(e)
-                    print("pass")
 #                 break
                 counter +=1
 #                 if counter > 10:

@@ -6,9 +6,9 @@ path='/home/adam/Framsticks/Framsticks50rc19'
 
 class FramsTransformer():
     frams = frams
-    orto_max = 100
+    orto_max = 10
     
-    def __init__(self,path,size_of_adj=10) -> None:
+    def __init__(self,path,size_of_adj=30) -> None:
         self.frams.init(path)
         self.size_of_adj = size_of_adj
 
@@ -28,20 +28,20 @@ class FramsTransformer():
         return aMatrix
 
     def getPartFeaturesArray(self,part):
-        return np.array([part.x._value()/self.orto_max, #float
-                        part.y._value() /self.orto_max,  #float
-                        part.z._value() /self.orto_max,  #float
-                        part.sh._value()/3, #0.1-3
-                        part.s._value() /10,  #0.1-10
-                        part.sx._value()/5, #0.05-5
-                        part.sy._value()/5, #0.05-5
-                        part.sz._value()/5, #0.05-5
-                        part.rx._value(), #float
-                        part.ry._value(), #float
-                        part.rz._value(), #float 
-                        part.dn._value()/5, #0.02-5
-                        part.fr._value()/4, #0-4
-                        part.ing._value(), #0-1
+        return np.array([part.x._value()    /self.orto_max, #float
+                        part.y._value()     /self.orto_max,  #float
+                        part.z._value()     /self.orto_max,  #float
+                        part.sh._value()    /3, #0.1-3
+                        part.s._value()     /10,  #0.1-10
+                        part.sx._value()    /5, #0.05-5
+                        part.sy._value()    /5, #0.05-5
+                        part.sz._value()    /5, #0.05-5
+                        part.rx._value()    , #float
+                        part.ry._value()    , #float
+                        part.rz._value()    , #float 
+                        part.dn._value()    /5, #0.02-5
+                        part.fr._value()    /4, #0-4
+                        part.ing._value()   , #0-1
     #                      part.as._value()
     #                      sth for neurons...
                         ])
