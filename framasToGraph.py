@@ -6,9 +6,9 @@ path='/home/adam/Framsticks/Framsticks50rc19'
 
 class FramsTransformer():
     frams = frams
-    orto_max = 10
+    orto_max = 30
     
-    def __init__(self,path,size_of_adj=30) -> None:
+    def __init__(self,path,size_of_adj=30):
         self.frams.init(path)
         self.size_of_adj = size_of_adj
 
@@ -19,6 +19,7 @@ class FramsTransformer():
         for i in range(model.numjoints._value()):
 #             print("p1: ",model.getJoint(i).p1._value(), "p2: ",model.getJoint(i).p2._value() )
             aMatrix[model.getJoint(i).p1._value(),model.getJoint(i).p2._value()] = 1
+            aMatrix[model.getJoint(i).p2._value(),model.getJoint(i).p1._value()] = 1
         for i in range(aMatrix.shape[0]):
             aMatrix[i,i] = 1
         
@@ -31,17 +32,17 @@ class FramsTransformer():
         return np.array([part.x._value()    /self.orto_max, #float
                         part.y._value()     /self.orto_max,  #float
                         part.z._value()     /self.orto_max,  #float
-                        part.sh._value()    /3, #0.1-3
-                        part.s._value()     /10,  #0.1-10
-                        part.sx._value()    /5, #0.05-5
-                        part.sy._value()    /5, #0.05-5
-                        part.sz._value()    /5, #0.05-5
-                        part.rx._value()    , #float
-                        part.ry._value()    , #float
-                        part.rz._value()    , #float 
-                        part.dn._value()    /5, #0.02-5
-                        part.fr._value()    /4, #0-4
-                        part.ing._value()   , #0-1
+#                         part.sh._value()    /3, #0.1-3
+#                         part.s._value()     /10,  #0.1-10
+#                         part.sx._value()    /5, #0.05-5
+#                         part.sy._value()    /5, #0.05-5
+#                         part.sz._value()    /5, #0.05-5
+#                         part.rx._value()    , #float
+#                         part.ry._value()    , #float
+#                         part.rz._value()    , #float 
+#                         part.dn._value()    /5, #0.02-5
+#                         part.fr._value()    /4, #0-4
+#                         part.ing._value()   , #0-1
     #                      part.as._value()
     #                      sth for neurons...
                         ])

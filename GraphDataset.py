@@ -9,10 +9,11 @@ class GraphDataset(Dataset):
 
     transformer = None
 
-    def __init__(self, path_frams, path_data ,n_samples=1000, **kwargs):
+    def __init__(self, path_frams, path_data ,n_samples=1000,size_of_adj=30, **kwargs):
         self.n_samples = n_samples
-        self.transformer = FramsTransformer(path_frams)
+        self.transformer = FramsTransformer(path_frams,size_of_adj)
         self.path_data = path_data
+        
         super().__init__(**kwargs)
 
     def read(self):
