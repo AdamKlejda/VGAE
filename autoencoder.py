@@ -1,28 +1,9 @@
 from tensorflow.keras.models import Model
 import tensorflow.keras.layers as layers
-from spektral.layers import GCNConv
+from spektral.layers import GCNConv,GATConv
 import tensorflow as tf
+from tensorflow import keras
 
-
-def loss_f(y_true, y_pred,adjency_size,z_log_var,z_mean,verbose=False):
-    loss = 0
-    x_true, a_true = y_true
-    x_pred, a_pred = y_pred
-
-    if verbose:
-        print(x_true[0].numpy().astype(np.float64))
-        print(x_pred[0].numpy().astype(np.float64))
-    
-        print(a_true[0].numpy().astype(np.float64))
-        print(a_pred[0].numpy().astype(np.float64))
-        
-    loss += tf.reduce_mean(tf.abs(tf.cast(tf.squeeze(x_true),tf.float32) - tf.cast(tf.squeeze(x_pred),tf.float32)))
-    loss += tf.reduce_mean(tf.square(tf.cast(tf.squeeze(a_true),tf.float32) - tf.cast(tf.squeeze(a_pred),tf.float32)))
-    
-    log_lik = loss
-    kl = (0.5 / adjency_size) * tf.reduce_mean(tf.reduce_sum(1 + 2 * z_log_var - tf.square(z_mean) - tf.square(tf.exp(z_log_var)), 1))
-    loss-=kl
-    return loss
     
 class Sampling(layers.Layer):
 
@@ -34,89 +15,183 @@ class Sampling(layers.Layer):
         return z_mean + tf.exp(0.5 * z_log_var) * epsilon
 
 
-class Autoencoder(Model):
-    def __init__(self, latent_dim,n_hidden,n_samples,adjency_size,num_features):
-        super(Autoencoder, self).__init__()
-        self.n_samples= n_samples
-        self.latent_dim = latent_dim
-        self.adjency_size = adjency_size
-        self.num_features = num_features
-#         encoder
-        self.conv1 = GCNConv(n_hidden, activation='relu')
-        self.flat1 = layers.Flatten()
+class Encoder(Model):
+    def __init__(self, latent_dim,n_hidden):
+        super(Encoder, self).__init__()
+        
+        self.norm1 = layers.BatchNormalization()        
+        self.conv1 = GATConv(n_hidden, activation='relu')
         self.drop1 = layers.Dropout(.2)
         
-        self.conv2 = GCNConv(n_hidden, activation='relu')
+        self.norm2 = layers.BatchNormalization()
+        self.conv2 = GCNConv(int(n_hidden/2), activation='relu')
         self.drop2 = layers.Dropout(.2)
-        self.norm = layers.BatchNormalization()
+        
+        self.norm3 = layers.BatchNormalization()
+        self.conv3 = GCNConv(int(n_hidden/4), activation='relu')
+        self.drop3 = layers.Dropout(.2)
+        
+        self.flat = layers.Flatten()
 
-        self.z_mean = layers.Dense(latent_dim,name="z_mean")
+
+        self.z_mean = layers.Dense(latent_dim,name="z_mean", activation='sigmoid')
         self.z_log_var = layers.Dense(latent_dim,name="z_log_var")
         
-        
-        # decoder A 
-        self.adense1 = layers.Dense(64, activation='relu')
-        self.adrop1 = layers.Dropout(.2)
-        self.adense2 = layers.Dense(self.adjency_size*self.adjency_size, activation='sigmoid')
-        self.reshape2 = layers.Reshape((self.adjency_size, self.adjency_size))
-        
-        # decoder X
-#         self.conv3 = GCNConv(n_hidden, activation='tanh')
-        self.xdense1  = layers.Dense(self.adjency_size*self.latent_dim, activation='relu')
-        self.xreshape1 = layers.Reshape((self.adjency_size, self.latent_dim))
-        self.xconv1 = GCNConv(24, activation='relu')
-        self.xflat1 = layers.Flatten()
-        self.xdrop1 = layers.Dropout(.2)
-        self.xdense2  = layers.Dense(self.adjency_size*self.num_features, activation='tanh')
-        self.xreshape2 = layers.Reshape((self.adjency_size, self.num_features))
-    
-    def call(self, x):
+    def call(self,x):
         x,a = x
-        x1 = self.conv1([x,a])
-        x1 = self.norm(x1)
-        x1 = self.conv2([x1,a])
-        x1 = self.flat1(x1)
+        x1 = self.norm1(x)
+        x1 = self.conv1([x1,a])        
         x1 = self.drop1(x1)
-#         print(d1.shape)
-#         z = x1
-        self.z_mean_v = self.z_mean(x1)
-        self.z_log_var_v = self.z_log_var(x1)
-        z = Sampling()([self.z_mean_v, self.z_log_var_v])
         
-        da = self.adense1(z)
+        x1 = self.norm2(x1)
+        x1 = self.conv2([x1,a])
+        x1 = self.drop2(x1)
+        
+        x1 = self.norm3(x1)
+        x1 = self.conv3([x1,a])
+        x1 = self.drop3(x1)
+        
+        x1 = self.flat(x1)
+
+        z_mean = self.z_mean(x1)
+        z_log_var = self.z_log_var(x1)
+        z = Sampling()([z_mean, z_log_var])
+        return z_mean, z_log_var, z
+    
+# encoder = Encoder(latent_dim,n_hidden)
+
+
+class DecoderA(Model):
+    def __init__(self, adjency_size):
+        super(DecoderA, self).__init__()
+        self.adjency_size = adjency_size
+        
+        self.anorm1 = layers.BatchNormalization()
+        self.adense1 = layers.Dense(128, activation='relu')
+        self.adrop1 = layers.Dropout(.2)
+        
+        self.anorm2 = layers.BatchNormalization()
+        self.adense2 = layers.Dense(self.adjency_size*self.adjency_size, activation='sigmoid')
+        self.adrop2 = layers.Dropout(.2)
+        
+        self.reshape2 = layers.Reshape((self.adjency_size, self.adjency_size))
+    
+    def call(self,z):
+        
+        da = self.anorm1(z)
+        da = self.adense1(da)
         da = self.adrop1(da)
+        
+        da = self.anorm2(da)
         da = self.adense2(da)
+        da = self.adrop2(da)
+        
         decodedA = self.reshape2(da)
+        return decodedA
         
-        dx = self.xdense1(z)
-        dx = self.xreshape1(dx)
-        dx = self.xconv1([dx,decodedA])
+class DecoderX(Model):
+    def __init__(self,latent_dim, adjency_size,num_features):        
+        super(DecoderX, self).__init__()
+        self.adjency_size = adjency_size
+        self.num_features = num_features
+        self.latent_dim = latent_dim
+        
+        self.xnorm1 = layers.BatchNormalization()
+        self.xdense1  = layers.Dense(self.adjency_size*self.latent_dim, activation='relu')
+        self.xdrop1 = layers.Dropout(.2)
+
+        self.xreshape1 = layers.Reshape((self.adjency_size, self.latent_dim))
+        
+        self.xnorm2 = layers.BatchNormalization()
+        self.xconv1 = GCNConv(64, activation='relu')
+        self.xdrop2 = layers.Dropout(.2)
+
+        self.xflat1 = layers.Flatten()
+
+        
+        self.xdense2  = layers.Dense(self.adjency_size*self.num_features, activation='tanh')
+        self.xdrop3 = layers.Dropout(.2)
+        self.xreshape2 = layers.Reshape((self.adjency_size, self.num_features))
+        
+    def call(self,z,decodedA):
+        
+        dx = self.xnorm1(z)
+        dx = self.xdense1(dx)
         dx = self.xdrop1(dx)
-        dx = self.xflat1(dx)
-        dx = self.xdense2(dx)
-        decodedX = self.xreshape2(dx)
-        return decodedX, decodedA
-    
-    def train_step(self, data,verbose=False):
-        # Unpack the data. Its structure depends on your model and
-        # on what you pass to `fit()`.
-        x,a = data
         
-        with tf.GradientTape() as tape:
-            x_pred, a_pred = self(data, training=True)  # Forward pass
-            # Compute the loss value
-            # (the loss function is configured in `compile()`)
-            loss = loss_f([x,a], [x_pred, a_pred],self.adjency_size,self.z_log_var_v,self.z_mean_v,verbose)
-            
-        if verbose:
-            print(loss)
-        # Compute gradients
-        trainable_vars = self.trainable_variables
-        gradients = tape.gradient(loss, trainable_vars)
-        # Update weights
-        self.optimizer.apply_gradients(zip(gradients, trainable_vars))
-        # Update metrics (includes the metric that tracks the loss)
-#         self.compiled_metrics.update_state([x,a], [x_pred, a_pred])
-        # Return a dict mapping metric names to current value
-        return loss
+        dx = self.xreshape1(dx)
+        
+        dx = self.xnorm2(dx)
+        dx = self.xconv1([dx,decodedA])
+        dx = self.xdrop2(dx)
+        dx = self.xflat1(dx)
+        
+        dx = self.xdense2(dx)
+        dx = self.xdrop3(dx)
+        decodedX = self.xreshape2(dx)
+        return decodedX
     
+# decoderA = DecoderA(ADJ_SIZE)
+# decoderX = DecoderX(latent_dim,ADJ_SIZE,NUM_FEATURES)
+
+
+class VGAE(keras.Model):
+    def __init__(self, encoder, decoderA, decoderX, **kwargs):
+        super(VGAE, self).__init__(**kwargs)
+        
+        self.huber = tf.keras.losses.Huber(delta=1.0, reduction="auto", name="huber_loss")
+        self.encoder = encoder
+        self.decoderA = decoderA
+        self.decoderX = decoderX
+        self.total_loss_tracker = keras.metrics.Mean(name="total_loss")
+        self.reconstruction_loss_tracker = keras.metrics.Mean(
+            name="reconstruction_loss"
+        )
+        self.kl_loss_tracker = keras.metrics.Mean(name="kl_loss")
+
+    @property
+    def metrics(self):
+        return [
+            self.total_loss_tracker,
+            self.reconstruction_loss_tracker,
+            self.kl_loss_tracker,
+        ]
+
+    def train_step(self, data):
+        with tf.GradientTape() as tape:
+            x_true,a_true = data
+            z_mean, z_log_var, z = self.encoder(data)
+            reconstructionA = self.decoderA(z)
+            reconstructionX = self.decoderX(z,a_true)
+#             reconstruction_lossA = self.huber(a_true, reconstructionA)
+            reconstruction_lossA = tf.reduce_sum(
+                tf.reduce_sum(
+#                     keras.losses.mean_squared_error(a_true, reconstructionA), axis=(1)
+                    tf.losses.mean_squared_logarithmic_error(a_true, reconstructionA), axis=(1)
+                )
+            )
+#             reconstruction_lossX = self.huber(x_true, reconstructionX)
+            reconstruction_lossX = tf.reduce_sum(
+                tf.reduce_sum(
+                    keras.losses.mean_absolute_error(x_true, reconstructionX), axis=(1)
+#                     tf.losses.mean_absolute_percentage_error(x_true, reconstructionX), axis=(1)
+                )
+            )
+            reconstruction_loss = reconstruction_lossA + reconstruction_lossX
+            kl_loss = -0.5 * (1 + z_log_var - tf.square(z_mean) - tf.exp(z_log_var))
+            kl_loss = tf.reduce_mean(tf.reduce_sum(kl_loss, axis=1))
+            total_loss = reconstruction_loss + kl_loss
+        grads = tape.gradient(total_loss, self.trainable_weights)
+        self.optimizer.apply_gradients(zip(grads, self.trainable_weights))
+        self.total_loss_tracker.update_state(total_loss)
+        self.reconstruction_loss_tracker.update_state(reconstruction_loss)
+        self.kl_loss_tracker.update_state(kl_loss)
+        return {
+            "loss": self.total_loss_tracker.result(),
+            "reconstruction_loss": self.reconstruction_loss_tracker.result(),
+            "kl_loss": self.kl_loss_tracker.result(),
+        }
+# autoencoder = VGAE(encoder,decoderA,decoderX)
+# autoencoder.compile(optimizer=keras.optimizers.Adam())
+
+# losses_all = []
