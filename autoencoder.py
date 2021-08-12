@@ -13,11 +13,12 @@ class Sampling(layers.Layer):
         return z_mean + tf.exp(0.5 * z_log_var) * epsilon
 
 class Encoder(Model):
-    def __init__(self, latent_dim,n_hidden):
+    def __init__(self, latent_dim,n_hidden,num_conv, num_dense):
         super(Encoder, self).__init__()
-        
+        self.num_conv = num_conv
+        self.num_dense = num_dense
 #         self.conv1 = GATConv_layer_relu(n_hidden)    
-#         self.conv2 = GATConv_layer_relu(int(n_hidden/2))   
+#         self.conv2 = GATConv_layer_relu(int(n_hidden/2))   Z
 #         self.conv3 = GATConv_layer_relu(int(n_hidden/2))
         self.conv1 = Conv_layer_relu(n_hidden)    
         self.conv2 = Conv_layer_relu(n_hidden)   
@@ -48,22 +49,29 @@ class Encoder(Model):
         x,a = x
         
 #         a = tf.sparse.from_dense(a[0])
-        
         x1 = self.conv1([x,a])
-        x1 = self.conv2([x1,a])
-#         x1 = self.conv3([x1,a])
-#         x1 = self.conv4([x1,a])
-#         x1 = self.conv5([x1,a])
+
+        if self.num_conv > 0:
+            x1 = self.conv2([x1,a])
+        if self.num_conv > 1:
+            x1 = self.conv3([x1,a])
+        if self.num_conv > 2:
+            x1 = self.conv4([x1,a])
+        if self.num_conv > 3:
+            x1 = self.conv5([x1,a])
         
 #         x1 = GlobalAvgPool()(x1)
         x1 = self.flat(x1)
-
-        x1 = self.dense1(x1)
-        x1 = self.dense2(x1)
-        x1 = self.dense3(x1)
-        # x1 = self.dense4(x1)
-        # x1 = self.dense5(x1)
-        
+        if self.num_dense>0:
+            x1 = self.dense1(x1)
+        if self.num_dense>1:
+            x1 = self.dense2(x1)
+        if self.num_dense>2:
+            x1 = self.dense3(x1)
+        if self.num_dense>3:
+            x1 = self.dense4(x1)
+        if self.num_dense>4:
+            x1 = self.dense5(x1)        
         
         x1 = self.denset(x1)
         
@@ -75,13 +83,54 @@ class Encoder(Model):
         return z_mean, z_log_var, z
     
 
+
+    
+class DecoderA(Model):
+    def __init__(self, adjency_size,latent_dim,num_dense):
+        super(DecoderA, self).__init__()
+        self.adjency_size = adjency_size
+        self.latent_dim = latent_dim
+        self.num_dense = num_dense
+        
+        self.adense1 = Dense_layer_relu(self.latent_dim*2)  
+        
+        self.adense2 = Dense_layer_relu(self.latent_dim*4)
+        
+        self.adense3 = Dense_layer_relu(self.latent_dim*8)
+        
+        self.adense4 = Dense_layer_relu(self.latent_dim*8)
+
+        self.adense_end = layers.Dense(self.adjency_size*self.adjency_size,
+                                    kernel_initializer=initializers.GlorotUniform(seed=None))
+        self.adrop_end = layers.Dropout(.2)
+        
+        self.reshape = layers.Reshape((self.adjency_size, self.adjency_size))
+    
+    def call(self,z):
+        
+        da = self.adense1(z)
+        if self.num_dense > 1:
+            da = self.adense2(da)
+        if self.num_dense > 2:
+            da = self.adense3(da)
+        if self.num_dense > 3:
+            da = self.adense4(da)
+        
+        da = self.adense_end(da)
+        da = tf.keras.activations.sigmoid(da)        
+        decodedA = self.reshape(da)
+
+        return decodedA
+
 class DecoderX(Model):
-    def __init__(self,latent_dim, adjency_size,num_features):        
+    def __init__(self,latent_dim, adjency_size,num_features,num_conv,num_dense):        
         super(DecoderX, self).__init__()
         self.adjency_size = adjency_size
         self.num_features = num_features
         self.latent_dim = latent_dim
-        
+        self.num_conv = num_conv
+        self.num_dense = num_dense
+
         self.xdense1  = Dense_layer_relu(self.adjency_size*self.latent_dim)
 
         self.xreshape1 = layers.Reshape((self.adjency_size, self.latent_dim))
@@ -108,61 +157,37 @@ class DecoderX(Model):
     def call(self,x):
         z,decodedA = x
 #         decodedA = tf.sparse.from_dense(decodedA[0])
+        
         dx = self.xdense1(z)
 
-        # dx = self.xreshape1(dx)
+        if self.num_conv > 0:
+            dx = self.xreshape1(dx)
+            dx = self.xconv1([dx,decodedA]) 
         
-        # dx = self.xconv1([dx,decodedA])        
-        # dx = self.xconv2([dx,decodedA])
+        if self.num_conv > 1:
+            dx = self.xconv2([dx,decodedA])
 
-        dx = self.xflat1(dx)
+        if self.num_conv > 0: 
+            dx = self.xflat1(dx)
 
         
-        dx = self.xdense2(dx)        
-        dx = self.xdense3(dx)
-        dx = self.xdense4(dx)
-        # dx = self.xdense5(dx)
-        # dx = self.xdense6(dx)
+        if self.num_dense>1:
+            dx = self.xdense2(dx)
+        if self.num_dense>2:      
+            dx = self.xdense3(dx)
+        if self.num_dense>3:
+            dx = self.xdense4(dx)
+        if self.num_dense>4:
+            dx = self.xdense5(dx)
+        if self.num_dense>5:
+            dx = self.xdense6(dx)
         
         
         dx = self.xdense_end(dx)
         
         decodedX = self.xreshape2(dx)-1
         return decodedX
-    
-class DecoderA(Model):
-    def __init__(self, adjency_size,latent_dim):
-        super(DecoderA, self).__init__()
-        self.adjency_size = adjency_size
-        self.latent_dim = latent_dim
-        
-        self.adense1 = Dense_layer_relu(self.latent_dim*2)  
-        
-        self.adense2 = Dense_layer_relu(self.latent_dim*4)
-        
-        self.adense3 = Dense_layer_relu(self.latent_dim*8)
-        
-        self.adense4 = Dense_layer_relu(self.latent_dim*8)
 
-        self.adense_end = layers.Dense(self.adjency_size*self.adjency_size,
-                                    kernel_initializer=initializers.GlorotUniform(seed=None))
-        self.adrop_end = layers.Dropout(.2)
-        
-        self.reshape = layers.Reshape((self.adjency_size, self.adjency_size))
-    
-    def call(self,z):
-        
-        da = self.adense1(z)
-        da = self.adense2(da)
-
-        
-        da = self.adense_end(da)
-        da = tf.keras.activations.sigmoid(da)
-
-        
-        decodedA = self.reshape(da)
-        return decodedA
-        
 class VGAE(keras.Model):
     def __init__(self, encoder, decoderA, decoderX, **kwargs):
         super(VGAE, self).__init__(**kwargs)
