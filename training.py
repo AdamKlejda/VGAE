@@ -18,20 +18,16 @@ def ensureDir(string):
     else:
         raise NotADirectoryError(string)
 
-def save_model(path,name,loss_all,autoencoder):
-    loss_all = [keras.backend.get_value(x['loss']) for x in  losses_all]
-    reconstruction_loss = [keras.backend.get_value(x['reconstruction_loss']) for x in  losses_all]
-    reconstruction_lossA = [keras.backend.get_value(x['reconstruction_lossA']) for x in  losses_all]
-    reconstruction_lossX = [keras.backend.get_value(x['reconstruction_lossX']) for x in  losses_all]
-    kl_loss = [keras.backend.get_value(x['kl_loss']) for x in  losses_all]
-    dic_losses = {"loss_all":str(loss_all),
-                  "reconstruction_loss": str(reconstruction_loss),
-                  "reconstruction_lossA":str(reconstruction_lossA),
-                  "reconstruction_lossX":str(reconstruction_lossX),
-                  "kl_loss":str(kl_loss)}
-         
+def save_model(path,name,losses_all,autoencoder):
+
+    loss_all = [x[0] for x in  losses_all]
+    reconstruction_loss = [x[1] for x in  losses_all]
+    reconstruction_lossA = [x[2] for x in  losses_all]
+    reconstruction_lossX = [x[3] for x in  losses_all]
+    kl_loss = [x[4] for x in  losses_all]
+
     with open("{0}{1}/losses.json".format(path,name), "w") as outfile: 
-        json.dump(dic_losses, outfile)
+        json.dump(losses_all, outfile)
 
     fig, ax = plt.subplots(2,3,figsize=(10,15))
     x = np.array(loss_all)
@@ -54,9 +50,21 @@ def save_model(path,name,loss_all,autoencoder):
     ax[1,2].plot(x)
     ax[1,2].set(xlabel='epoch', ylabel='reconstruction_lossA')
 
-    fig.savefig("{0}{1}/loss.png".format(path,name))
+    fig.savefig("{0}/loss_{1}.png".format(path,name))
     autoencoder.save_weights("{0}{1}/model".format(path,name))
     pass
+
+def load_model(path,name,autoencoder):
+    losses_all = []
+    try:
+        autoencoder.load_weights("{0}{1}/model".format(path,name))
+        print("Model loaded successfully")
+        with open("{0}{1}/losses.json".format(path,name), "r") as inputFie: 
+            losses_all = json.load(inputFie)
+        print("Losses loaded successfully")
+    except Exception as e:
+        print("Error while loading weights ", e)
+    return losses_all
 
 def parseArguments():
     parser = argparse.ArgumentParser(
@@ -96,14 +104,10 @@ MODEL_NAME = ("model_enc_"+str(parsed_args.convenc)+"_"+str(parsed_args.denseenc
              "_deca"+str(parsed_args.densedeca)+
              "_decx"+str(parsed_args.convdecx)+"_"+str(parsed_args.densedecx))
 
-if not os.path.exists(PATH_OUT+MODEL_NAME):
-    os.makedirs(PATH_OUT+MODEL_NAME)
 
-with open(PATH_OUT+MODEL_NAME+"/args.txt", "w") as f:
-    json.dump(parsed_args.__dict__, f, indent=2)
 
 myData = GraphDataset(parsed_args.pathframs, parsed_args.pathdata,size_of_adj=parsed_args.adjsize)
-# dataset.apply(normalize_one())
+
 loader = data.BatchLoader(myData, batch_size=parsed_args.batchsize)
 
 encoder = Encoder(latent_dim=parsed_args.latentdim,
@@ -133,10 +137,22 @@ tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
 
 losses_all = []
 
+if os.path.exists(PATH_OUT+MODEL_NAME):
+    print("Trying to load the model")
+    losses_all = load_model(PATH_OUT,MODEL_NAME,autoencoder)
+
+else:
+    os.makedirs(PATH_OUT+MODEL_NAME)
+
+with open(PATH_OUT+MODEL_NAME+"/args.txt", "w") as f:
+    json.dump(parsed_args.__dict__, f, indent=2)
+
+
+
 epochs = parsed_args.epochs
-# steps = math.ceil(myData.n_graphs/parsed_args.batchsize)
-steps=10
-for e in range(epochs):
+steps = math.ceil(myData.n_graphs/parsed_args.batchsize)
+
+for e in range(len(losses_all),epochs):
     print("EPOCH",e)
     loss=None
     avg_loss = []
@@ -151,7 +167,7 @@ for e in range(epochs):
     if tf.math.is_nan(loss['loss']):
         print("LOSS == NAN")
         break
-    losses_all.append(loss)
+    losses_all.append([float(keras.backend.get_value(loss[l])) for l in loss])
     if e%20 == 0:
         save_model(PATH_OUT,MODEL_NAME,losses_all,autoencoder)
     print("LOSS: ",np.mean(avg_loss))

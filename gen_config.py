@@ -1,4 +1,5 @@
-PATH_FRAMS='/home/adam/Framsticks/Framsticks50rc19'
+# PATH_FRAMS='/home/adam/Framsticks/Framsticks50rc19'
+PATH_FRAMS="/home/inf131778/Framsticks50rc19"
 PATH_DATA ="graphs/gen/"
 PATH_OUT = "models/"
 EPOCHS = 2000
