@@ -14,8 +14,9 @@ DENSEDECA=${11}
 CONVDECX=${12}
 DENSEDECX=${13}
 LEARNING_RATE=${14}
-EPOCHS=${15} 
+EPOCHS=${15}
+CONVTYPE=${16}
+VARIATIONAL=${17} 
 
-srun -p idss-student  python3 -u -m training.py -pathframs $PATH_FRAMS -pathdata $PATH_DATA -pathout $PATH_OUT -batchsize $BATCH_SIZE -adjsize $ADJ_SIZE -numfeatures $NUM_FEATURES -latentdim $LATENT_DIM -nhidden $NHIDDEN -convenc $CONVENC -denseenc $DENSEENC -densedeca $DENSEDECA -convdecx $CONVDECX -densedecx $DENSEDECX -learningrate $LEARNING_RATE -epochs $EPOCHS
-
+srun -p idss-student  python3 -u -m training.py -pathframs $PATH_FRAMS -pathdata $PATH_DATA -pathout $PATH_OUT -batchsize $BATCH_SIZE -adjsize $ADJ_SIZE -numfeatures $NUM_FEATURES -latentdim $LATENT_DIM -nhidden $NHIDDEN -convtype $CONVTYPE -convenc $CONVENC -denseenc $DENSEENC -densedeca $DENSEDECA -convdecx $CONVDECX -densedecx $DENSEDECX -learningrate $LEARNING_RATE -epochs $EPOCHS -variational $VARIATIONAL -trainid $SLURM_ARRAY_TASK_ID
 

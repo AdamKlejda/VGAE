@@ -6,19 +6,28 @@ import os
 import numpy as np
 import random 
 import spektral
+from sklearn.model_selection import train_test_split
 
-class GraphDataset(Dataset):
+class GraphData(Dataset):
+    def __init__(self,data, **kwargs):
+        self.data = data
+        super().__init__(**kwargs)
+        
+    def read(self):
+        return np.array(self.data)
+    
+class GraphDataset():
 
     transformer = None
 
-    def __init__(self, path_frams, path_data ,n_samples=1000,size_of_adj=30,number_of_rep=100, **kwargs):
-        self.n_samples = n_samples
+    def __init__(self, path_frams, path_data ,size_of_adj=30,number_of_rep=150,train_size = 0.8, **kwargs):
         self.transformer = FramsTransformer(path_frams,size_of_adj)
         self.path_data = path_data
         self.size_of_adj = size_of_adj
         self.number_of_rep=number_of_rep
+        self.train_size = train_size
         
-        super().__init__(**kwargs)
+        
 
     def read(self):
         out = []
@@ -59,4 +68,8 @@ class GraphDataset(Dataset):
                     x = dict_a_x[k][res]
                     x = np.where(x == -1, x, x+(c-i))
                     out.append(spektral.data.graph.Graph(x=x, a=a, e=None, y=None))
-        return np.array(out)
+        
+        train,test = train_test_split(out, train_size=self.train_size)
+        train = GraphData(train)
+        test = GraphData(test)
+        return train,test

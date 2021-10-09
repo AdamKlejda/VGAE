@@ -1,9 +1,9 @@
-# PATH_FRAMS='/home/adam/Framsticks/Framsticks50rc19'
-PATH_FRAMS="path_to/Framsticks50rc19"
+#PATH_FRAMS='/home/adam/Framsticks/Framsticks50rc19'
+PATH_FRAMS="/home/inf131778/Framsticks50rc19"
 PATH_DATA ="graphs/gen/"
 PATH_OUT = "models/"
-EPOCHS = 2000
-BATCH_SIZE = 258
+EPOCHS = 300
+BATCH_SIZE = 256
 ADJ_SIZE = 15
 NUM_FEATURES = 3
 LEARNING_RATE = 0.0001
@@ -11,8 +11,8 @@ LEARNING_RATE = 0.0001
 # def create_filename(latentdim, nhidden, convenc, denseenc, densedeca, convdecx, densedecx):
 #     return f"{latentdim}_{nhidden}_{convenc}_{denseenc}_{densedeca}_{convdecx}_{densedecx}"
 
-def create_file(latentdim, nhidden, convenc, denseenc, densedeca, convdecx, densedecx):
-    with open("configs/"+f"{latentdim}_{nhidden}_{convenc}_{denseenc}_{densedeca}_{convdecx}_{densedecx}", "w") as file:
+def create_file(variational,convtype,latentdim, nhidden, convenc, denseenc, densedeca, convdecx, densedecx):
+    with open("configs/"+f"v{variational}_{convtype}_{latentdim}_{nhidden}_{convenc}_{denseenc}_{densedeca}_{convdecx}_{densedecx}", "w") as file:
         file.write(str(PATH_FRAMS)+"\n")    #pathframs
         file.write(str(PATH_DATA)+"\n")     #pathdata
         file.write(str(PATH_OUT)+"\n")      #pathout
@@ -28,20 +28,25 @@ def create_file(latentdim, nhidden, convenc, denseenc, densedeca, convdecx, dens
         file.write(str(densedecx)+"\n")     #densedecx
         file.write(str(LEARNING_RATE)+"\n") #learningrate
         file.write(str(EPOCHS)+"\n")        #epochs
+        file.write(str(convtype)+"\n")        #convtype
+        file.write(str(variational)+"\n")        #convtype
 
-latentdim = [6,10]
-nhidden = [64,128]
-convenc = [1,3]
-denseenc = [2,4]
+latentdim = [3,10,15]
+nhidden = [64]
+convenc = [1,2]
+denseenc = [2]
 densedeca = [1]
 convdecx = [1]
-densedecx = [2,5]
-
-for l in latentdim:
-    for nh in nhidden:
-        for cv in convenc:
-            for de in denseenc:
-                for dda in densedeca:
-                    for cdx in convdecx:
-                        for ddx in densedecx:
-                            create_file(l,nh,cv,de,dda,cdx,ddx)
+densedecx = [2]
+convtypes = ["gcnconv","armaconv","gatconv","gcsconv"]
+variational=['True','False']
+for v in variational:
+    for l in latentdim:
+        for nh in nhidden:
+            for cv in convenc:
+                for de in denseenc:
+                    for dda in densedeca:
+                        for cdx in convdecx:
+                            for ddx in densedecx:
+                                for ct in convtypes:
+                                    create_file(v,ct,l,nh,cv,de,dda,cdx,ddx)
