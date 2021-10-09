@@ -9,7 +9,7 @@ import math
 from math import floor
 
 from GraphDataset import GraphDataset
-from autoencoder import EncoderGAE,EncoderVGAE, DecoderX, DecoderA, VGAE, GAE
+from autoencoder_l import EncoderGAE,EncoderVGAE, DecoderX, DecoderA, VGAE_l, GAE_l
 from utils import *
 from custom_layers import *
 from custom_layers import ConvTypes
@@ -154,9 +154,9 @@ inp= [inputsX,inputsA]
 current_learning_rate = parsed_args.learningrate
 
 if variational == True:
-    autoencoder = VGAE(encoder,decoderA,decoderX)
+    autoencoder = VGAE_l(parsed_args.pathframs,encoder,decoderA,decoderX)
 else:
-    autoencoder = GAE(encoder,decoderA,decoderX)
+    autoencoder = GAE_l(parsed_args.pathframs,encoder,decoderA,decoderX)
 opt = keras.optimizers.Adam(learning_rate=current_learning_rate)
 autoencoder.compile(optimizer=opt)
 autoencoder._set_inputs(inp)
@@ -203,8 +203,8 @@ for e in range(len(losses_all_train),epochs):
     
     test_loses = test_model(autoencoder,loader_test,steps_test,variational)
     losses_all_test.append(test_loses)
-    if e%10 == 0:
-        save_model(PATH_OUT,MODEL_NAME,losses_all_train,losses_all_test,autoencoder,Variational=variational)
+    # if e%10 == 0:
+    #     save_model(PATH_OUT,MODEL_NAME,losses_all_train,losses_all_test,autoencoder,Variational=variational)
     print("Loss train: ",np.mean(avg_loss))
     print("Loss test: ", np.mean(test_loses[0]))
 
@@ -212,5 +212,5 @@ print("EPOCH",epochs)
 print("Loss train: ",np.mean(losses_all_train[-1][0]))
 print("Loss test: ", np.mean(losses_all_test[-1][0]))
 
-save_model(PATH_OUT,MODEL_NAME,losses_all_train,losses_all_test,autoencoder,Variational=variational)
+# save_model(PATH_OUT,MODEL_NAME,losses_all_train,losses_all_test,autoencoder,Variational=variational)
 

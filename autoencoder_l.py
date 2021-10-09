@@ -3,8 +3,9 @@ import tensorflow.keras.layers as layers
 import tensorflow as tf
 from tensorflow import keras
 from custom_layers import *
-class Sampling(layers.Layer):
+from utils import FramsManager,gen_f0_from_tensors
 
+class Sampling(layers.Layer):
     def call(self, inputs):
         z_mean, z_log_var = inputs
         batch = tf.shape(z_mean)[0]
@@ -411,10 +412,11 @@ class DecoderX(Model):
         decodedX = self.xreshape2(dx)-1
         return decodedX
 
-class VGAE(keras.Model):
-    def __init__(self, encoder, decoderA, decoderX, **kwargs):
-        super(VGAE, self).__init__(**kwargs)
+class VGAE_l(keras.Model):
+    def __init__(self, pathFrams, encoder, decoderA, decoderX, **kwargs):
+        super(VGAE_l, self).__init__(**kwargs)
         
+        self.FramsManager = FramsManager(pathFrams)
         self.encoder = encoder
         self.decoderA = decoderA
         self.decoderX = decoderX
@@ -464,7 +466,10 @@ class VGAE(keras.Model):
                 keras.losses.mean_squared_error(x_true, reconstructionX), axis=(1)
             )
         )
-        reconstruction_loss = (reconstruction_lossA*1000) + reconstruction_lossX
+
+        gen_list = gen_f0_from_tensors(reconstructionX,reconstructionA)
+        c_wrong_joints = self.FramsManager.count_wrong_joints(gen_list)
+        reconstruction_loss = (reconstruction_lossA*1000) + reconstruction_lossX + c_wrong_joints * 100
         
         kl_loss = -0.5 * (1 + z_log_var - tf.square(z_mean) - tf.exp(z_log_var))
         kl_loss = tf.reduce_mean(tf.reduce_sum(kl_loss, axis=1))
@@ -491,7 +496,10 @@ class VGAE(keras.Model):
                     keras.losses.mean_squared_error(x_true, reconstructionX), axis=(1)
                 )
             )
-            reconstruction_loss = (reconstruction_lossA*1000) + reconstruction_lossX
+
+            gen_list = gen_f0_from_tensors(reconstructionX,reconstructionA)
+            c_wrong_joints = self.FramsManager.count_wrong_joints(gen_list)
+            reconstruction_loss = (reconstruction_lossA*1000) + reconstruction_lossX + (c_wrong_joints * 100)
             
             kl_loss = -0.5 * (1 + z_log_var - tf.square(z_mean) - tf.exp(z_log_var))
             kl_loss = tf.reduce_mean(tf.reduce_sum(kl_loss, axis=1))
@@ -511,10 +519,10 @@ class VGAE(keras.Model):
             "kl_loss": self.kl_loss_tracker.result(),
         }
 
-class GAE(keras.Model):
-    def __init__(self, encoder, decoderA, decoderX, **kwargs):
-        super(GAE, self).__init__(**kwargs)
-        
+class GAE_l(keras.Model):
+    def __init__(self,pathFrams, encoder, decoderA, decoderX, **kwargs):
+        super(GAE_l, self).__init__(**kwargs)
+        self.FramsManager = FramsManager(pathFrams)
         self.encoder = encoder
         self.decoderA = decoderA
         self.decoderX = decoderX
@@ -562,7 +570,9 @@ class GAE(keras.Model):
                 keras.losses.mean_squared_error(x_true, reconstructionX), axis=(1)
             )
         )
-        reconstruction_loss = (reconstruction_lossA*1000) + reconstruction_lossX
+        gen_list = gen_f0_from_tensors(reconstructionX,reconstructionA)
+        c_wrong_joints = self.FramsManager.count_wrong_joints(gen_list)
+        reconstruction_loss = (reconstruction_lossA*1000) + reconstruction_lossX + c_wrong_joints * 100
         
         total_loss = reconstruction_loss
     
@@ -587,7 +597,9 @@ class GAE(keras.Model):
                     keras.losses.mean_squared_error(x_true, reconstructionX), axis=(1)
                 )
             )
-            reconstruction_loss = (reconstruction_lossA*1000) + reconstruction_lossX
+            gen_list = gen_f0_from_tensors(reconstructionX,reconstructionA)
+            c_wrong_joints = self.FramsManager.count_wrong_joints(gen_list)
+            reconstruction_loss = (reconstruction_lossA*1000) + reconstruction_lossX + c_wrong_joints * 100
             
             total_loss = reconstruction_loss
         grads = tape.gradient(total_loss, self.trainable_weights)
