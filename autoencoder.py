@@ -64,85 +64,84 @@ class EncoderVGAE(Model):
         self.z_log_var = Dense_layer_relu(latent_dim,dropout=0.0)
     
         
-    def call(self,x):
+    def call(self,x,training=False):
         x,a = x
-#         a = tf.sparse.from_dense(a[0])
         if self.convtype==ConvTypes.GCNConv:
-            x1 = self.conv1GCN([x,a])    
+            x1 = self.conv1GCN([x,a],training)    
         elif self.convtype==ConvTypes.GATConv:
-            x1 = self.conv1GAT([x,a])    
+            x1 = self.conv1GAT([x,a],training)    
         elif self.convtype==ConvTypes.ARMAConv:
-            x1 = self.conv1ARMA([x,a])    
+            x1 = self.conv1ARMA([x,a],training)    
         elif self.convtype==ConvTypes.ECCConv:
-            x1 = self.conv1ECC([x,a])   
+            x1 = self.conv1ECC([x,a],training)   
         else:
-            x1 = self.conv1GCS([x,a])
+            x1 = self.conv1GCS([x,a],training) 
 
         if self.num_conv > 0:
             if self.convtype==ConvTypes.GCNConv:
-                x1 = self.conv2GCN([x1,a])   
+                x1 = self.conv2GCN([x1,a],training)    
             elif self.convtype==ConvTypes.GATConv:
-                x1 = self.conv2GAT([x1,a])   
+                x1 = self.conv2GAT([x1,a],training)    
             elif self.convtype==ConvTypes.ARMAConv:
-                x1 = self.conv2ARMA([x1,a])   
+                x1 = self.conv2ARMA([x1,a],training)    
             elif self.convtype==ConvTypes.ECCConv:
-                x1 = self.conv2ECC([x1,a])  
+                x1 = self.conv2ECC([x1,a],training)   
             elif self.convtype==ConvTypes.GCSConv:
-                x1 = self.conv2GCS([x1,a])
+                x1 = self.conv2GCS([x1,a],training) 
 
         if self.num_conv > 1:
             if self.convtype==ConvTypes.GCNConv:   
-                x1 = self.conv3GCN([x1,a])
+                x1 = self.conv3GCN([x1,a],training) 
             elif self.convtype==ConvTypes.GATConv:  
-                x1 = self.conv3GAT([x1,a]) 
+                x1 = self.conv3GAT([x1,a],training)  
             elif self.convtype==ConvTypes.ARMAConv: 
-                x1 = self.conv3ARMA([x1,a]) 
+                x1 = self.conv3ARMA([x1,a],training)  
             elif self.convtype==ConvTypes.ECCConv: 
-                x1 = self.conv3ECC([x1,a])
+                x1 = self.conv3ECC([x1,a],training) 
             elif self.convtype==ConvTypes.GCSConv:  
-                x1 = self.conv3GCS([x1,a])
+                x1 = self.conv3GCS([x1,a],training) 
 
         if self.num_conv > 2:
             if self.convtype==ConvTypes.GCNConv:
-                x1 = self.conv4GCN([x1,a])    
+                x1 = self.conv4GCN([x1,a],training)     
             elif self.convtype==ConvTypes.GATConv:
-                x1 = self.conv4GAT([x1,a])    
+                x1 = self.conv4GAT([x1,a],training)     
             elif self.convtype==ConvTypes.ARMAConv: 
-                x1 = self.conv4ARMA([x1,a])    
+                x1 = self.conv4ARMA([x1,a],training)     
             elif self.convtype==ConvTypes.ECCConv:
-                x1 = self.conv4ECC([x1,a])   
+                x1 = self.conv4ECC([x1,a],training)    
             elif self.convtype==ConvTypes.GCSConv:
-                x1 = self.conv4GCS([x1,a])
+                x1 = self.conv4GCS([x1,a],training) 
 
         if self.num_conv > 3:
             if self.convtype==ConvTypes.GCNConv:   
-                x1 = self.conv5GCN([x1,a])
+                x1 = self.conv5GCN([x1,a],training) 
             elif self.convtype==ConvTypes.GATConv:   
-                x1 = self.conv5GAT([x1,a])
+                x1 = self.conv5GAT([x1,a],training) 
             elif self.convtype==ConvTypes.ARMAConv:   
-                x1 = self.conv5ARMA([x1,a])
+                x1 = self.conv5ARMA([x1,a],training) 
             elif self.convtype==ConvTypes.ECCConv:  
-                x1 = self.conv5ECC([x1,a])
+                x1 = self.conv5ECC([x1,a],training) 
             elif self.convtype==ConvTypes.GCSConv:  
-                x1 = self.conv5GCS([x1,a])
+                x1 = self.conv5GCS([x1,a],training) 
         
         x1 = self.flat(x1)
         if self.num_dense>0:
-            x1 = self.dense1(x1)
+            x1 = self.dense1(x1,training)
         if self.num_dense>1:
-            x1 = self.dense2(x1)
+            x1 = self.dense2(x1,training)
         if self.num_dense>2:
-            x1 = self.dense3(x1)
+            x1 = self.dense3(x1,training)
         if self.num_dense>3:
-            x1 = self.dense4(x1)
+            x1 = self.dense4(x1,training)
         if self.num_dense>4:
-            x1 = self.dense5(x1)        
+            x1 = self.dense5(x1,training)        
         
-        x1 = self.denset(x1)
+        x1 = self.denset(x1,training)
         
 
-        z_mean = self.z_mean(x1)
-        z_log_var = self.z_log_var(x1)
+        z_mean = self.z_mean(x1,training)
+        z_log_var = self.z_log_var(x1,training)
 
         z = Sampling()([z_mean, z_log_var])
         return z_mean, z_log_var, z 
@@ -197,83 +196,82 @@ class EncoderGAE(Model):
         
         self.z = Dense_layer_relu(latent_dim,dropout=0.0)
         
-    def call(self,x):
+    def call(self,x,training=False):
         x,a = x
-#         a = tf.sparse.from_dense(a[0])
         if self.convtype==ConvTypes.GCNConv:
-            x1 = self.conv1GCN([x,a])    
+            x1 = self.conv1GCN([x,a],training)    
         elif self.convtype==ConvTypes.GATConv:
-            x1 = self.conv1GAT([x,a])    
+            x1 = self.conv1GAT([x,a],training)    
         elif self.convtype==ConvTypes.ARMAConv:
-            x1 = self.conv1ARMA([x,a])    
+            x1 = self.conv1ARMA([x,a],training)    
         elif self.convtype==ConvTypes.ECCConv:
-            x1 = self.conv1ECC([x,a])   
+            x1 = self.conv1ECC([x,a],training)   
         else:
-            x1 = self.conv1GCS([x,a])
+            x1 = self.conv1GCS([x,a],training) 
 
         if self.num_conv > 0:
             if self.convtype==ConvTypes.GCNConv:
-                x1 = self.conv2GCN([x1,a])   
+                x1 = self.conv2GCN([x1,a],training)    
             elif self.convtype==ConvTypes.GATConv:
-                x1 = self.conv2GAT([x1,a])   
+                x1 = self.conv2GAT([x1,a],training)    
             elif self.convtype==ConvTypes.ARMAConv:
-                x1 = self.conv2ARMA([x1,a])   
+                x1 = self.conv2ARMA([x1,a],training)    
             elif self.convtype==ConvTypes.ECCConv:
-                x1 = self.conv2ECC([x1,a])  
+                x1 = self.conv2ECC([x1,a],training)   
             elif self.convtype==ConvTypes.GCSConv:
-                x1 = self.conv2GCS([x1,a])
+                x1 = self.conv2GCS([x1,a],training) 
 
         if self.num_conv > 1:
             if self.convtype==ConvTypes.GCNConv:   
-                x1 = self.conv3GCN([x1,a])
+                x1 = self.conv3GCN([x1,a],training) 
             elif self.convtype==ConvTypes.GATConv:  
-                x1 = self.conv3GAT([x1,a]) 
+                x1 = self.conv3GAT([x1,a],training)  
             elif self.convtype==ConvTypes.ARMAConv: 
-                x1 = self.conv3ARMA([x1,a]) 
+                x1 = self.conv3ARMA([x1,a],training)  
             elif self.convtype==ConvTypes.ECCConv: 
-                x1 = self.conv3ECC([x1,a])
+                x1 = self.conv3ECC([x1,a],training) 
             elif self.convtype==ConvTypes.GCSConv:  
-                x1 = self.conv3GCS([x1,a])
+                x1 = self.conv3GCS([x1,a],training) 
 
         if self.num_conv > 2:
             if self.convtype==ConvTypes.GCNConv:
-                x1 = self.conv4GCN([x1,a])    
+                x1 = self.conv4GCN([x1,a],training)     
             elif self.convtype==ConvTypes.GATConv:
-                x1 = self.conv4GAT([x1,a])    
+                x1 = self.conv4GAT([x1,a],training)     
             elif self.convtype==ConvTypes.ARMAConv: 
-                x1 = self.conv4ARMA([x1,a])    
+                x1 = self.conv4ARMA([x1,a],training)     
             elif self.convtype==ConvTypes.ECCConv:
-                x1 = self.conv4ECC([x1,a])   
+                x1 = self.conv4ECC([x1,a],training)    
             elif self.convtype==ConvTypes.GCSConv:
-                x1 = self.conv4GCS([x1,a])
+                x1 = self.conv4GCS([x1,a],training) 
 
         if self.num_conv > 3:
             if self.convtype==ConvTypes.GCNConv:   
-                x1 = self.conv5GCN([x1,a])
+                x1 = self.conv5GCN([x1,a],training) 
             elif self.convtype==ConvTypes.GATConv:   
-                x1 = self.conv5GAT([x1,a])
+                x1 = self.conv5GAT([x1,a],training) 
             elif self.convtype==ConvTypes.ARMAConv:   
-                x1 = self.conv5ARMA([x1,a])
+                x1 = self.conv5ARMA([x1,a],training) 
             elif self.convtype==ConvTypes.ECCConv:  
-                x1 = self.conv5ECC([x1,a])
+                x1 = self.conv5ECC([x1,a],training) 
             elif self.convtype==ConvTypes.GCSConv:  
-                x1 = self.conv5GCS([x1,a])
+                x1 = self.conv5GCS([x1,a],training) 
         
         x1 = self.flat(x1)
         if self.num_dense>0:
-            x1 = self.dense1(x1)
+            x1 = self.dense1(x1,training)
         if self.num_dense>1:
-            x1 = self.dense2(x1)
+            x1 = self.dense2(x1,training)
         if self.num_dense>2:
-            x1 = self.dense3(x1)
+            x1 = self.dense3(x1,training)
         if self.num_dense>3:
-            x1 = self.dense4(x1)
+            x1 = self.dense4(x1,training)
         if self.num_dense>4:
-            x1 = self.dense5(x1)        
+            x1 = self.dense5(x1,training)        
         
-        x1 = self.denset(x1)
+        x1 = self.denset(x1,training)
         
-        z = self.z(x1)
+        z = self.z(x1,training)
         return z    
 
     
@@ -298,15 +296,15 @@ class DecoderA(Model):
         
         self.reshape = layers.Reshape((self.adjency_size, self.adjency_size))
     
-    def call(self,z):
+    def call(self,z,training=False):
         
-        da = self.adense1(z)
+        da = self.adense1(z,training)
         if self.num_dense > 1:
-            da = self.adense2(da)
+            da = self.adense2(da,training)
         if self.num_dense > 2:
-            da = self.adense3(da)
+            da = self.adense3(da,training)
         if self.num_dense > 3:
-            da = self.adense4(da)
+            da = self.adense4(da,training)
         
         da = self.adense_end(da)
         da = tf.keras.activations.sigmoid(da)        
@@ -359,7 +357,7 @@ class DecoderX(Model):
         
         self.xreshape2 = layers.Reshape((self.adjency_size, self.num_features))
         
-    def call(self,x):
+    def call(self,x,training=False):
         z,decodedA = x
         
         dx = self.xdense1(z)
@@ -367,46 +365,46 @@ class DecoderX(Model):
         if self.num_conv > 0:
             dx = self.xreshape1(dx)
             if self.convtype==ConvTypes.GCNConv:
-                dx = self.xconv1Conv([dx,decodedA])     
+                dx = self.xconv1Conv([dx,decodedA],training)     
             elif self.convtype==ConvTypes.GATConv:
-                dx = self.xconv1GAT([dx,decodedA])   
+                dx = self.xconv1GAT([dx,decodedA],training)   
             elif self.convtype==ConvTypes.ARMAConv:
-                dx = self.xconv1ARMA([dx,decodedA])   
+                dx = self.xconv1ARMA([dx,decodedA],training)   
             elif self.convtype==ConvTypes.ECCConv:
-                dx = self.xconv1ECC([dx,decodedA])   
+                dx = self.xconv1ECC([dx,decodedA],training)   
             elif self.convtype==ConvTypes.GCSConv:
-                dx = self.xconv1GCS([dx,decodedA])   
+                dx = self.xconv1GCS([dx,decodedA],training)   
             
         
         if self.num_conv > 1:
             if self.convtype==ConvTypes.GCNConv:
-                dx = self.xconv2Conv([dx,decodedA])    
+                dx = self.xconv2Conv([dx,decodedA],training)    
             elif self.convtype==ConvTypes.GATConv:
-                dx = self.xconv2GAT([dx,decodedA])    
+                dx = self.xconv2GAT([dx,decodedA],training)    
             elif self.convtype==ConvTypes.ARMAConv:
-                dx = self.xconv2ARMA([dx,decodedA])    
+                dx = self.xconv2ARMA([dx,decodedA],training)    
             elif self.convtype==ConvTypes.ECCConv:
-                dx = self.xconv2ECC([dx,decodedA])    
+                dx = self.xconv2ECC([dx,decodedA],training)    
             elif self.convtype==ConvTypes.GCSConv:
-                dx = self.xconv2GCS([dx,decodedA])
+                dx = self.xconv2GCS([dx,decodedA],training)
 
         if self.num_conv > 0: 
             dx = self.xflat1(dx)
 
         
         if self.num_dense>1:
-            dx = self.xdense2(dx)
+            dx = self.xdense2(dx,training)
         if self.num_dense>2:      
-            dx = self.xdense3(dx)
+            dx = self.xdense3(dx,training)
         if self.num_dense>3:
-            dx = self.xdense4(dx)
+            dx = self.xdense4(dx,training)
         if self.num_dense>4:
-            dx = self.xdense5(dx)
+            dx = self.xdense5(dx,training)
         if self.num_dense>5:
-            dx = self.xdense6(dx)
+            dx = self.xdense6(dx,training)
         
         
-        dx = self.xdense_end(dx)
+        dx = self.xdense_end(dx,training)
         
         decodedX = self.xreshape2(dx)-1
         return decodedX
@@ -418,42 +416,22 @@ class VGAE(keras.Model):
         self.encoder = encoder
         self.decoderA = decoderA
         self.decoderX = decoderX
-        self.total_loss_tracker = keras.metrics.Mean(name="total_loss")
-        self.reconstruction_loss_tracker = keras.metrics.Mean(
-            name="reconstruction_loss"
-        )
-        self.reconstruction_loss_trackerX = keras.metrics.Mean(
-            name="reconstruction_lossX"
-        )
-        self.reconstruction_loss_trackerA = keras.metrics.Mean(
-            name="reconstruction_lossA"
-        )
-        self.kl_loss_tracker = keras.metrics.Mean(name="kl_loss")
 
-    @property
-    def metrics(self):
-        return [
-            self.total_loss_tracker,
-            self.reconstruction_loss_tracker,
-            self.reconstruction_loss_trackerX,
-            self.reconstruction_loss_trackerA,
-            self.kl_loss_tracker,
-        ]
-    def call(self,data):
-        z_mean, z_log_var, z = self.encoder(data)
+    def call(self,data,training=False):
+        z_mean, z_log_var, z = self.encoder(data,training)
 
-        reconstructionA = self.decoderA(z)
-        reconstructionX = self.decoderX([z,reconstructionA])
+        reconstructionA = self.decoderA(z,training)
+        reconstructionX = self.decoderX([z,reconstructionA],training)
         return reconstructionX, reconstructionA 
     
     def test_step(self, data):        
         x_true,a_true = data
 
-        z_mean, z_log_var, z = self.encoder(data)
+        z_mean, z_log_var, z = self.encoder(data,training=False)
 
-        reconstructionA = self.decoderA(z)
+        reconstructionA = self.decoderA(z,training=False)
 
-        reconstructionX = self.decoderX([z,reconstructionA])
+        reconstructionX = self.decoderX([z,reconstructionA],training=False)
         reconstruction_lossA = tf.reduce_mean(
             tf.reduce_sum(
                 tf.losses.mean_squared_error(a_true, reconstructionA), axis=(1)
@@ -470,17 +448,17 @@ class VGAE(keras.Model):
         kl_loss = tf.reduce_mean(tf.reduce_sum(kl_loss, axis=1))
         total_loss = reconstruction_loss + kl_loss
     
-        return reconstruction_loss,reconstruction_lossA,reconstruction_lossX,kl_loss,total_loss
+        return total_loss,reconstruction_loss,reconstruction_lossA,reconstruction_lossX,kl_loss
 
     def train_step(self, data):
         with tf.GradientTape() as tape:
             x_true,a_true = data
 
-            z_mean, z_log_var, z = self.encoder(data)
+            z_mean, z_log_var, z = self.encoder(data,training=True)
 
-            reconstructionA = self.decoderA(z)
+            reconstructionA = self.decoderA(z,training=True)
 
-            reconstructionX = self.decoderX([z,reconstructionA])
+            reconstructionX = self.decoderX([z,reconstructionA],training=True)
             reconstruction_lossA = tf.reduce_mean(
                 tf.reduce_sum(
                     tf.losses.mean_squared_error(a_true, reconstructionA), axis=(1)
@@ -498,17 +476,13 @@ class VGAE(keras.Model):
             total_loss = reconstruction_loss + kl_loss
         grads = tape.gradient(total_loss, self.trainable_weights)
         self.optimizer.apply_gradients(zip(grads, self.trainable_weights))
-        self.total_loss_tracker.update_state(total_loss)
-        self.reconstruction_loss_tracker.update_state(reconstruction_loss)
-        self.reconstruction_loss_trackerA.update_state(reconstruction_lossA)
-        self.reconstruction_loss_trackerX.update_state(reconstruction_lossX)
-        self.kl_loss_tracker.update_state(kl_loss)
+
         return {
-            "loss": self.total_loss_tracker.result(),
-            "reconstruction_loss": self.reconstruction_loss_tracker.result(),
-            "reconstruction_lossA": self.reconstruction_loss_trackerA.result(),
-            "reconstruction_lossX": self.reconstruction_loss_trackerX.result(),
-            "kl_loss": self.kl_loss_tracker.result(),
+            "loss": total_loss,
+            "reconstruction_loss": reconstruction_loss,
+            "reconstruction_lossA": reconstruction_lossA,
+            "reconstruction_lossX": reconstruction_lossX,
+            "kl_loss": kl_loss,
         }
 
 class GAE(keras.Model):
@@ -518,25 +492,7 @@ class GAE(keras.Model):
         self.encoder = encoder
         self.decoderA = decoderA
         self.decoderX = decoderX
-        self.total_loss_tracker = keras.metrics.Mean(name="total_loss")
-        self.reconstruction_loss_tracker = keras.metrics.Mean(
-            name="reconstruction_loss"
-        )
-        self.reconstruction_loss_trackerX = keras.metrics.Mean(
-            name="reconstruction_lossX"
-        )
-        self.reconstruction_loss_trackerA = keras.metrics.Mean(
-            name="reconstruction_lossA"
-        )
-
-    @property
-    def metrics(self):
-        return [
-            self.total_loss_tracker,
-            self.reconstruction_loss_tracker,
-            self.reconstruction_loss_trackerX,
-            self.reconstruction_loss_trackerA
-        ]
+        
     def call(self,data):
         z = self.encoder(data)
 
@@ -547,11 +503,11 @@ class GAE(keras.Model):
     def test_step(self, data):        
         x_true,a_true = data
 
-        z = self.encoder(data)
+        z = self.encoder(data,training=False)
 
-        reconstructionA = self.decoderA(z)
+        reconstructionA = self.decoderA(z,training=False)
 
-        reconstructionX = self.decoderX([z,reconstructionA])
+        reconstructionX = self.decoderX([z,reconstructionA],training=False)
         reconstruction_lossA = tf.reduce_mean(
             tf.reduce_sum(
                 tf.losses.mean_squared_error(a_true, reconstructionA), axis=(1)
@@ -566,17 +522,17 @@ class GAE(keras.Model):
         
         total_loss = reconstruction_loss
     
-        return reconstruction_loss,reconstruction_lossA,reconstruction_lossX,total_loss
+        return total_loss,reconstruction_loss,reconstruction_lossA,reconstruction_lossX
 
     def train_step(self, data):
         with tf.GradientTape() as tape:
             x_true,a_true = data
 
-            z = self.encoder(data)
+            z = self.encoder(data,training=True)
 
-            reconstructionA = self.decoderA(z)
+            reconstructionA = self.decoderA(z,training=True)
 
-            reconstructionX = self.decoderX([z,reconstructionA])
+            reconstructionX = self.decoderX([z,reconstructionA],training=True)
             reconstruction_lossA = tf.reduce_mean(
                 tf.reduce_sum(
                     tf.losses.mean_squared_error(a_true, reconstructionA), axis=(1)
@@ -592,13 +548,9 @@ class GAE(keras.Model):
             total_loss = reconstruction_loss
         grads = tape.gradient(total_loss, self.trainable_weights)
         self.optimizer.apply_gradients(zip(grads, self.trainable_weights))
-        self.total_loss_tracker.update_state(total_loss)
-        self.reconstruction_loss_tracker.update_state(reconstruction_loss)
-        self.reconstruction_loss_trackerA.update_state(reconstruction_lossA)
-        self.reconstruction_loss_trackerX.update_state(reconstruction_lossX)
         return {
-            "loss": self.total_loss_tracker.result(),
-            "reconstruction_loss": self.reconstruction_loss_tracker.result(),
-            "reconstruction_lossA": self.reconstruction_loss_trackerA.result(),
-            "reconstruction_lossX": self.reconstruction_loss_trackerX.result(),
+            "loss": total_loss,
+            "reconstruction_loss": reconstruction_loss,
+            "reconstruction_lossA": reconstruction_lossA,
+            "reconstruction_lossX": reconstruction_lossX,
         }

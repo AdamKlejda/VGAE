@@ -1,15 +1,11 @@
-#PATH_FRAMS='/home/adam/Framsticks/Framsticks50rc19'
-PATH_FRAMS="/home/inf131778/Framsticks50rc19"
+PATH_FRAMS=""
 PATH_DATA ="graphs/gen/"
 PATH_OUT = "models/"
-EPOCHS = 300
+EPOCHS = 150
 BATCH_SIZE = 256
 ADJ_SIZE = 15
 NUM_FEATURES = 3
-LEARNING_RATE = 0.0001
-
-# def create_filename(latentdim, nhidden, convenc, denseenc, densedeca, convdecx, densedecx):
-#     return f"{latentdim}_{nhidden}_{convenc}_{denseenc}_{densedeca}_{convdecx}_{densedecx}"
+LEARNING_RATE = 0.005
 
 def create_file(variational,convtype,latentdim, nhidden, convenc, denseenc, densedeca, convdecx, densedecx):
     with open("configs/"+f"v{variational}_{convtype}_{latentdim}_{nhidden}_{convenc}_{denseenc}_{densedeca}_{convdecx}_{densedecx}", "w") as file:
@@ -28,8 +24,8 @@ def create_file(variational,convtype,latentdim, nhidden, convenc, denseenc, dens
         file.write(str(densedecx)+"\n")     #densedecx
         file.write(str(LEARNING_RATE)+"\n") #learningrate
         file.write(str(EPOCHS)+"\n")        #epochs
-        file.write(str(convtype)+"\n")        #convtype
-        file.write(str(variational)+"\n")        #convtype
+        file.write(str(convtype)+"\n")      #convtype
+        file.write(str(variational)+"\n")   #variational
 
 latentdim = [3,10,15]
 nhidden = [64]

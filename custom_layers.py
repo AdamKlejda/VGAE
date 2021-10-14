@@ -24,10 +24,10 @@ class Conv_layer_relu(layers.Layer):
         self.norm = layers.BatchNormalization()        
         self.act  = layers.ReLU()         
         self.drop = layers.Dropout(dropout)
-    def call(self, inputs):
+    def call(self, inputs,training=False):
         x,a = inputs
         x1 = self.conv([x,a])
-        x1 = self.norm(x1)
+        x1 = self.norm(x1,training)
         x1 = self.act(x1) 
         x1 = self.drop(x1)
         return x1
@@ -42,10 +42,10 @@ class ARMAConv_layer_relu(layers.Layer):
         self.norm = layers.BatchNormalization()        
         self.act  = layers.ReLU()         
         self.drop = layers.Dropout(dropout)
-    def call(self, inputs):
+    def call(self, inputs,training=False):
         x,a = inputs
         x1 = self.conv([x,a])
-        x1 = self.norm(x1)
+        x1 = self.norm(x1,training)
         x1 = self.act(x1) 
         x1 = self.drop(x1)
         return x1
@@ -60,10 +60,10 @@ class ECCConv_layer_relu(layers.Layer):
         self.norm = layers.BatchNormalization()        
         self.act  = layers.ReLU()         
         self.drop = layers.Dropout(dropout)
-    def call(self, inputs):
+    def call(self, inputs,training=False):
         x,a = inputs
         x1 = self.conv([x,a])
-        x1 = self.norm(x1)
+        x1 = self.norm(x1,training)
         x1 = self.act(x1) 
         x1 = self.drop(x1)
         return x1
@@ -78,10 +78,10 @@ class GCSConv_layer_relu(layers.Layer):
         self.norm = layers.BatchNormalization()        
         self.act  = layers.ReLU()         
         self.drop = layers.Dropout(dropout)
-    def call(self, inputs):
+    def call(self, inputs,training=False):
         x,a = inputs
         x1 = self.conv([x,a])
-        x1 = self.norm(x1)
+        x1 = self.norm(x1,training)
         x1 = self.act(x1) 
         x1 = self.drop(x1)
         return x1
@@ -96,10 +96,10 @@ class GATConv_layer_relu(layers.Layer):
         self.norm = layers.BatchNormalization()        
         self.act = layers.ReLU()         
         self.drop = layers.Dropout(dropout)
-    def call(self, inputs):
+    def call(self, inputs,training=False):
         x,a = inputs
         x1 = self.conv([x,a])
-        x1 = self.norm(x1)
+        x1 = self.norm(x1,training)
         x1 = self.act(x1) 
         x1 = self.drop(x1)
         return x1
@@ -113,10 +113,10 @@ class MPConv_layer_relu(layers.Layer):
         self.norm = layers.BatchNormalization()        
         self.act  = layers.ReLU()         
         self.drop = layers.Dropout(dropout)
-    def call(self, inputs):
+    def call(self, inputs,training=False):
         x,a = inputs
         x1 = self.conv([x,a])
-#         x1 = self.norm(x1)
+#         x1 = self.norm(x1,training)
 #         x1 = self.act(x1) 
 #         x1 = self.drop(x1)
         return x1
@@ -132,9 +132,9 @@ class Dense_layer_relu(layers.Layer):
         self.act  = layers.ReLU()         
         self.drop = layers.Dropout(dropout)
     
-    def call(self, inputs):
+    def call(self, inputs,training=False):
         x1 = self.dense(inputs)
-        x1 = self.norm(x1)
+        x1 = self.norm(x1,training)
         x1 = self.act(x1) 
         x1 = self.drop(x1)
         return x1
@@ -147,9 +147,9 @@ class Dense_layer_tanh(layers.Layer):
         self.norm = layers.BatchNormalization()        
         self.drop = layers.Dropout(dropout)
     
-    def call(self, inputs):
+    def call(self, inputs,training=False):
         x1 = self.dense(inputs)
-#         x1 = self.norm(x1)
+#         x1 = self.norm(x1,training)
         x1 = tf.keras.activations.tanh(x1)
 #         x1 = self.drop(x1)
         return x1

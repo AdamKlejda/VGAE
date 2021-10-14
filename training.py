@@ -49,12 +49,12 @@ def test_model(autoencoder,data_loader,steps_test,variational):
     for _ in range(steps_test):
         x,a = next(data_loader)
         if variational:
-            reconstruction_loss,reconstruction_lossA,reconstruction_lossX,kl_loss,total_loss = autoencoder.test_step([(tf.convert_to_tensor(x)),
+            total_loss,reconstruction_loss,reconstruction_lossA,reconstruction_lossX,kl_loss = autoencoder.test_step([(tf.convert_to_tensor(x)),
                                     tf.convert_to_tensor(a)])
             loss_all.append([total_loss,reconstruction_loss,reconstruction_lossA,reconstruction_lossX,kl_loss])
 
         else:
-            reconstruction_loss,reconstruction_lossA,reconstruction_lossX,total_loss = autoencoder.test_step([(tf.convert_to_tensor(x)),
+            total_loss,reconstruction_loss,reconstruction_lossA,reconstruction_lossX = autoencoder.test_step([(tf.convert_to_tensor(x)),
                                     tf.convert_to_tensor(a)])
             loss_all.append([total_loss,reconstruction_loss,reconstruction_lossA,reconstruction_lossX])
     return np.array(loss_all).mean(axis=0)
@@ -148,9 +148,6 @@ decoderX = DecoderX(latent_dim=parsed_args.latentdim,
                     convtype=parsed_args.convtype)
 
 
-inputsX = tf.keras.Input(shape=(parsed_args.adjsize,parsed_args.numfeatures))
-inputsA = tf.keras.Input(shape=(parsed_args.adjsize,parsed_args.adjsize))
-inp= [inputsX,inputsA]
 current_learning_rate = parsed_args.learningrate
 
 if variational == True:
@@ -159,8 +156,10 @@ else:
     autoencoder = GAE(encoder,decoderA,decoderX)
 opt = keras.optimizers.Adam(learning_rate=current_learning_rate)
 autoencoder.compile(optimizer=opt)
-autoencoder._set_inputs(inp)
-tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
+
+x,a = next(loader_train)
+_ = autoencoder.train_step([(tf.convert_to_tensor(x)),
+                                      tf.convert_to_tensor(a)])
 
 losses_all_train = []
 losses_all_test = []
@@ -174,7 +173,7 @@ else:
 
 
 path_args = PATH_OUT+MODEL_NAME+"/args.txt"
-
+save_config(parsed_args,path_args)
 
 epochs = parsed_args.epochs
 steps_train = math.ceil(train.n_graphs/parsed_args.batchsize)
@@ -182,8 +181,8 @@ steps_test = math.ceil(test.n_graphs/parsed_args.batchsize)
 
 for e in range(len(losses_all_train),epochs):
 
-    if current_learning_rate > parsed_args.learningrate * pow(0.5,floor(e/75)):
-        current_learning_rate = parsed_args.learningrate * pow(0.5,floor(e/75))
+    if current_learning_rate > parsed_args.learningrate * pow(0.9,floor(e/10)):
+        current_learning_rate = parsed_args.learningrate * pow(0.9,floor(e/10))
         opt.lr.assign(current_learning_rate)
     print("EPOCH",e)
     loss=None
@@ -203,7 +202,7 @@ for e in range(len(losses_all_train),epochs):
     
     test_loses = test_model(autoencoder,loader_test,steps_test,variational)
     losses_all_test.append(test_loses)
-    if e%10 == 0:
+    if e%5 == 0:
         save_model(PATH_OUT,MODEL_NAME,losses_all_train,losses_all_test,autoencoder,Variational=variational)
     print("Loss train: ",np.mean(avg_loss))
     print("Loss test: ", np.mean(test_loses[0]))

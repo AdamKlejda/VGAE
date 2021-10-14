@@ -57,7 +57,9 @@ def save_model(path,name,losses_all_train,losses_all_test,autoencoder,Variationa
     ax[1,2].set(xlabel='epoch', ylabel='reconstruction_lossA')
 
     fig.savefig("{0}/loss_{1}.png".format(path,name))
-    autoencoder.save_weights("{0}{1}/model".format(path,name))
+    autoencoder.save_weights("{0}{1}/model.hdf5".format(path,name))
+    print("Model saved")
+
 
 
 
@@ -65,7 +67,7 @@ def load_model(path,name,autoencoder):
     losses_all_test = []
     losses_all_train = []
     try:
-        autoencoder.load_weights("{0}{1}/model".format(path,name))
+        autoencoder.load_weights("{0}{1}/model.hdf5".format(path,name))
         print("Model loaded successfully")
     except Exception as e:
         print("Error while loading weights ", e)
