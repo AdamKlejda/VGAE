@@ -181,8 +181,8 @@ steps_test = math.ceil(test.n_graphs/parsed_args.batchsize)
 
 for e in range(len(losses_all_train),epochs):
 
-    if current_learning_rate > parsed_args.learningrate * pow(0.9,floor(e/10)):
-        current_learning_rate = parsed_args.learningrate * pow(0.9,floor(e/10))
+    if current_learning_rate > parsed_args.learningrate * pow(0.7,floor(e/10)):
+        current_learning_rate = parsed_args.learningrate * pow(0.7,floor(e/10))
         opt.lr.assign(current_learning_rate)
     print("EPOCH",e)
     loss=None

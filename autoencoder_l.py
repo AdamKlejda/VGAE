@@ -13,21 +13,21 @@ class VGAE_l(keras.Model):
         self.decoderA = decoderA
         self.decoderX = decoderX
         
-    def call(self,data,training=False):
-        z_mean, z_log_var, z = self.encoder(data,training)
+    def call(self,data):
+        z_mean, z_log_var, z = self.encoder(data)
 
-        reconstructionA = self.decoderA(z,training)
-        reconstructionX = self.decoderX([z,reconstructionA],training)
+        reconstructionA = self.decoderA(z)
+        reconstructionX = self.decoderX([z,reconstructionA])
         return reconstructionX, reconstructionA 
     
     def test_step(self, data):        
         x_true,a_true = data
 
-        z_mean, z_log_var, z = self.encoder(data,training=False)
+        z_mean, z_log_var, z = self.encoder(data)
 
-        reconstructionA = self.decoderA(z,training=False)
+        reconstructionA = self.decoderA(z)
 
-        reconstructionX = self.decoderX([z,reconstructionA],training=False)
+        reconstructionX = self.decoderX([z,reconstructionA])
         reconstruction_lossA = tf.reduce_mean(
             tf.reduce_sum(
                 tf.losses.mean_squared_error(a_true, reconstructionA), axis=(1)
@@ -53,11 +53,11 @@ class VGAE_l(keras.Model):
         with tf.GradientTape() as tape:
             x_true,a_true = data
 
-            z_mean, z_log_var, z = self.encoder(data,training=True)
+            z_mean, z_log_var, z = self.encoder(data)
 
-            reconstructionA = self.decoderA(z,training=True)
+            reconstructionA = self.decoderA(z)
 
-            reconstructionX = self.decoderX([z,reconstructionA],training=True)
+            reconstructionX = self.decoderX([z,reconstructionA])
             reconstruction_lossA = tf.reduce_mean(
                 tf.reduce_sum(
                     tf.losses.mean_squared_error(a_true, reconstructionA), axis=(1)
@@ -95,21 +95,21 @@ class GAE_l(keras.Model):
         self.decoderX = decoderX
 
 
-    def call(self,data,training=False):
-        z = self.encoder(data,training)
+    def call(self,data):
+        z = self.encoder(data)
 
-        reconstructionA = self.decoderA(z,training)
-        reconstructionX = self.decoderX([z,reconstructionA],training)
+        reconstructionA = self.decoderA(z)
+        reconstructionX = self.decoderX([z,reconstructionA])
         return reconstructionX, reconstructionA 
     
     def test_step(self, data):        
         x_true,a_true = data
 
-        z = self.encoder(data,training=False)
+        z = self.encoder(data)
 
-        reconstructionA = self.decoderA(z,training=False)
+        reconstructionA = self.decoderA(z)
 
-        reconstructionX = self.decoderX([z,reconstructionA],training=False)
+        reconstructionX = self.decoderX([z,reconstructionA])
         reconstruction_lossA = tf.reduce_mean(
             tf.reduce_sum(
                 tf.losses.mean_squared_error(a_true, reconstructionA), axis=(1)
@@ -132,11 +132,11 @@ class GAE_l(keras.Model):
         with tf.GradientTape() as tape:
             x_true,a_true = data
 
-            z = self.encoder(data,training=True)
+            z = self.encoder(data)
 
-            reconstructionA = self.decoderA(z,training=True)
+            reconstructionA = self.decoderA(z)
 
-            reconstructionX = self.decoderX([z,reconstructionA],training=True)
+            reconstructionX = self.decoderX([z,reconstructionA])
             reconstruction_lossA = tf.reduce_mean(
                 tf.reduce_sum(
                     tf.losses.mean_squared_error(a_true, reconstructionA), axis=(1)
