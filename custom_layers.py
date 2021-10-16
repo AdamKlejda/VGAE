@@ -19,15 +19,16 @@ class Conv_layer_relu(layers.Layer):
         super(Conv_layer_relu,self).__init__()
         self.conv = GCNConv(n_hidden,
                             kernel_initializer=initializers.he_uniform(seed=None),
-#                             kernel_regularizer="l1"
+                            #kernel_regularizer="l1"
                            )
-        self.norm = layers.BatchNormalization()        
+        self.norm = layers.LayerNormalization() #BatchNormalization       
         self.act  = layers.ReLU()         
         self.drop = layers.Dropout(dropout)
-    def call(self, inputs,training=False):
+    def call(self, inputs):
         x,a = inputs
         x1 = self.conv([x,a])
-        x1 = self.norm(x1,training)
+        # x1 = self.norm(x1,training)
+        x1 = self.norm(x1)
         x1 = self.act(x1) 
         x1 = self.drop(x1)
         return x1
@@ -37,15 +38,16 @@ class ARMAConv_layer_relu(layers.Layer):
         super(ARMAConv_layer_relu,self).__init__()
         self.conv = ARMAConv(n_hidden,
                             kernel_initializer=initializers.he_uniform(seed=None),
-#                             kernel_regularizer="l1"
+                            #kernel_regularizer="l1"
                            )
-        self.norm = layers.BatchNormalization()        
+        self.norm = layers.LayerNormalization()        
         self.act  = layers.ReLU()         
         self.drop = layers.Dropout(dropout)
-    def call(self, inputs,training=False):
+    def call(self, inputs):
         x,a = inputs
         x1 = self.conv([x,a])
-        x1 = self.norm(x1,training)
+        # x1 = self.norm(x1,training)
+        x1 = self.norm(x1)
         x1 = self.act(x1) 
         x1 = self.drop(x1)
         return x1
@@ -55,15 +57,16 @@ class ECCConv_layer_relu(layers.Layer):
         super(ECCConv_layer_relu,self).__init__()
         self.conv = ECCConv(n_hidden,
                             kernel_initializer=initializers.he_uniform(seed=None),
-#                             kernel_regularizer="l1"
+                            #kernel_regularizer="l1"
                            )
-        self.norm = layers.BatchNormalization()        
+        self.norm = layers.LayerNormalization()        
         self.act  = layers.ReLU()         
         self.drop = layers.Dropout(dropout)
-    def call(self, inputs,training=False):
+    def call(self, inputs):
         x,a = inputs
         x1 = self.conv([x,a])
-        x1 = self.norm(x1,training)
+        # x1 = self.norm(x1,training)
+        x1 = self.norm(x1)
         x1 = self.act(x1) 
         x1 = self.drop(x1)
         return x1
@@ -73,15 +76,16 @@ class GCSConv_layer_relu(layers.Layer):
         super(GCSConv_layer_relu,self).__init__()
         self.conv = GCSConv(n_hidden,
                             kernel_initializer=initializers.he_uniform(seed=None),
-#                             kernel_regularizer="l1"
+                            #kernel_regularizer="l1"
                            )
-        self.norm = layers.BatchNormalization()        
+        self.norm = layers.LayerNormalization()        
         self.act  = layers.ReLU()         
         self.drop = layers.Dropout(dropout)
-    def call(self, inputs,training=False):
+    def call(self, inputs):
         x,a = inputs
         x1 = self.conv([x,a])
-        x1 = self.norm(x1,training)
+        # x1 = self.norm(x1,training)
+        x1 = self.norm(x1)
         x1 = self.act(x1) 
         x1 = self.drop(x1)
         return x1
@@ -91,50 +95,37 @@ class GATConv_layer_relu(layers.Layer):
         super(GATConv_layer_relu,self).__init__()
         self.conv = GATConv(channels,
                             kernel_initializer=initializers.he_uniform(seed=None),
-#                             kernel_regularizer="l1"
+                            #kernel_regularizer="l1"
                            )
-        self.norm = layers.BatchNormalization()        
+        self.norm = layers.LayerNormalization()        
         self.act = layers.ReLU()         
         self.drop = layers.Dropout(dropout)
-    def call(self, inputs,training=False):
+    def call(self, inputs):
         x,a = inputs
         x1 = self.conv([x,a])
-        x1 = self.norm(x1,training)
+        # x1 = self.norm(x1,training)
+        x1 = self.norm(x1)
         x1 = self.act(x1) 
         x1 = self.drop(x1)
         return x1
 
-class MPConv_layer_relu(layers.Layer):
-    def __init__(self,dropout=0.2):
-        super(MPConv_layer_relu,self).__init__()
-        self.conv = MessagePassing(aggregate="mean",kernel_initializer=initializers.he_uniform(seed=None),
-#                                    kernel_regularizer="l1"
-                                  )
-        self.norm = layers.BatchNormalization()        
-        self.act  = layers.ReLU()         
-        self.drop = layers.Dropout(dropout)
-    def call(self, inputs,training=False):
-        x,a = inputs
-        x1 = self.conv([x,a])
-#         x1 = self.norm(x1,training)
-#         x1 = self.act(x1) 
-#         x1 = self.drop(x1)
-        return x1
+
     
 class Dense_layer_relu(layers.Layer):
     def __init__(self,n_hidden,dropout=0.2):
         super(Dense_layer_relu,self).__init__()
         self.dense = layers.Dense(n_hidden,
                                   kernel_initializer=initializers.he_uniform(seed=None),
-#                                   kernel_regularizer="l1"
+                                  #kernel_regularizer="l1"
                                  )
-        self.norm = layers.BatchNormalization()        
+        self.norm = layers.LayerNormalization()        
         self.act  = layers.ReLU()         
         self.drop = layers.Dropout(dropout)
     
-    def call(self, inputs,training=False):
+    def call(self, inputs):
         x1 = self.dense(inputs)
-        x1 = self.norm(x1,training)
+        # x1 = self.norm(x1,training)
+        x1 = self.norm(x1)
         x1 = self.act(x1) 
         x1 = self.drop(x1)
         return x1
@@ -143,11 +134,13 @@ class Dense_layer_tanh(layers.Layer):
     def __init__(self,n_hidden,dropout=0.2):
         super(Dense_layer_tanh,self).__init__()
         self.dense = layers.Dense(n_hidden,
-                                  kernel_initializer=initializers.GlorotUniform(seed=None))
-        self.norm = layers.BatchNormalization()        
+                                  kernel_initializer=initializers.GlorotUniform(seed=None),
+                                  #kernel_regularizer="l1"
+                                  )
+        self.norm = layers.LayerNormalization()        
         self.drop = layers.Dropout(dropout)
     
-    def call(self, inputs,training=False):
+    def call(self, inputs):
         x1 = self.dense(inputs)
 #         x1 = self.norm(x1,training)
         x1 = tf.keras.activations.tanh(x1)
