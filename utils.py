@@ -88,7 +88,7 @@ def roundXA(x,a):
             a[(i1,i2)] = 1
         else:
             a[(i1,i2)] = 0
-    x= np.around(x,decimals=2)
+    # x= np.around(x,decimals=4)
     return x, a
 
 def repairA(x,a):
@@ -124,7 +124,7 @@ def add_joint(g,i1,i2):
 def generateF1fromXA(x,a):
     genotype = "//0\n"
     for part in x:
-        if sum(part)>0:
+        if sum(part)>=-0.001:
             genotype = add_part(genotype,part)
     for (i1,i2),r in np.ndenumerate(a):
         if (a[(i1,i2)]==1 ) and (i1 != i2) and(i2>i1):

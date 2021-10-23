@@ -13,7 +13,9 @@ from autoencoder import EncoderGAE,EncoderVGAE, DecoderX, DecoderA, VGAE, GAE
 from utils import *
 from custom_layers import *
 from custom_layers import ConvTypes
+from LossManager import LossManager, LossTypes
 
+# os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
 def ensureDir(string):
     if os.path.isdir(string):
@@ -39,8 +41,9 @@ def save_config(parsed_args,path_args):
         file.write(str(parsed_args.learningrate)+"\n") #learningrate
         file.write(str(parsed_args.epochs)+"\n")        #epochs
         file.write(str(parsed_args.convtype.value)+"\n")#convtype
+        file.write(str(parsed_args.variational)+"\n")   #variational
+        file.write(str(parsed_args.loss)+"\n")          #loss
         file.write(str(parsed_args.trainid)+"\n")       #trainid
-        file.write(str(variational)+"\n")   #variational
 
 
 def test_model(autoencoder,data_loader,steps_test,variational):
@@ -80,7 +83,7 @@ def parseArguments():
     parser.add_argument('-epochs', type=int, required=False, help='',default=500)
     parser.add_argument('-trainid', type=int, required=False, help='',default=-1)
     parser.add_argument('-variational', type=str, required=True, help='')
-
+    parser.add_argument('-loss', type=LossTypes, required=True, help='',default=LossTypes.No)
     parser.set_defaults(debug=False)
     return parser.parse_args()
 ae_type=None
@@ -100,7 +103,8 @@ else:
 
 
 PATH_OUT = (str(parsed_args.pathout)+
-            ae_type +
+            str(parsed_args.loss)+
+            "/"+ae_type +
             "/numfeatures"+str(parsed_args.numfeatures) +
             "/adjsize"+str(parsed_args.adjsize) + 
             "/batchsize"+str(parsed_args.batchsize) +
@@ -117,7 +121,21 @@ MODEL_NAME = ("model_enc_"+str(parsed_args.convenc)+"_"+str(parsed_args.denseenc
              )
 
 
-
+if parsed_args.loss is not LossTypes.No:
+    lossManager = LossManager(parsed_args.pathframs,"eval-allcriteria.sim","vertpos")
+    if parsed_args.loss == LossTypes.joints:
+        custom_loss = lossManager.joints_too_big_loss
+    elif parsed_args.loss == LossTypes.parts:
+        custom_loss = lossManager.part_number_loss
+    elif parsed_args.loss == LossTypes.fitness:
+        custom_loss = lossManager.fitness_comparison_loss
+    elif parsed_args.loss == LossTypes.dissim:
+        custom_loss = lossManager.dissimilarity_comparison
+    else:
+        print(parsed_args.loss," is not supported, custom loss set to None")
+        custom_loss = None
+else:
+    custom_loss = None
 train, test = GraphDataset(parsed_args.pathframs, parsed_args.pathdata,size_of_adj=parsed_args.adjsize).read()
 
 loader_train = data.BatchLoader(train, batch_size=parsed_args.batchsize)
@@ -150,9 +168,9 @@ decoderX = DecoderX(latent_dim=parsed_args.latentdim,
 current_learning_rate = parsed_args.learningrate
 
 if variational == True:
-    autoencoder = VGAE(encoder,decoderA,decoderX)
+    autoencoder = VGAE(encoder,decoderA,decoderX,custom_loss)
 else:
-    autoencoder = GAE(encoder,decoderA,decoderX)
+    autoencoder = GAE(encoder,decoderA,decoderX,custom_loss)
 opt = keras.optimizers.Adam(learning_rate=current_learning_rate)
 autoencoder.compile(optimizer=opt)
 

@@ -20,7 +20,7 @@ class GraphDataset():
 
     transformer = None
 
-    def __init__(self, path_frams, path_data ,size_of_adj=30,number_of_rep=9999,train_size = 0.8, **kwargs):
+    def __init__(self, path_frams, path_data ,size_of_adj=30,number_of_rep=100,train_size = 0.8, **kwargs):
         self.transformer = FramsTransformer(path_frams,size_of_adj)
         self.path_data = path_data
         self.size_of_adj = size_of_adj
