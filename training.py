@@ -15,7 +15,7 @@ from custom_layers import *
 from custom_layers import ConvTypes
 from LossManager import LossManager, LossTypes
 
-# os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
 def ensureDir(string):
     if os.path.isdir(string):
@@ -177,6 +177,7 @@ autoencoder.compile(optimizer=opt)
 x,a = next(loader_train)
 _ = autoencoder.train_step([(tf.convert_to_tensor(x)),
                                       tf.convert_to_tensor(a)])
+autoencoder.built = True
 
 losses_all_train = []
 losses_all_test = []

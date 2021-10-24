@@ -27,7 +27,12 @@ def get_file_name(file_name):
                 pattern_2 = r"'[A-Z,a-z]+conv'"
                 to_keep = re.findall(pattern_2, to_remove[0], flags=0)
                 mod_string = re.sub(to_remove[0], to_keep[0]+',', line )
+                pattern = r"<LossTypes.*'>,"
+                to_remove = re.findall(pattern, line, flags=0)
+                pattern_2 = r"'[A-Z,a-z]+'"
+                to_keep = re.findall(pattern_2, to_remove[0], flags=0)
 
+                mod_string = re.sub(to_remove[0], to_keep[0]+',', mod_string )
                 d_name = eval(mod_string)
                 
                 if d_name['variational'] == "True":
