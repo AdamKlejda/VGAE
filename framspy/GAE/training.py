@@ -8,12 +8,11 @@ import argparse
 import math
 from math import floor
 
-from GraphDataset import GraphDataset
-from autoencoder import EncoderGAE,EncoderVGAE, DecoderX, DecoderA, VGAE, GAE
-from utils import *
-from custom_layers import *
-from custom_layers import ConvTypes
-from LossManager import LossManager, LossTypes
+from GAE.GraphDataset import GraphDataset
+from GAE.autoencoder import EncoderGAE,EncoderVGAE, DecoderX, DecoderA, VGAE, GAE
+from GAE.utils import *
+from GAE.custom_layers import ConvTypes
+from GAE.LossManager import LossManager, LossTypes
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
@@ -49,15 +48,17 @@ def save_config(parsed_args,path_args):
 def test_model(autoencoder,data_loader,steps_test,variational):
     loss_all =[]
     for _ in range(steps_test):
-        x,a = next(data_loader)
+        (x,a),y= next(data_loader)
         if variational:
             total_loss,reconstruction_loss,reconstruction_lossA,reconstruction_lossX,kl_loss = autoencoder.test_step([(tf.convert_to_tensor(x)),
-                                    tf.convert_to_tensor(a)])
+                                    tf.convert_to_tensor(a),
+                                    y])
             loss_all.append([total_loss,reconstruction_loss,reconstruction_lossA,reconstruction_lossX,kl_loss])
 
         else:
             total_loss,reconstruction_loss,reconstruction_lossA,reconstruction_lossX = autoencoder.test_step([(tf.convert_to_tensor(x)),
-                                    tf.convert_to_tensor(a)])
+                                    tf.convert_to_tensor(a),
+                                    y])
             loss_all.append([total_loss,reconstruction_loss,reconstruction_lossA,reconstruction_lossX])
     return np.array(loss_all).mean(axis=0)
 
@@ -120,14 +121,16 @@ MODEL_NAME = ("model_enc_"+str(parsed_args.convenc)+"_"+str(parsed_args.denseenc
              "_train_id_"+str(parsed_args.trainid)
              )
 
+fitness = None
 
 if parsed_args.loss is not LossTypes.No:
-    lossManager = LossManager(parsed_args.pathframs,"eval-allcriteria.sim","vertpos")
+    lossManager = LossManager(parsed_args.pathframs,"eval-allcriteria_new.sim","vertpos")
     if parsed_args.loss == LossTypes.joints:
         custom_loss = lossManager.joints_too_big_loss
     elif parsed_args.loss == LossTypes.parts:
         custom_loss = lossManager.part_number_loss
     elif parsed_args.loss == LossTypes.fitness:
+        fitness="vertpos"
         custom_loss = lossManager.fitness_comparison_loss
     elif parsed_args.loss == LossTypes.dissim:
         custom_loss = lossManager.dissimilarity_comparison
@@ -136,7 +139,8 @@ if parsed_args.loss is not LossTypes.No:
         custom_loss = None
 else:
     custom_loss = None
-train, test = GraphDataset(parsed_args.pathframs, parsed_args.pathdata,size_of_adj=parsed_args.adjsize).read()
+
+train, test = GraphDataset(parsed_args.pathframs, parsed_args.pathdata,max_examples=25000,fitness=fitness,size_of_adj=parsed_args.adjsize).read()
 
 loader_train = data.BatchLoader(train, batch_size=parsed_args.batchsize)
 loader_test = data.BatchLoader(test, batch_size=parsed_args.batchsize)
@@ -174,9 +178,11 @@ else:
 opt = keras.optimizers.Adam(learning_rate=current_learning_rate)
 autoencoder.compile(optimizer=opt)
 
-x,a = next(loader_train)
+(x,a),y= next(loader_train)
+print(y)
 _ = autoencoder.train_step([(tf.convert_to_tensor(x)),
-                                      tf.convert_to_tensor(a)])
+                                      tf.convert_to_tensor(a),
+                                      y])
 autoencoder.built = True
 
 losses_all_train = []
@@ -206,9 +212,10 @@ for e in range(len(losses_all_train),epochs):
     loss=None
     avg_loss = []
     for _ in range(steps_train):        
-        x,a = next(loader_train)
-        loss = autoencoder.train_step([(tf.convert_to_tensor(x)),
-                                      tf.convert_to_tensor(a)])
+        (x,a),y= next(loader_train)
+        loss = autoencoder.train_step([tf.convert_to_tensor(x),
+                                      tf.convert_to_tensor(a),
+                                      y])
         avg_loss.append(loss['loss'])
         if tf.math.is_nan(loss['loss']):
             print("LOSS == NAN")

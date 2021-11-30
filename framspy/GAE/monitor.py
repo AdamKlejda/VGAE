@@ -41,6 +41,7 @@ def get_file_name(file_name):
                     v= "GAE"
                 name = (name +
                         v+
+                        "_"+str(d_name['loss'])+
                         "_"+str(d_name['convtype']) +
                         "_"+str(d_name['batchsize']) +
                         "_"+str(d_name['latentdim']) +
@@ -52,7 +53,7 @@ def get_file_name(file_name):
                         "_"+str(d_name['densedecx']) +
                         "_id_"+str(d_name['trainid']) 
                         )
-                return name
+                return name+file_name
 
     return "None"
 

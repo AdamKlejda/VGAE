@@ -2,7 +2,7 @@ from tensorflow.keras.models import Model
 import tensorflow.keras.layers as layers
 import tensorflow as tf
 from tensorflow import keras
-from custom_layers import *
+from GAE.custom_layers import *
 class Sampling(layers.Layer):
 
     def call(self, inputs):
@@ -419,7 +419,8 @@ class VGAE(keras.Model):
         self.custom_loss = custom_loss
 
     def call(self,data,training=False):
-        z_mean, z_log_var, z = self.encoder.call(data)
+        x_true,a_true,y_true = data
+        z_mean, z_log_var, z = self.encoder.call([x_true,a_true])
 
         reconstructionA = self.decoderA.call(z)
         reconstructionX = self.decoderX.call([z,reconstructionA])
@@ -427,9 +428,9 @@ class VGAE(keras.Model):
     
     def test_step(self, data):
         
-        x_true,a_true = data
+        x_true,a_true,y_true = data
 
-        z_mean, z_log_var, z = self.encoder.call(data)
+        z_mean, z_log_var, z = self.encoder.call([x_true,a_true])
 
         reconstructionA = self.decoderA.call(z)
 
@@ -452,7 +453,7 @@ class VGAE(keras.Model):
         
         custom_loss_v = 0
         if self.custom_loss is not None:
-            custom_loss_v = self.custom_loss([x_true,a_true],[reconstructionX,reconstructionA],z)
+            custom_loss_v = self.custom_loss([x_true,a_true,y_true],[reconstructionX,reconstructionA],z)
         total_loss = reconstruction_loss + kl_loss + custom_loss_v
     
         return total_loss,reconstruction_loss,reconstruction_lossA,reconstruction_lossX,kl_loss
@@ -460,9 +461,9 @@ class VGAE(keras.Model):
     def train_step(self, data):
         
         with tf.GradientTape() as tape:
-            x_true,a_true = data
+            x_true,a_true,y_true = data
 
-            z_mean, z_log_var, z = self.encoder.call(data)
+            z_mean, z_log_var, z = self.encoder.call([x_true,a_true])
 
             reconstructionA = self.decoderA.call(z)
 
@@ -483,7 +484,7 @@ class VGAE(keras.Model):
             kl_loss = tf.reduce_mean(tf.reduce_sum(kl_loss, axis=1))
             custom_loss_v = 0
             if self.custom_loss is not None:
-                custom_loss_v = self.custom_loss([x_true,a_true],[reconstructionX,reconstructionA],z)
+                custom_loss_v = self.custom_loss([x_true,a_true,y_true],[reconstructionX,reconstructionA],z)
             total_loss = reconstruction_loss + kl_loss + custom_loss_v
         grads = tape.gradient(total_loss, self.trainable_weights)
         self.optimizer.apply_gradients(zip(grads, self.trainable_weights))
@@ -506,16 +507,17 @@ class GAE(keras.Model):
         self.custom_loss = custom_loss
 
     def call(self,data):
-        z = self.encoder.call(data)
+        x_true,a_true,y_true = data
+        z = self.encoder.call([x_true,a_true])
 
         reconstructionA = self.decoderA.call(z)
         reconstructionX = self.decoderX.call([z,reconstructionA])
         return reconstructionX, reconstructionA 
     
     def test_step(self, data):           
-        x_true,a_true = data
+        x_true,a_true,y_true = data
 
-        z = self.encoder.call(data)
+        z = self.encoder.call([x_true,a_true])
 
         reconstructionA = self.decoderA.call(z)
 
@@ -534,7 +536,7 @@ class GAE(keras.Model):
         
         custom_loss_v = 0
         if self.custom_loss is not None:
-            custom_loss_v = self.custom_loss([x_true,a_true],[reconstructionX,reconstructionA],z)
+            custom_loss_v = self.custom_loss([x_true,a_true,y_true],[reconstructionX,reconstructionA],z)
 
         total_loss = reconstruction_loss + custom_loss_v
     
@@ -543,9 +545,9 @@ class GAE(keras.Model):
     def train_step(self, data):
         
         with tf.GradientTape() as tape:
-            x_true,a_true = data
+            x_true,a_true,y_true = data
 
-            z = self.encoder.call(data)
+            z = self.encoder.call([x_true,a_true])
 
             reconstructionA = self.decoderA.call(z)
 
@@ -564,7 +566,7 @@ class GAE(keras.Model):
             
             custom_loss_v = 0
             if self.custom_loss is not None:
-                custom_loss_v = self.custom_loss([x_true,a_true],[reconstructionX,reconstructionA],z)
+                custom_loss_v = self.custom_loss([x_true,a_true,y_true],[reconstructionX,reconstructionA],z)
 
             total_loss = reconstruction_loss + custom_loss_v
         grads = tape.gradient(total_loss, self.trainable_weights)

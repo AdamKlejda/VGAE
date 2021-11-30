@@ -1,4 +1,5 @@
-from spektral.layers import GCNConv, GlobalSumPool,MessagePassing,GATConv,ARMAConv,ECCConv,GCSConv
+import enum
+from spektral.layers import GCNConv,GATConv,ARMAConv,ECCConv,GCSConv
 import tensorflow.keras.layers as layers
 from tensorflow.keras import initializers
 import tensorflow as tf
@@ -8,11 +9,52 @@ from enum import Enum
 class ConvTypes(Enum):
     GCNConv = "gcnconv"
     ARMAConv = "armaconv"
-    ECCConv = "eccconv"
     GATConv = "gatconv"
     GCSConv = "gcsconv"
     def __str__(self):
         return self.name
+
+
+class Conv_layers_relu(layers.Layer):
+    def __init__(self,n_hidden,ctype="",dropout=0.2) -> None:
+        super(Conv_layers_relu,self).__init__()
+
+        if ctype==ConvTypes.ARMAConv: 
+            self.conv = ARMAConv(n_hidden,
+                                kernel_initializer=initializers.he_uniform(seed=None),
+                                #kernel_regularizer="l1"
+                            )
+        elif ctype==ConvTypes.GCSConv: 
+            self.conv = GCSConv(n_hidden,
+                                kernel_initializer=initializers.he_uniform(seed=None),
+                                #kernel_regularizer="l1"
+                            )
+        elif ctype==ConvTypes.GATConv: 
+            self.conv = GATConv(n_hidden,
+                                kernel_initializer=initializers.he_uniform(seed=None),
+                                #kernel_regularizer="l1"
+                            )
+        elif ctype==ConvTypes.GCNConv: 
+            self.conv = GCNConv(n_hidden,
+                        kernel_initializer=initializers.he_uniform(seed=None),
+                        #kernel_regularizer="l1"
+                        )
+        else:
+            print("Wrong conv type",ctype)
+            assert ctype
+
+        self.norm = layers.LayerNormalization() #BatchNormalization       
+        self.act  = layers.ReLU()         
+        self.drop = layers.Dropout(dropout)
+    
+    def call(self,inputs):
+        x,a = inputs
+        x1 = self.conv([x,a])
+        # x1 = self.norm(x1,training)
+        x1 = self.norm(x1)
+        x1 = self.act(x1) 
+        x1 = self.drop(x1)
+        return x1
 
 class Conv_layer_relu(layers.Layer):
     def __init__(self,n_hidden,dropout=0.2):

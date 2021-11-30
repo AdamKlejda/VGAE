@@ -1,12 +1,13 @@
 from re import A, S
 
 from tensorflow.python.ops.gen_control_flow_ops import no_op
-from utils import gen_f0_from_tensors,FramsManager
-from framspy.FramsticksLib import *
+from GAE.utils import gen_f0_from_tensors,FramsManager
+from FramsticksLib import *
 from scipy.spatial import distance
 from enum import Enum
 import numpy as np
 import pandas as pd 
+
 class LossTypes(Enum):
     joints = "joints"
     parts = "parts"
@@ -18,7 +19,7 @@ class LossTypes(Enum):
 
 
 class LossManager:
-    def __init__(self,pathFrams,path_to_sim="eval-allcriteria.sim",fitness="vertpos") -> None:
+    def __init__(self,pathFrams,path_to_sim="eval-allcriteria_new.sim",fitness="vertpos") -> None:
         self.FramsManager = FramsManager(pathFrams)
         self.framsLib = FramsticksLib(pathFrams,None,[path_to_sim])
         self.fitness = fitness
@@ -39,7 +40,7 @@ class LossManager:
 
     def part_number_loss(self,xa_orginal,xa_reconstructed,latent_space):
         # frams with similar number of parts should be close to each other
-        x,a= xa_orginal
+        x,a,y= xa_orginal
         gen_list = gen_f0_from_tensors(x,a)
         n_parts_list = []
         for gen in gen_list:            
@@ -56,10 +57,10 @@ class LossManager:
 
     def fitness_comparison_loss(self,xa_orginal,xa_reconstructed,latent_space):
         # frams with similar fitness should be close to each other
-        x,a= xa_orginal
-        gen_list = gen_f0_from_tensors(x,a)
-        c = self.framsLib.evaluate(gen_list)
-        fit_list = [f['evaluations'][''][self.fitness] for f in c]
+        x,a,y= xa_orginal
+        # gen_list = gen_f0_from_tensors(x,a)
+        # c = self.framsLib.evaluate(gen_list)
+        fit_list = y
         dist_list = self.get_latent_dist(latent_space)
         zipped=  zip(fit_list,dist_list)
         df = pd.DataFrame(zipped,columns=[0,1])
@@ -69,8 +70,9 @@ class LossManager:
 
     def dissimilarity_comparison(self,xa_orginal,xa_reconstructed,latent_space):
         # similar frams should be close to each other
-        x,a= xa_orginal
+        x,a,y= xa_orginal
         gen_list = gen_f0_from_tensors(x,a)
+        gen_list = [self.FramsManager.reduce_joint_length_for_gen(g) for g in gen_list]
         dissim_list = self.framsLib.dissimilarity(gen_list)
         dissim_list = np.mean(np.array(dissim_list), axis=1)
         dist_list = self.get_latent_dist(latent_space)

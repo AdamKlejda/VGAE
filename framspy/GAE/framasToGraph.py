@@ -28,20 +28,20 @@ class FramsTransformer():
 
     def getPartFeaturesArray(self,part):
         x = 50
-        return np.array([part.x._value(),#   /self.orto_max, #float
-                        part.y._value() ,#   /self.orto_max,  #float
-                        part.z._value() ,#   /self.orto_max,  #float
-#                         part.sh._value()    /3, #0.1-3
-#                         part.s._value()     /10,  #0.1-10
-#                         part.sx._value()    /5, #0.05-5
-#                         part.sy._value()    /5, #0.05-5
-#                         part.sz._value()    /5, #0.05-5
-#                         part.rx._value()    , #float
-#                         part.ry._value()    , #float
-#                         part.rz._value()    , #float 
-#                         part.dn._value()    /5, #0.02-5
-#                         part.fr._value()    /4, #0-4
-#                         part.ing._value()   , #0-1
+        return np.array([part.x._value(),#    #float
+                        part.y._value() ,#    #float
+                        part.z._value() ,#    #float
+#                         part.sh._value()    #0.1-3
+#                         part.s._value()     #0.1-10
+#                         part.sx._value()    #0.05-5
+#                         part.sy._value()    #0.05-5
+#                         part.sz._value()    #0.05-5
+#                         part.rx._value()    #float
+#                         part.ry._value()    #float
+#                         part.rz._value()    #float 
+#                         part.dn._value()    #0.02-5
+#                         part.fr._value()    #0-4
+#                         part.ing._value()   #0-1
     #                      part.as._value()
     #                      sth for neurons...
                         ])
@@ -121,8 +121,8 @@ class FramsTransformer():
 #         e = self.getFeaturesForEdges(model)
     #     print(e)
         # for the node or graph labels
-        # y = 
-        return spektral.data.graph.Graph(x=x, a=a, e=None, y=None)
+        y = 0
+        return spektral.data.graph.Graph(x=x, a=a, e=None, y=y)
 
     def getGrafFromString(self,str_model):
         m = self.frams.Model.newFromString(str_model)

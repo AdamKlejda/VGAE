@@ -1,7 +1,7 @@
 PATH_FRAMS="~/"
 PATH_DATA ="graphs/gen/"
 PATH_OUT = "models/"
-EPOCHS = 150
+EPOCHS = 100
 BATCH_SIZE = 256
 ADJ_SIZE = 15
 NUM_FEATURES = 3
@@ -30,14 +30,14 @@ def create_file(variational,convtype,latentdim, nhidden, convenc, denseenc, dens
 
 latentdim = [15]
 nhidden = [64]
-convenc = [1]
+convenc = [1,2]
 denseenc = [2]
 densedeca = [1]
 convdecx = [1]
 densedecx = [2]
-convtypes = ["gcsconv"]#"gcnconv","armaconv","gatconv",
+convtypes = ["gcsconv","gcnconv","armaconv","gatconv",]
 variational=['True','False']
-loss=['parts','fitness','dissim'] # ['joints']
+loss= ['joints'] #['parts','fitness','dissim','None'] #
 for v in variational:
     for l in latentdim:
         for nh in nhidden:
