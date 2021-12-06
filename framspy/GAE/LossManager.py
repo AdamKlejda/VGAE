@@ -39,11 +39,11 @@ class LossManager:
         return c_wrong_joints * 100
 
     def part_number_loss(self,xa_orginal,xa_reconstructed,latent_space):
-        # frams with similar number of parts should be close to each other
+        # frams with similar number of parts should be close to each other  
         x,a,y= xa_orginal
         gen_list = gen_f0_from_tensors(x,a)
         n_parts_list = []
-        for gen in gen_list:            
+        for gen in gen_list:
             m = self.FramsManager.frams.Model.newFromString(gen);
             n_parts = m.numparts._value()
             n_parts_list.append(n_parts)

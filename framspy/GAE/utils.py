@@ -24,39 +24,42 @@ def save_model(path,name,losses_all_train,losses_all_test,autoencoder,Variationa
     with open("{0}{1}/losses_train.npy".format(path,name), "wb") as outfile: 
         np.save(outfile, np.array(losses_all_train))
 
-    fig, ax = plt.subplots(2,3,figsize=(10,15))
-    x_train = np.array(train_loss_all)
-    x_test = np.array(test_loss_all)
-    ax[0,0].plot(x_train, label = "train")
-    ax[0,0].plot(x_test, label = "test")
-    ax[0,0].set(xlabel='epoch', ylabel='loss')
+    # fig, ax = plt.subplots(2,3,figsize=(10,15))
+    # x_train = np.array(train_loss_all)
+    # x_test = np.array(test_loss_all)
+    # ax[0,0].plot(x_train, label = "train")
+    # ax[0,0].plot(x_test, label = "test")
+    # ax[0,0].set(xlabel='epoch', ylabel='loss')
 
-    if Variational:
-        x_train = np.array(train_kl_loss)
-        x_test = np.array(test_kl_loss)
-        ax[0,1].plot(x_train, label = "train")
-        ax[0,1].plot(x_test, label = "test")
-        ax[0,1].set(xlabel='epoch', ylabel='kl_loss')
+    # if Variational:
+    #     x_train = np.array(train_kl_loss)
+    #     x_test = np.array(test_kl_loss)
+    #     ax[0,1].plot(x_train, label = "train")
+    #     ax[0,1].plot(x_test, label = "test")
+    #     ax[0,1].set(xlabel='epoch', ylabel='kl_loss')
 
-    x_train = np.array(train_reconstruction_loss)
-    x_test = np.array(test_reconstruction_loss)
-    ax[1,0].plot(x_train, label = "train")
-    ax[1,0].plot(x_test, label = "test")
-    ax[1,0].set(xlabel='epoch', ylabel='reconstruction_loss')
+    # x_train = np.array(train_reconstruction_loss)
+    # x_test = np.array(test_reconstruction_loss)
+    # ax[1,0].plot(x_train, label = "train")
+    # ax[1,0].plot(x_test, label = "test")
+    # ax[1,0].set(xlabel='epoch', ylabel='reconstruction_loss')
 
-    x_train = np.array(train_reconstruction_lossX)
-    x_test = np.array(test_reconstruction_lossX)
-    ax[1,1].plot(x_train, label = "train")
-    ax[1,1].plot(x_test, label = "test")
-    ax[1,1].set(xlabel='epoch', ylabel='reconstruction_lossX')
+    # x_train = np.array(train_reconstruction_lossX)
+    # x_test = np.array(test_reconstruction_lossX)
+    # ax[1,1].plot(x_train, label = "train")
+    # ax[1,1].plot(x_test, label = "test")
+    # ax[1,1].set(xlabel='epoch', ylabel='reconstruction_lossX')
 
-    x_train = np.array(train_reconstruction_lossA)
-    x_test = np.array(test_reconstruction_lossA)
-    ax[1,2].plot(x_train, label = "train")
-    ax[1,2].plot(x_test, label = "test")
-    ax[1,2].set(xlabel='epoch', ylabel='reconstruction_lossA')
+    # x_train = np.array(train_reconstruction_lossA)
+    # x_test = np.array(test_reconstruction_lossA)
+    # ax[1,2].plot(x_train, label = "train")
+    # ax[1,2].plot(x_test, label = "test")
+    # ax[1,2].set(xlabel='epoch', ylabel='reconstruction_lossA')
 
-    fig.savefig("{0}/loss_{1}.png".format(path,name))
+    # fig.savefig("{0}/loss_{1}.png".format(path,name))
+    # fig.clear()
+    # plt.close(fig)
+    
     autoencoder.save_weights("{0}{1}/model.hdf5".format(path,name))
     print("Model saved")
 
@@ -91,29 +94,29 @@ def roundXA(x,a):
     # x= np.around(x,decimals=4)
     return x, a
 
-def repairA(x,a):
-    # make connection if only 1 has it
-    a_size = len(a[0])
-    for (i1,i2),r in np.ndenumerate(a):
-        if a[(i1,i2)]==1:
-            a[(i2,i1)] = 1
-    # remove connection to part that doesnt exist
-    num_parts = -1
-    for partId in range(len(x)):
-        if sum(x[partId]) < 0:
-            a[partId] = np.zeros(a_size)
-        else:
-            num_parts+=1
+# def repairA(x,a):
+#     # make connection if only 1 has it
+#     a_size = len(a[0])
+#     for (i1,i2),r in np.ndenumerate(a):
+#         if a[(i1,i2)]==1:
+#             a[(i2,i1)] = 1
+#     # remove connection to part that doesnt exist
+#     num_parts = -1
+#     for partId in range(len(x)):
+#         if sum(x[partId]) < 0:
+#             a[partId] = np.zeros(a_size)
+#         else:
+#             num_parts+=1
     
-    for i in range(num_parts):
-        if sum(a[i]) < 2:
-            if (i == a_size-2) or (i == a_size-1):
-                a[(i,i-1)]=1
-                a[(i-1,i)]=1
-            else:
-                a[(i,i+1)]=1
-                a[(i+1,i)]=1
-    return x, a
+#     for i in range(num_parts):
+#         if sum(a[i]) < 2:
+#             if (i == a_size-2) or (i == a_size-1):
+#                 a[(i,i-1)]=1
+#                 a[(i-1,i)]=1
+#             else:
+#                 a[(i,i+1)]=1
+#                 a[(i+1,i)]=1
+#     return x, a
             
 def add_part(g,p):
     return g + "p:"+str(p[0])+", "+str(p[1])+", "+str(p[2])+"\n"
@@ -125,7 +128,7 @@ def generateF1fromXA(x,a):
     genotype = "//0\n"
     counter_p = 0
     for part in x:
-        if sum(part)>=-0.001:
+        if part[-1]>=0:
             genotype = add_part(genotype,part)
             counter_p+=1
     for (i1,i2),r in np.ndenumerate(a):
@@ -185,7 +188,7 @@ class FramsManager():
         count =0
         ec = self.frams.MessageCatcher.new()
         for gen in gen_list:
-            m = self.frams.Model.newFromString(gen);
+            m = self.frams.Model.newFromString(gen)
             num_joints = m.numjoints._value() 
             for n in range(num_joints):            
                 p,c = m.getJoint(n).p1._value(),m.getJoint(n).p2._value()
@@ -287,7 +290,7 @@ class FramsManager():
 
     def check_consistency_for_gen(self, gen):
         try:
-            m = self.frams.Model.newFromString(gen);
+            m = self.frams.Model.newFromString(gen)
             n_parts = m.numparts._value()
 
             all_parts = np.arange(n_parts)
@@ -304,7 +307,7 @@ class FramsManager():
             for j in joints_to_add:
                 gen =add_joint(gen,j[0],j[1])
 
-            m = self.frams.Model.newFromString(gen);
+            m = self.frams.Model.newFromString(gen)
             groups_inside_graph = self.create_groups(m)
 
 
@@ -322,7 +325,7 @@ class FramsManager():
 
     def reduce_joint_length_for_gen(self,gen):
         # print("GEN PASSED",[gen])
-        m = frams.Model.newFromString(gen);
+        m = frams.Model.newFromString(gen)
         num_joints = m.numjoints._value() 
         # print("num_joints start:",num_joints)
         num_of_iterations =0
@@ -345,7 +348,7 @@ class FramsManager():
                 p2 = (m.getPart(int(c)).x._value(),m.getPart(int(c)).y._value(),m.getPart(int(c)).z._value())
                 dist =distance.euclidean(p1,p2)
                 
-                if dist >= 2.0:
+                if dist >= 1.99999:
                     joints_too_big.append((dist,n,p,c))
                 if dist == 0.0:
                     joints_too_small.append((dist,n,p,c))

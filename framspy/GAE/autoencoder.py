@@ -19,37 +19,12 @@ class EncoderVGAE(Model):
         self.num_dense = num_dense
         self.convtype = convtype
 
-        self.conv1GCN = Conv_layer_relu(n_hidden)    
-        self.conv2GCN = Conv_layer_relu(n_hidden)   
-        self.conv3GCN = Conv_layer_relu(n_hidden) 
-        self.conv4GCN = Conv_layer_relu(int(n_hidden/2))    
-        self.conv5GCN = Conv_layer_relu(int(n_hidden/2))
-        
-        self.conv1GAT = GATConv_layer_relu(n_hidden)    
-        self.conv2GAT = GATConv_layer_relu(n_hidden)   
-        self.conv3GAT = GATConv_layer_relu(n_hidden) 
-        self.conv4GAT = GATConv_layer_relu(int(n_hidden/2))    
-        self.conv5GAT = GATConv_layer_relu(int(n_hidden/2))
-
-        self.conv1ARMA = ARMAConv_layer_relu(n_hidden)    
-        self.conv2ARMA = ARMAConv_layer_relu(n_hidden)   
-        self.conv3ARMA = ARMAConv_layer_relu(n_hidden) 
-        self.conv4ARMA = ARMAConv_layer_relu(int(n_hidden/2))    
-        self.conv5ARMA = ARMAConv_layer_relu(int(n_hidden/2))
-
-        self.conv1ECC = ECCConv_layer_relu(n_hidden)    
-        self.conv2ECC = ECCConv_layer_relu(n_hidden)   
-        self.conv3ECC = ECCConv_layer_relu(n_hidden) 
-        self.conv4ECC = ECCConv_layer_relu(int(n_hidden/2))    
-        self.conv5ECC = ECCConv_layer_relu(int(n_hidden/2))
-
-        self.conv1GCS = GCSConv_layer_relu(n_hidden)    
-        self.conv2GCS = GCSConv_layer_relu(n_hidden)   
-        self.conv3GCS = GCSConv_layer_relu(n_hidden) 
-        self.conv4GCS = GCSConv_layer_relu(int(n_hidden/2))    
-        self.conv5GCS = GCSConv_layer_relu(int(n_hidden/2))
-        
-       
+        self.conv1 = Conv_layers_relu(n_hidden,convtype)    
+        self.conv2 = Conv_layers_relu(n_hidden,convtype)   
+        self.conv3 = Conv_layers_relu(n_hidden,convtype) 
+        self.conv4 = Conv_layers_relu(int(n_hidden/2),convtype)    
+        self.conv5 = Conv_layers_relu(int(n_hidden/2),convtype)
+             
         self.flat = layers.Flatten()
         
         self.dense1 = Dense_layer_relu(int(n_hidden))
@@ -66,66 +41,19 @@ class EncoderVGAE(Model):
         
     def call(self,x,training=False):
         x,a = x
-        if self.convtype==ConvTypes.GCNConv:
-            x1 = self.conv1GCN([x,a])    
-        elif self.convtype==ConvTypes.GATConv:
-            x1 = self.conv1GAT([x,a])    
-        elif self.convtype==ConvTypes.ARMAConv:
-            x1 = self.conv1ARMA([x,a])    
-        elif self.convtype==ConvTypes.ECCConv:
-            x1 = self.conv1ECC([x,a])   
-        else:
-            x1 = self.conv1GCS([x,a]) 
 
+        x1 = self.conv1([x,a])
         if self.num_conv > 0:
-            if self.convtype==ConvTypes.GCNConv:
-                x1 = self.conv2GCN([x1,a])    
-            elif self.convtype==ConvTypes.GATConv:
-                x1 = self.conv2GAT([x1,a])    
-            elif self.convtype==ConvTypes.ARMAConv:
-                x1 = self.conv2ARMA([x1,a])    
-            elif self.convtype==ConvTypes.ECCConv:
-                x1 = self.conv2ECC([x1,a])   
-            elif self.convtype==ConvTypes.GCSConv:
-                x1 = self.conv2GCS([x1,a]) 
-
+            x1 = self.conv2([x1,a])
         if self.num_conv > 1:
-            if self.convtype==ConvTypes.GCNConv:   
-                x1 = self.conv3GCN([x1,a]) 
-            elif self.convtype==ConvTypes.GATConv:  
-                x1 = self.conv3GAT([x1,a])  
-            elif self.convtype==ConvTypes.ARMAConv: 
-                x1 = self.conv3ARMA([x1,a])  
-            elif self.convtype==ConvTypes.ECCConv: 
-                x1 = self.conv3ECC([x1,a]) 
-            elif self.convtype==ConvTypes.GCSConv:  
-                x1 = self.conv3GCS([x1,a]) 
-
+            x1 = self.conv3([x1,a])  
         if self.num_conv > 2:
-            if self.convtype==ConvTypes.GCNConv:
-                x1 = self.conv4GCN([x1,a])     
-            elif self.convtype==ConvTypes.GATConv:
-                x1 = self.conv4GAT([x1,a])     
-            elif self.convtype==ConvTypes.ARMAConv: 
-                x1 = self.conv4ARMA([x1,a])     
-            elif self.convtype==ConvTypes.ECCConv:
-                x1 = self.conv4ECC([x1,a])    
-            elif self.convtype==ConvTypes.GCSConv:
-                x1 = self.conv4GCS([x1,a]) 
-
+            x1 = self.conv4([x1,a])
         if self.num_conv > 3:
-            if self.convtype==ConvTypes.GCNConv:   
-                x1 = self.conv5GCN([x1,a]) 
-            elif self.convtype==ConvTypes.GATConv:   
-                x1 = self.conv5GAT([x1,a]) 
-            elif self.convtype==ConvTypes.ARMAConv:   
-                x1 = self.conv5ARMA([x1,a]) 
-            elif self.convtype==ConvTypes.ECCConv:  
-                x1 = self.conv5ECC([x1,a]) 
-            elif self.convtype==ConvTypes.GCSConv:  
-                x1 = self.conv5GCS([x1,a]) 
+            x1 = self.conv5([x1,a]) 
         
         x1 = self.flat(x1)
+
         if self.num_dense>0:
             x1 = self.dense1(x1)
         if self.num_dense>1:
@@ -137,8 +65,7 @@ class EncoderVGAE(Model):
         if self.num_dense>4:
             x1 = self.dense5(x1)        
         
-        x1 = self.denset(x1)
-        
+        x1 = self.denset(x1)        
 
         z_mean = self.z_mean(x1)
         z_log_var = self.z_log_var(x1)
@@ -153,37 +80,12 @@ class EncoderGAE(Model):
         self.num_dense = num_dense
         self.convtype = convtype
 
-        self.conv1GCN = Conv_layer_relu(n_hidden)    
-        self.conv2GCN = Conv_layer_relu(n_hidden)   
-        self.conv3GCN = Conv_layer_relu(n_hidden) 
-        self.conv4GCN = Conv_layer_relu(int(n_hidden/2))    
-        self.conv5GCN = Conv_layer_relu(int(n_hidden/2))
-        
-        self.conv1GAT = GATConv_layer_relu(n_hidden)    
-        self.conv2GAT = GATConv_layer_relu(n_hidden)   
-        self.conv3GAT = GATConv_layer_relu(n_hidden) 
-        self.conv4GAT = GATConv_layer_relu(int(n_hidden/2))    
-        self.conv5GAT = GATConv_layer_relu(int(n_hidden/2))
-
-        self.conv1ARMA = ARMAConv_layer_relu(n_hidden)    
-        self.conv2ARMA = ARMAConv_layer_relu(n_hidden)   
-        self.conv3ARMA = ARMAConv_layer_relu(n_hidden) 
-        self.conv4ARMA = ARMAConv_layer_relu(int(n_hidden/2))    
-        self.conv5ARMA = ARMAConv_layer_relu(int(n_hidden/2))
-
-        self.conv1ECC = ECCConv_layer_relu(n_hidden)    
-        self.conv2ECC = ECCConv_layer_relu(n_hidden)   
-        self.conv3ECC = ECCConv_layer_relu(n_hidden) 
-        self.conv4ECC = ECCConv_layer_relu(int(n_hidden/2))    
-        self.conv5ECC = ECCConv_layer_relu(int(n_hidden/2))
-
-        self.conv1GCS = GCSConv_layer_relu(n_hidden)    
-        self.conv2GCS = GCSConv_layer_relu(n_hidden)   
-        self.conv3GCS = GCSConv_layer_relu(n_hidden) 
-        self.conv4GCS = GCSConv_layer_relu(int(n_hidden/2))    
-        self.conv5GCS = GCSConv_layer_relu(int(n_hidden/2))
-        
-       
+        self.conv1 = Conv_layers_relu(n_hidden,convtype)    
+        self.conv2 = Conv_layers_relu(n_hidden,convtype)   
+        self.conv3 = Conv_layers_relu(n_hidden,convtype) 
+        self.conv4 = Conv_layers_relu(int(n_hidden/2),convtype)    
+        self.conv5 = Conv_layers_relu(int(n_hidden/2),convtype)       
+           
         self.flat = layers.Flatten()
         
         self.dense1 = Dense_layer_relu(int(n_hidden))
@@ -198,66 +100,19 @@ class EncoderGAE(Model):
         
     def call(self,x,training=False):
         x,a = x
-        if self.convtype==ConvTypes.GCNConv:
-            x1 = self.conv1GCN([x,a])    
-        elif self.convtype==ConvTypes.GATConv:
-            x1 = self.conv1GAT([x,a])    
-        elif self.convtype==ConvTypes.ARMAConv:
-            x1 = self.conv1ARMA([x,a])    
-        elif self.convtype==ConvTypes.ECCConv:
-            x1 = self.conv1ECC([x,a])   
-        else:
-            x1 = self.conv1GCS([x,a]) 
+        x1 = self.conv1([x,a])    
 
         if self.num_conv > 0:
-            if self.convtype==ConvTypes.GCNConv:
-                x1 = self.conv2GCN([x1,a])    
-            elif self.convtype==ConvTypes.GATConv:
-                x1 = self.conv2GAT([x1,a])    
-            elif self.convtype==ConvTypes.ARMAConv:
-                x1 = self.conv2ARMA([x1,a])    
-            elif self.convtype==ConvTypes.ECCConv:
-                x1 = self.conv2ECC([x1,a])   
-            elif self.convtype==ConvTypes.GCSConv:
-                x1 = self.conv2GCS([x1,a]) 
-
+            x1 = self.conv2([x1,a])
         if self.num_conv > 1:
-            if self.convtype==ConvTypes.GCNConv:   
-                x1 = self.conv3GCN([x1,a]) 
-            elif self.convtype==ConvTypes.GATConv:  
-                x1 = self.conv3GAT([x1,a])  
-            elif self.convtype==ConvTypes.ARMAConv: 
-                x1 = self.conv3ARMA([x1,a])  
-            elif self.convtype==ConvTypes.ECCConv: 
-                x1 = self.conv3ECC([x1,a]) 
-            elif self.convtype==ConvTypes.GCSConv:  
-                x1 = self.conv3GCS([x1,a]) 
-
+            x1 = self.conv3([x1,a])
         if self.num_conv > 2:
-            if self.convtype==ConvTypes.GCNConv:
-                x1 = self.conv4GCN([x1,a])     
-            elif self.convtype==ConvTypes.GATConv:
-                x1 = self.conv4GAT([x1,a])     
-            elif self.convtype==ConvTypes.ARMAConv: 
-                x1 = self.conv4ARMA([x1,a])     
-            elif self.convtype==ConvTypes.ECCConv:
-                x1 = self.conv4ECC([x1,a])    
-            elif self.convtype==ConvTypes.GCSConv:
-                x1 = self.conv4GCS([x1,a]) 
-
+            x1 = self.conv4([x1,a])
         if self.num_conv > 3:
-            if self.convtype==ConvTypes.GCNConv:   
-                x1 = self.conv5GCN([x1,a]) 
-            elif self.convtype==ConvTypes.GATConv:   
-                x1 = self.conv5GAT([x1,a]) 
-            elif self.convtype==ConvTypes.ARMAConv:   
-                x1 = self.conv5ARMA([x1,a]) 
-            elif self.convtype==ConvTypes.ECCConv:  
-                x1 = self.conv5ECC([x1,a]) 
-            elif self.convtype==ConvTypes.GCSConv:  
-                x1 = self.conv5GCS([x1,a]) 
+            x1 = self.conv5([x1,a]) 
         
         x1 = self.flat(x1)
+
         if self.num_dense>0:
             x1 = self.dense1(x1)
         if self.num_dense>1:
@@ -323,26 +178,10 @@ class DecoderX(Model):
         self.convtype = convtype
 
         self.xdense1  = Dense_layer_relu(self.adjency_size*self.latent_dim)
+        self.xreshape1 = layers.Reshape((self.adjency_size, self.latent_dim))    
 
-        self.xreshape1 = layers.Reshape((self.adjency_size, self.latent_dim))
-    
-
-        self.xconv1Conv = Conv_layer_relu(latent_dim)    
-        self.xconv2Conv = Conv_layer_relu(latent_dim*2)   
-        
-        self.xconv1GAT = GATConv_layer_relu(latent_dim)    
-        self.xconv2GAT = GATConv_layer_relu(latent_dim*2)   
-        
-        self.xconv1ARMA = ARMAConv_layer_relu(latent_dim)    
-        self.xconv2ARMA = ARMAConv_layer_relu(latent_dim*2)   
-        
-        self.xconv1ECC = ECCConv_layer_relu(latent_dim)    
-        self.xconv2ECC = ECCConv_layer_relu(latent_dim*2)   
-        
-        self.xconv1GCS = GCSConv_layer_relu(latent_dim)    
-        self.xconv2GCS = GCSConv_layer_relu(latent_dim*2)   
-
-
+        self.xconv1 = Conv_layers_relu(latent_dim,convtype)    
+        self.xconv2 = Conv_layers_relu(latent_dim*2,convtype)  
         
         self.xflat1 = layers.Flatten()
 
@@ -364,33 +203,12 @@ class DecoderX(Model):
 
         if self.num_conv > 0:
             dx = self.xreshape1(dx)
-            if self.convtype==ConvTypes.GCNConv:
-                dx = self.xconv1Conv([dx,decodedA])     
-            elif self.convtype==ConvTypes.GATConv:
-                dx = self.xconv1GAT([dx,decodedA])   
-            elif self.convtype==ConvTypes.ARMAConv:
-                dx = self.xconv1ARMA([dx,decodedA])   
-            elif self.convtype==ConvTypes.ECCConv:
-                dx = self.xconv1ECC([dx,decodedA])   
-            elif self.convtype==ConvTypes.GCSConv:
-                dx = self.xconv1GCS([dx,decodedA])   
-            
-        
+            dx = self.xconv1([dx,decodedA])             
         if self.num_conv > 1:
-            if self.convtype==ConvTypes.GCNConv:
-                dx = self.xconv2Conv([dx,decodedA])    
-            elif self.convtype==ConvTypes.GATConv:
-                dx = self.xconv2GAT([dx,decodedA])    
-            elif self.convtype==ConvTypes.ARMAConv:
-                dx = self.xconv2ARMA([dx,decodedA])    
-            elif self.convtype==ConvTypes.ECCConv:
-                dx = self.xconv2ECC([dx,decodedA])    
-            elif self.convtype==ConvTypes.GCSConv:
-                dx = self.xconv2GCS([dx,decodedA])
-
+            dx = self.xconv2([dx,decodedA])    
+            
         if self.num_conv > 0: 
             dx = self.xflat1(dx)
-
         
         if self.num_dense>1:
             dx = self.xdense2(dx)
@@ -401,10 +219,8 @@ class DecoderX(Model):
         if self.num_dense>4:
             dx = self.xdense5(dx)
         if self.num_dense>5:
-            dx = self.xdense6(dx)
-        
-        
-        dx = self.xdense_end(dx)
+            dx = self.xdense6(dx)                
+        dx = self.xdense_end(dx)        
         
         decodedX = self.xreshape2(dx)-1
         return decodedX

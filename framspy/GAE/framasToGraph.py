@@ -44,6 +44,7 @@ class FramsTransformer():
 #                         part.ing._value()   #0-1
     #                      part.as._value()
     #                      sth for neurons...
+                        1
                         ])
     def getFeaturesForParts(self,model):
         parts_features = []
@@ -55,11 +56,10 @@ class FramsTransformer():
         if len(parts_features)>0:
             features=len(parts_features[0])
         parts_features = np.array(parts_features)
-        min_v = np.amin(parts_features)
-        if min_v < 0:
-            parts_features = parts_features-min_v
-        parts_features = np.concatenate([parts_features,np.full((pad,features),-1)], axis=0)
-        
+        n_base = len(parts_features)
+
+        parts_features = np.concatenate([parts_features,np.full((pad,features),0)], axis=0)
+        parts_features[n_base:,-1]=-1
         return np.array(parts_features)
 
     def getEdgeFeatures(self,joint):

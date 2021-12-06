@@ -71,7 +71,7 @@ def parseArguments():
     parser.add_argument('-pathout', type=ensureDir, required=True, help='Path to save output model and plots.')
     parser.add_argument('-batchsize', type=int, required=False, help='',default=256)
     parser.add_argument('-adjsize', type=int, required=False, help='',default=15)
-    parser.add_argument('-numfeatures', type=int, required=False, help='',default=3)
+    parser.add_argument('-numfeatures', type=int, required=False, help='',default=4)
     parser.add_argument('-latentdim', type=int, required=False, help='',default=3)
     parser.add_argument('-nhidden', type=int,   required=False, help='',default=16)
     parser.add_argument('-convtype', type=ConvTypes, required=False, help='',default=ConvTypes.GCNConv)
@@ -140,7 +140,7 @@ if parsed_args.loss is not LossTypes.No:
 else:
     custom_loss = None
 
-train, test = GraphDataset(parsed_args.pathframs, parsed_args.pathdata,max_examples=25000,fitness=fitness,size_of_adj=parsed_args.adjsize).read()
+train, test = GraphDataset(parsed_args.pathframs, parsed_args.pathdata,max_examples=320,fitness=fitness,size_of_adj=parsed_args.adjsize).read()
 
 loader_train = data.BatchLoader(train, batch_size=parsed_args.batchsize)
 loader_test = data.BatchLoader(test, batch_size=parsed_args.batchsize)
