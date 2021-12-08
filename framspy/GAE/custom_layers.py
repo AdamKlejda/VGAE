@@ -150,6 +150,25 @@ class Dense_layer_relu(layers.Layer):
         x1 = self.act(x1) 
         x1 = self.drop(x1)
         return x1
+
+class Dense_layer_leaky_relu(layers.Layer):
+    def __init__(self,n_hidden,dropout=0.2):
+        super(Dense_layer_leaky_relu,self).__init__()
+        self.dense = layers.Dense(n_hidden,
+                                  kernel_initializer=initializers.he_uniform(seed=None),
+                                  #kernel_regularizer="l1"
+                                 )
+        self.norm = layers.LayerNormalization()        
+        self.act  = layers.LeakyReLU()         
+        self.drop = layers.Dropout(dropout)
+    
+    def call(self, inputs):
+        x1 = self.dense(inputs)
+        # x1 = self.norm(x1,training)
+        x1 = self.norm(x1)
+        x1 = self.act(x1) 
+        x1 = self.drop(x1)
+        return x1
     
 class Dense_layer_tanh(layers.Layer):
     def __init__(self,n_hidden,dropout=0.2):

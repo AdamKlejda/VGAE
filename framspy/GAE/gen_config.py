@@ -1,14 +1,15 @@
 PATH_FRAMS="~/"
 PATH_DATA ="graphs/gen/"
 PATH_OUT = "models/"
-EPOCHS = 100
+PATH_CONFIGS = "configs/"
+EPOCHS = 200
 BATCH_SIZE = 256
 ADJ_SIZE = 15
 NUM_FEATURES = 3
 LEARNING_RATE = 0.01
 
 def create_file(variational,convtype,latentdim, nhidden, convenc, denseenc, densedeca, convdecx, densedecx, loss):
-    with open("configs/"+f"v{variational}_{convtype}_{latentdim}_{nhidden}_{convenc}_{denseenc}_{densedeca}_{convdecx}_{densedecx}_{loss}", "w") as file:
+    with open(PATH_CONFIGS+f"v{variational}_{convtype}_{latentdim}_{nhidden}_{convenc}_{denseenc}_{densedeca}_{convdecx}_{densedecx}_{loss}", "w") as file:
         file.write(str(PATH_FRAMS)+"\n")    #pathframs
         file.write(str(PATH_DATA)+"\n")     #pathdata
         file.write(str(PATH_OUT)+"\n")      #pathout
@@ -37,7 +38,7 @@ convdecx = [1]
 densedecx = [2]
 convtypes = ["gcsconv","gcnconv","armaconv","gatconv",]
 variational=['True','False']
-loss= ['joints'] #['parts','fitness','dissim','None'] #
+loss= ['parts','fitness','dissim','None'] #
 for v in variational:
     for l in latentdim:
         for nh in nhidden:

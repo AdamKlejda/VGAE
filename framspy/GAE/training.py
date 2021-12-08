@@ -14,7 +14,7 @@ from GAE.utils import *
 from GAE.custom_layers import ConvTypes
 from GAE.LossManager import LossManager, LossTypes
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+# os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
 def ensureDir(string):
     if os.path.isdir(string):
@@ -50,16 +50,16 @@ def test_model(autoencoder,data_loader,steps_test,variational):
     for _ in range(steps_test):
         (x,a),y= next(data_loader)
         if variational:
-            total_loss,reconstruction_loss,reconstruction_lossA,reconstruction_lossX,kl_loss = autoencoder.test_step([(tf.convert_to_tensor(x)),
+            total_loss,reconstruction_loss,reconstruction_lossA,reconstruction_lossX,reconstruction_lossMask,kl_loss = autoencoder.test_step([(tf.convert_to_tensor(x)),
                                     tf.convert_to_tensor(a),
                                     y])
-            loss_all.append([total_loss,reconstruction_loss,reconstruction_lossA,reconstruction_lossX,kl_loss])
+            loss_all.append([total_loss,reconstruction_loss,reconstruction_lossA,reconstruction_lossX,reconstruction_lossMask,kl_loss])
 
         else:
-            total_loss,reconstruction_loss,reconstruction_lossA,reconstruction_lossX = autoencoder.test_step([(tf.convert_to_tensor(x)),
+            total_loss,reconstruction_loss,reconstruction_lossA,reconstruction_lossX,reconstruction_lossMask = autoencoder.test_step([(tf.convert_to_tensor(x)),
                                     tf.convert_to_tensor(a),
                                     y])
-            loss_all.append([total_loss,reconstruction_loss,reconstruction_lossA,reconstruction_lossX])
+            loss_all.append([total_loss,reconstruction_loss,reconstruction_lossA,reconstruction_lossX,reconstruction_lossMask])
     return np.array(loss_all).mean(axis=0)
 
 def parseArguments():
@@ -140,7 +140,7 @@ if parsed_args.loss is not LossTypes.No:
 else:
     custom_loss = None
 
-train, test = GraphDataset(parsed_args.pathframs, parsed_args.pathdata,max_examples=320,fitness=fitness,size_of_adj=parsed_args.adjsize).read()
+train, test = GraphDataset(parsed_args.pathframs, parsed_args.pathdata,max_examples=999999,fitness=fitness,size_of_adj=parsed_args.adjsize).read()
 
 loader_train = data.BatchLoader(train, batch_size=parsed_args.batchsize)
 loader_test = data.BatchLoader(test, batch_size=parsed_args.batchsize)
@@ -190,6 +190,7 @@ losses_all_test = []
 
 if os.path.exists(PATH_OUT+MODEL_NAME):
     print("Trying to load the model")
+    print("PATH:",PATH_OUT+MODEL_NAME)
     losses_all_train, losses_all_test = load_model(PATH_OUT,MODEL_NAME,autoencoder)
 
 else:
@@ -205,8 +206,8 @@ steps_test = math.ceil(test.n_graphs/parsed_args.batchsize)
 
 for e in range(len(losses_all_train),epochs):
 
-    if current_learning_rate > parsed_args.learningrate * pow(0.7,floor(e/10)):
-        current_learning_rate = parsed_args.learningrate * pow(0.7,floor(e/10))
+    if current_learning_rate > parsed_args.learningrate * pow(0.7,floor(e/40)):
+        current_learning_rate = parsed_args.learningrate * pow(0.7,floor(e/40))
         opt.lr.assign(current_learning_rate)
     print("EPOCH",e)
     loss=None

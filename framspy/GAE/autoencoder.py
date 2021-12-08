@@ -191,7 +191,7 @@ class DecoderX(Model):
         self.xdense5 = Dense_layer_relu(latent_dim*3)
         self.xdense6 = Dense_layer_relu(latent_dim*3)
         
-        self.xdense_end  = Dense_layer_relu(self.adjency_size*self.num_features)
+        self.xdense_end  = Dense_layer_leaky_relu(self.adjency_size*self.num_features)
 
         
         self.xreshape2 = layers.Reshape((self.adjency_size, self.num_features))
@@ -222,7 +222,7 @@ class DecoderX(Model):
             dx = self.xdense6(dx)                
         dx = self.xdense_end(dx)        
         
-        decodedX = self.xreshape2(dx)-1
+        decodedX = self.xreshape2(dx)
         return decodedX
 
 class VGAE(keras.Model):
@@ -258,11 +258,16 @@ class VGAE(keras.Model):
         )
         reconstruction_lossX = tf.reduce_mean(
             tf.reduce_sum(
-                keras.losses.mean_squared_error(x_true, reconstructionX), axis=(1)
+                keras.losses.mean_squared_error(x_true[:,:,:-1], reconstructionX[:,:,:-1]), axis=(1)
+            )
+        )
+        reconstruction_lossMask = tf.reduce_mean(
+            tf.reduce_sum(
+                [keras.losses.mean_squared_error(x_true[:,:,-1:], reconstructionX[:,:,-1:])], axis=(1)
             )
         )
 
-        reconstruction_loss = (reconstruction_lossA*1000) + reconstruction_lossX
+        reconstruction_loss = (reconstruction_lossA*1000) + reconstruction_lossX + (reconstruction_lossMask * 1)
         
         kl_loss = -0.5 * (1 + z_log_var - tf.square(z_mean) - tf.exp(z_log_var))
         kl_loss = tf.reduce_mean(tf.reduce_sum(kl_loss, axis=1))
@@ -272,7 +277,7 @@ class VGAE(keras.Model):
             custom_loss_v = self.custom_loss([x_true,a_true,y_true],[reconstructionX,reconstructionA],z)
         total_loss = reconstruction_loss + kl_loss + custom_loss_v
     
-        return total_loss,reconstruction_loss,reconstruction_lossA,reconstruction_lossX,kl_loss
+        return total_loss,reconstruction_loss,reconstruction_lossA,reconstruction_lossX,reconstruction_lossMask ,kl_loss
 
     def train_step(self, data):
         
@@ -291,10 +296,15 @@ class VGAE(keras.Model):
             )
             reconstruction_lossX = tf.reduce_mean(
                 tf.reduce_sum(
-                    keras.losses.mean_squared_error(x_true, reconstructionX), axis=(1)
+                    keras.losses.mean_squared_error(x_true[:,:,:-1], reconstructionX[:,:,:-1]), axis=(1)
                 )
             )
-            reconstruction_loss = (reconstruction_lossA*1000) + reconstruction_lossX
+            reconstruction_lossMask = tf.reduce_mean(
+                tf.reduce_sum(
+                    [keras.losses.mean_squared_error(x_true[:,:,-1:], reconstructionX[:,:,-1:])], axis=(1)
+                )
+            )
+            reconstruction_loss = (reconstruction_lossA*1000) + reconstruction_lossX + (reconstruction_lossMask * 1)
             
             kl_loss = -0.5 * (1 + z_log_var - tf.square(z_mean) - tf.exp(z_log_var))
             kl_loss = tf.reduce_mean(tf.reduce_sum(kl_loss, axis=1))
@@ -310,6 +320,7 @@ class VGAE(keras.Model):
             "reconstruction_loss": reconstruction_loss,
             "reconstruction_lossA": reconstruction_lossA,
             "reconstruction_lossX": reconstruction_lossX,
+            "reconstruction_lossMask": reconstruction_lossMask,
             "kl_loss": kl_loss,
         }
 
@@ -338,6 +349,9 @@ class GAE(keras.Model):
         reconstructionA = self.decoderA.call(z)
 
         reconstructionX = self.decoderX.call([z,reconstructionA])
+        print("NEXT")
+        print("ORG:",x_true[0])
+        print("rec:",reconstructionX[0])
         reconstruction_lossA = tf.reduce_mean(
             tf.reduce_sum(
                 tf.losses.mean_squared_error(a_true, reconstructionA), axis=(1)
@@ -345,10 +359,15 @@ class GAE(keras.Model):
         )
         reconstruction_lossX = tf.reduce_mean(
             tf.reduce_sum(
-                keras.losses.mean_squared_error(x_true, reconstructionX), axis=(1)
+                keras.losses.mean_squared_error(x_true[:,:,:-1], reconstructionX[:,:,:-1]), axis=(1)
             )
         )
-        reconstruction_loss = (reconstruction_lossA*1000) + reconstruction_lossX
+        reconstruction_lossMask = tf.reduce_mean(
+            tf.reduce_sum(
+                [keras.losses.mean_squared_error(x_true[:,:,-1:], reconstructionX[:,:,-1:])], axis=(1)
+            )
+        )
+        reconstruction_loss = (reconstruction_lossA*1000) + reconstruction_lossX + (reconstruction_lossMask * 1)
         
         custom_loss_v = 0
         if self.custom_loss is not None:
@@ -356,7 +375,7 @@ class GAE(keras.Model):
 
         total_loss = reconstruction_loss + custom_loss_v
     
-        return total_loss,reconstruction_loss,reconstruction_lossA,reconstruction_lossX
+        return total_loss,reconstruction_loss,reconstruction_lossA,reconstruction_lossX,reconstruction_lossMask
 
     def train_step(self, data):
         
@@ -375,10 +394,15 @@ class GAE(keras.Model):
             )
             reconstruction_lossX = tf.reduce_mean(
                 tf.reduce_sum(
-                    keras.losses.mean_squared_error(x_true, reconstructionX), axis=(1)
+                    keras.losses.mean_squared_error(x_true[:,:,:-1], reconstructionX[:,:,:-1]), axis=(1)
                 )
             )
-            reconstruction_loss = (reconstruction_lossA*1000) + reconstruction_lossX
+            reconstruction_lossMask = tf.reduce_mean(
+                tf.reduce_sum(
+                    [keras.losses.mean_squared_error(x_true[:,:,-1:], reconstructionX[:,:,-1:])], axis=(1)
+                )
+            )
+            reconstruction_loss = (reconstruction_lossA*1000) + reconstruction_lossX + (reconstruction_lossMask * 1)
             
             custom_loss_v = 0
             if self.custom_loss is not None:
@@ -392,4 +416,5 @@ class GAE(keras.Model):
             "reconstruction_loss": reconstruction_loss,
             "reconstruction_lossA": reconstruction_lossA,
             "reconstruction_lossX": reconstruction_lossX,
+            "reconstruction_lossMask": reconstruction_lossMask,
         }
