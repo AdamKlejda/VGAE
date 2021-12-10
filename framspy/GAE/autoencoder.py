@@ -349,9 +349,6 @@ class GAE(keras.Model):
         reconstructionA = self.decoderA.call(z)
 
         reconstructionX = self.decoderX.call([z,reconstructionA])
-        print("NEXT")
-        print("ORG:",x_true[0])
-        print("rec:",reconstructionX[0])
         reconstruction_lossA = tf.reduce_mean(
             tf.reduce_sum(
                 tf.losses.mean_squared_error(a_true, reconstructionA), axis=(1)

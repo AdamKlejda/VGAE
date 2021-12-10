@@ -5,7 +5,7 @@ PATH_CONFIGS = "../../configs/"
 EPOCHS = 200
 BATCH_SIZE = 256
 ADJ_SIZE = 15
-NUM_FEATURES = 3
+NUM_FEATURES = 4
 LEARNING_RATE = 0.01
 
 def create_file(variational,convtype,latentdim, nhidden, convenc, denseenc, densedeca, convdecx, densedecx, loss):
