@@ -1,7 +1,7 @@
 PATH_FRAMS="~/"
 PATH_DATA ="graphs/gen/"
 PATH_OUT = "models/"
-PATH_CONFIGS = "configs/"
+PATH_CONFIGS = "../../configs/"
 EPOCHS = 200
 BATCH_SIZE = 256
 ADJ_SIZE = 15
@@ -31,7 +31,7 @@ def create_file(variational,convtype,latentdim, nhidden, convenc, denseenc, dens
 
 latentdim = [15]
 nhidden = [64]
-convenc = [1,2]
+convenc = [2]
 denseenc = [2]
 densedeca = [1]
 convdecx = [1]
