@@ -137,6 +137,10 @@ def generateF1fromXA(x,a):
         if part[-1]>=0:
             genotype = add_part(genotype,part)
             counter_p+=1
+    if counter_p<1:
+        genotype = add_part(genotype,x[0])
+        genotype = add_part(genotype,x[1])
+        counter_p+=2
     for (i1,i2),r in np.ndenumerate(a):
         if (a[(i1,i2)]==1 ) and (i1 != i2) and(i2>i1):
             if i1 <=counter_p and i2 <=counter_p:
