@@ -367,6 +367,7 @@ class FramsManager():
                 if len(joints_too_big) == 0 and len(joints_too_small) == 0:
                     # print("NJOINTS:",m.numjoints._value() )
                     return gen_f0_from_model(m)
+                print("Unable to repair gen")
                 return None    
 
             for j in joints_too_big:

@@ -73,6 +73,9 @@ class LossManager:
         x,a,y= xa_orginal
         gen_list = gen_f0_from_tensors(x,a)
         gen_list = [self.FramsManager.reduce_joint_length_for_gen(g) for g in gen_list]
+        penalty = sum(g is None for g in gen_list)
+        gen_list = [g for g in gen_list if g is not None]
+
         dissim_list = self.framsLib.dissimilarity(gen_list)
         dissim_list = np.mean(np.array(dissim_list), axis=1)
         dist_list = self.get_latent_dist(latent_space)
@@ -80,4 +83,4 @@ class LossManager:
         df = pd.DataFrame(zipped,columns=[0,1])
         my_r = df.corr(method="spearman")
         rho = my_r[0][1]
-        return 1000*(1-rho)
+        return 1000*(1-rho) + penalty*20
