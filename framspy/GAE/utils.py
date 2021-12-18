@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import frams
 from scipy.spatial import distance
 
+
 def save_model(path,name,losses_all_train,losses_all_test,autoencoder,Variational = False):
 
     test_loss_all = [x[0] for x in  losses_all_test]
@@ -72,6 +73,7 @@ def save_model(path,name,losses_all_train,losses_all_test,autoencoder,Variationa
     print("Model saved")
 
 
+
 def load_model(path,name,autoencoder):
     losses_all_test = []
     losses_all_train = []
@@ -89,6 +91,61 @@ def load_model(path,name,autoencoder):
     except Exception as e:
         print("Error while loading Losses ", e)
     return losses_all_train, losses_all_test
+
+def get_convType(name):
+    from GAE.custom_layers import ConvTypes
+
+    if name =="gcnconv":
+        return ConvTypes.GCNConv
+    elif name =="armaconv":
+        return ConvTypes.ARMAConv
+    elif name =="gatconv":
+        return ConvTypes.GATConv
+    elif name =="gcsconv":
+        return ConvTypes.GCSConv
+    
+def get_Loss(name):
+    from GAE.LossManager import LossTypes
+
+    if name =="joints":
+        return LossTypes.joints
+    elif name =="parts":
+        return LossTypes.parts
+    elif name =="fitness":
+        return LossTypes.fitness
+    elif name =="dissim":
+        return LossTypes.dissim
+    elif name =="None":
+        return LossTypes.No
+    elif name == "No":
+        return LossTypes.No
+
+
+def load_config(pathconfig):
+    with open(pathconfig) as file:
+        lines = file.readlines()
+        lines = [line.rstrip() for line in lines]
+    params_dict = {} 
+    params_dict['pathframs']=lines[0]
+    params_dict['pathdata']=lines[1]
+    params_dict['pathout']=lines[2]
+    params_dict['batchsize']=int(lines[3])
+    params_dict['adjsize']=int(lines[4])
+    params_dict['numfeatures']=int(lines[5])
+    params_dict['latentdim']=int(lines[6])
+    params_dict['nhidden']=int(lines[7])
+    params_dict['convenc']=int(lines[8])
+    params_dict['denseenc']=int(lines[9])
+    params_dict['densedeca']=int(lines[10])
+    params_dict['convdecx']=int(lines[11])
+    params_dict['densedecx']=int(lines[12])
+    params_dict['learningrate']=float(lines[13])
+    params_dict['epochs']=int(lines[14])
+    params_dict['convtype']=get_convType(lines[15])
+    params_dict['variational']=lines[16]
+    params_dict['loss']=get_Loss(lines[17])
+    # params_dict['trainid']=lines[18]
+    return params_dict
 
 
 def roundXA(x,a):

@@ -4,13 +4,13 @@ import random
 from evolalg.base.individual import Individual
 
 class AutoencoderCrossAndMutate(FramsStep):
-    def __init__(self, frams_lib, cross_prob, mutate_prob,path_config, m_range,mutate_commands=None, cross_commands=None, *args, **kwargs):
+    def __init__(self, frams_lib, cross_prob, mutate_prob,path_config,train_id, m_range,mutate_commands=None, cross_commands=None, *args, **kwargs):
         super().__init__(frams_lib, *args, **kwargs)
 
         self.m_range = m_range
         self.cross_prob = cross_prob
         self.mutate_prob = mutate_prob
-        self.ae_mut = AE_evolalg(path_config)
+        self.ae_mut = AE_evolalg(path_config,train_id)
 
     def call(self, population):
         super(AutoencoderCrossAndMutate, self).call(population)

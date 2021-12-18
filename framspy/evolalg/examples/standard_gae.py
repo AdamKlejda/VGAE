@@ -23,7 +23,7 @@ from evolalg.statistics.halloffame_stats import HallOfFameStatistics
 from evolalg.statistics.statistics_deap import StatisticsDeap
 from evolalg.utils.population_save import PopulationSave
 
-
+from GAE.utils import load_config
 
 EVAL_LIFESPAN_BEHAVIOR = False  # if False, standard evaluation criteria can be used as fitness as defined by the -opt parameter. If True, it is assumed that the expdef provides custom dictionary fields in evaluation, and they need to be handled specifically in python source code below (this could be parametrized in command-line too, but the syntax would be complex).
 
@@ -48,9 +48,10 @@ def parseArguments():
                         help='Genetic format for the demo run, for example 4, 9, or B. If not given, f1 is assumed.')
     parser.add_argument('-sim', required=False, default="eval-allcriteria_new.sim", help="Name of the .sim file with all parameter values. If you want to provide more files, separate them with a semicolon ';'.")
     parser.add_argument("-popsize", type=int, default=100, help="Population size, default 50.")
-    parser.add_argument('-generations', type=int, default=2000, help="Number of generations, default 5.")
+    parser.add_argument('-generations', type=int, default=10, help="Number of generations, default 5.")
     parser.add_argument('-tournament', type=int, default=3, help="Tournament size, default 3.")
-    parser.add_argument('-path_config', type=str, required=True, help="Path to coonfig file for autoencoder (with out args.txt).")
+    parser.add_argument('-path_config', type=str, required=True, help="Path to config file for autoencoder (with out args.txt).")
+    parser.add_argument('-train_id', type=str, required=True, help=".")
     parser.add_argument('-hof_size', type=int, default=100, help="Number of genotypes in Hall of Fame. Default: 10.")
     parser.add_argument('-m_range', type=float, default=0.33, help="mutation_range id")
     parser.add_argument('-id', type=int, default=0, help="process id")
@@ -68,6 +69,29 @@ def print_population_count(pop):
 
 def main():
     parsed_args = parseArguments()
+
+    configs = load_config(parsed_args.path_config)
+
+    if configs['variational'] == True:
+        ae_type="VGAE"
+    else:
+        ae_type="GAE"
+    path_out = (str(configs['pathout'])+
+                str(configs['loss'])+
+                "/"+ae_type +
+                "/numfeatures"+str(configs['numfeatures']) +
+                "/adjsize"+str(configs['adjsize']) + 
+                "/batchsize"+str(configs['batchsize']) +
+                "/latentdim"+str(configs['latentdim'])+
+                "/nhidden"+str(configs['nhidden'])+
+                "/learningrate"+str(configs['learningrate'])+
+                "/convtype"+str(configs['convtype'])+
+                "/model_enc_"+str(configs['convenc'])+"_"+str(configs['denseenc'])+
+                "_deca"+str(configs['densedeca'])+
+                "_decx"+str(configs['convdecx'])+"_"+str(configs['densedecx'])+
+                "_train_id_"+str(parsed_args.train_id)+
+                "/"
+                )
     frams_lib = FramsticksLib(parsed_args.path, parsed_args.lib, parsed_args.sim.split(";"))
 
     hall_of_fame = HallOfFameStatistics(parsed_args.hof_size, "fitness")
@@ -98,7 +122,7 @@ def main():
 
     selection = TournamentSelection(parsed_args.tournament, copy=True, fit_attr="fitness")
     new_generation_steps = [
-        AutoencoderCrossAndMutate(frams_lib,m_range=[-parsed_args.m_range,parsed_args.m_range], cross_prob=0.0, mutate_prob=1.0,path_config=parsed_args.path_config+'args.txt'),
+        AutoencoderCrossAndMutate(frams_lib,m_range=[-parsed_args.m_range,parsed_args.m_range], cross_prob=0.0, mutate_prob=1.0,path_config=parsed_args.path_config,train_id=parsed_args.train_id),
         fitness_remove
     ]
 
@@ -110,7 +134,7 @@ def main():
                    fitness_remove,  # It is possible to create smaller population
                    statistics_union]
 
-    end_steps = [PopulationSave(parsed_args.path_config+str(parsed_args.m_range)+"/"+str(parsed_args.id)+"/"+"halloffame.gen", provider=hall_of_fame.halloffame,
+    end_steps = [PopulationSave(path_out+str(parsed_args.m_range)+"/"+str(parsed_args.id)+"/"+"halloffame.gen", provider=hall_of_fame.halloffame,
                                 fields={"genotype": "genotype", "fitness": "fitness", "custom": "recording"}
                                 if EVAL_LIFESPAN_BEHAVIOR
                                 else {"genotype": "genotype", "fitness": "fitness"}
@@ -127,16 +151,16 @@ def main():
                             )
     
 
-    if os.path.exists(parsed_args.path_config+str(parsed_args.m_range)+"/"+str(parsed_args.id)+"/"):
-        print(parsed_args.path_config+str(parsed_args.m_range)+"/"+str(parsed_args.id)+"/","exists")  
+    if os.path.exists(path_out+str(parsed_args.m_range)+"/"+str(parsed_args.id)+"/"):
+        print(path_out+str(parsed_args.m_range)+"/"+str(parsed_args.id)+"/","exists")  
     else:
-        os.makedirs(parsed_args.path_config+str(parsed_args.m_range)+"/"+str(parsed_args.id)+"/")
+        os.makedirs(path_out+str(parsed_args.m_range)+"/"+str(parsed_args.id)+"/")
     experiment.init()
     experiment.stats_log=stats_deap.logbook
     experiment.run(parsed_args.generations)
     
     log_book_df = pd.DataFrame(stats_deap.logbook)
-    log_book_df.to_csv(parsed_args.path_config+str(parsed_args.m_range)+"/"+str(parsed_args.id)+"/"+"logs.csv",index=False)
+    log_book_df.to_csv(path_out+str(parsed_args.m_range)+"/"+str(parsed_args.id)+"/"+"logs.csv",index=False)
     # for ind in hall_of_fame.halloffame:
     #     print("%g\t%s" % (ind.fitness, ind.genotype))
 

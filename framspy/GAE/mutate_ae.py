@@ -11,7 +11,6 @@ from GAE.GraphDataset import GraphDataset
 from GAE.autoencoder import EncoderGAE,EncoderVGAE, DecoderX, DecoderA, VGAE, GAE
 from GAE.utils import *
 from GAE.custom_layers import *
-from GAE.custom_layers import ConvTypes
 from GAE.LossManager import LossManager, LossTypes
 from GAE.framasToGraph import FramsTransformer
 
@@ -22,64 +21,10 @@ def ensureDir(string):
         return string
     else:
         raise NotADirectoryError(string)
-        
-def get_convType(name):
-    if name =="gcnconv":
-        return ConvTypes.GCNConv
-    elif name =="armaconv":
-        return ConvTypes.ARMAConv
-    elif name =="eccconv":
-        return ConvTypes.ECCConv
-    elif name =="gatconv":
-        return ConvTypes.GATConv
-    elif name =="gcsconv":
-        return ConvTypes.GCSConv
-    
-def get_Loss(name):
-    if name =="joints":
-        return LossTypes.joints
-    elif name =="parts":
-        return LossTypes.parts
-    elif name =="fitness":
-        return LossTypes.fitness
-    elif name =="dissim":
-        return LossTypes.dissim
-    elif name =="None":
-        return LossTypes.No
-    elif name == "No":
-        return LossTypes.No
-
-
-def load_config(pathconfig):
-    with open(pathconfig) as file:
-        lines = file.readlines()
-        lines = [line.rstrip() for line in lines]
-    params_dict = {} 
-    params_dict['pathframs']="/home/inf131778/Framsticks50rc19/"
-    params_dict['pathdata']=lines[1]
-    params_dict['pathout']="/home/inf131778/VGAE/framspy/models_vertpos/"
-    params_dict['batchsize']=int(lines[3])
-    params_dict['adjsize']=int(lines[4])
-    params_dict['numfeatures']=int(lines[5])
-    params_dict['latentdim']=int(lines[6])
-    params_dict['nhidden']=int(lines[7])
-    params_dict['convenc']=int(lines[8])
-    params_dict['denseenc']=int(lines[9])
-    params_dict['densedeca']=int(lines[10])
-    params_dict['convdecx']=int(lines[11])
-    params_dict['densedecx']=int(lines[12])
-    params_dict['learningrate']=float(lines[13])
-    params_dict['epochs']=int(lines[14])
-    params_dict['convtype']=get_convType(lines[15])
-    params_dict['variational']=lines[16]
-    params_dict['loss']=get_Loss(lines[17])
-    params_dict['trainid']=lines[18]
-    return params_dict
-
-             
+                    
              
 class AE_evolalg:
-    def __init__(self,path_config) -> None:
+    def __init__(self,path_config,train_id) -> None:
         self.params_dict = load_config(path_config)
 
         self.frams_manager = FramsManager(self.params_dict['pathframs'])
@@ -110,7 +55,7 @@ class AE_evolalg:
         self.model_name = ("model_enc_"+str(self.params_dict['convenc'])+"_"+str(self.params_dict['denseenc'])+
                     "_deca"+str(self.params_dict['densedeca'])+
                     "_decx"+str(self.params_dict['convdecx'])+"_"+str(self.params_dict['densedecx'])+
-                    "_train_id_"+str(self.params_dict['trainid'])
+                    "_train_id_"+str(train_id)
                     )
                     
         if self.params_dict['loss'] is not LossTypes.No:
