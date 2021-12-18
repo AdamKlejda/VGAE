@@ -48,7 +48,7 @@ def parseArguments():
                         help='Genetic format for the demo run, for example 4, 9, or B. If not given, f1 is assumed.')
     parser.add_argument('-sim', required=False, default="eval-allcriteria_new.sim", help="Name of the .sim file with all parameter values. If you want to provide more files, separate them with a semicolon ';'.")
     parser.add_argument("-popsize", type=int, default=100, help="Population size, default 50.")
-    parser.add_argument('-generations', type=int, default=10, help="Number of generations, default 5.")
+    parser.add_argument('-generations', type=int, default=2000, help="Number of generations, default 5.")
     parser.add_argument('-tournament', type=int, default=3, help="Tournament size, default 3.")
     parser.add_argument('-path_config', type=str, required=True, help="Path to config file for autoencoder (with out args.txt).")
     parser.add_argument('-train_id', type=str, required=True, help=".")
