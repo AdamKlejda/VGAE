@@ -67,13 +67,14 @@ def get_last_epoch_loss(file_name):
         for i in range(len(lines)-1,0,-1):
             a1 = re.search(rLoss, lines[i])
             if a1 is not None:
-                a2 = re.search(rEpoch, lines[i-1])
-                if a2 is not None:
-                    #print(lines[i-1])
-                    #exit(0)
-                    epoch = re.findall('[0-9]+', lines[i-1])[0]
-                    loss = re.findall('[0-9]+.[0-9]+', lines[i])[0]
-                    return epoch,loss
+                loss = re.findall('[0-9]+.[0-9]+', lines[i])[0]
+                for j in range(i, 0 , -1):
+                    a2 = re.search(rEpoch, lines[j-1])
+                    if a2 is not None:
+                        #print(lines[i-1])
+                        #exit(0)
+                        epoch = re.findall('[0-9]+', lines[j-1])[0]
+                        return epoch,loss
     return epoch,loss
 
 class options(Enum):
