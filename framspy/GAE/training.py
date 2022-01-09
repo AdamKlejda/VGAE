@@ -9,7 +9,7 @@ import math
 from math import floor
 
 from GAE.GraphDataset import GraphDataset
-from GAE.autoencoder import EncoderGAE,EncoderVGAE, DecoderX, DecoderA, VGAE, GAE
+from GAE.autoencoder import EncoderGAE,EncoderVGAE, DecoderX, DecoderA, VGAE, GAE, Weights
 from GAE.utils import *
 from GAE.custom_layers import ConvTypes
 from GAE.LossManager import LossManager, LossTypes
@@ -141,6 +141,7 @@ else:
     custom_loss = None
 
 train, test = GraphDataset(parsed_args.pathframs, parsed_args.pathdata,max_examples=999999,fitness=fitness,size_of_adj=parsed_args.adjsize).read()
+# train, test = GraphDataset(parsed_args.pathframs, parsed_args.pathdata,max_examples=500,fitness=fitness,size_of_adj=parsed_args.adjsize).read()
 
 loader_train = data.BatchLoader(train, batch_size=parsed_args.batchsize)
 loader_test = data.BatchLoader(test, batch_size=parsed_args.batchsize)
@@ -224,6 +225,8 @@ for e in range(len(losses_all_train),epochs):
     if tf.math.is_nan(loss['loss']):
         print("LOSS == NAN")
         break
+    print(loss)
+    autoencoder.set_weights_for_loss([float(keras.backend.get_value(loss[l])) for l in loss])
     losses_all_train.append([float(keras.backend.get_value(loss[l])) for l in loss])
     
     test_loses = test_model(autoencoder,loader_test,steps_test,variational)
