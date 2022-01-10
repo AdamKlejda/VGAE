@@ -16,8 +16,8 @@ class Sampling(layers.Layer):
 
 class Weights():
     # new weight = capped(max/cur)
-    min_weight = 0.1
-    max_weight = 10
+    min_weight = 1.0
+    max_weight = 5.0
     weight_loss_A = 1.0
     weight_loss_X = 1.0
     weight_custom_loss = 1.0
@@ -40,10 +40,10 @@ class Weights():
         else:
             return weight
 
-    def set_weights_for_loss(self,losses):
+    def set_weights_for_loss(self,losses,epoch):
         # loss, reconstruction_loss, reconstruction_lossA, reconstruction_lossX, reconstruction_lossMask = losses
         custom_loss = losses[0]-losses[1]
-        new_max_loss = losses[0]/4
+        new_max_loss = 2000-(10*epoch)/4
         self.weight_loss_A = self.adjust_weight(new_max_loss/losses[2])
         self.weight_loss_X = self.adjust_weight(new_max_loss/losses[3])
         self.weight_custom_loss = self.adjust_weight(new_max_loss/custom_loss)

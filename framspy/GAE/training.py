@@ -212,28 +212,31 @@ for e in range(len(losses_all_train),epochs):
         opt.lr.assign(current_learning_rate)
     print("EPOCH",e)
     loss=None
-    avg_loss = []
+    losses_all = []
     for _ in range(steps_train):        
         (x,a),y= next(loader_train)
         loss = autoencoder.train_step([tf.convert_to_tensor(x),
                                       tf.convert_to_tensor(a),
                                       y])
-        avg_loss.append(loss['loss'])
+        losses_all.append([float(keras.backend.get_value(loss[l])) for l in loss])
         if tf.math.is_nan(loss['loss']):
             print("LOSS == NAN")
             break
+        
     if tf.math.is_nan(loss['loss']):
         print("LOSS == NAN")
         break
-    print(loss)
-    autoencoder.set_weights_for_loss([float(keras.backend.get_value(loss[l])) for l in loss])
+    avg_losses_all = np.mean(losses_all,axis=0)
+    np.set_printoptions(suppress=True,precision=3)
+    print(avg_losses_all)
+    autoencoder.set_weights_for_loss(avg_losses_all,e)
     losses_all_train.append([float(keras.backend.get_value(loss[l])) for l in loss])
     
     test_loses = test_model(autoencoder,loader_test,steps_test,variational)
     losses_all_test.append(test_loses)
     if e%5 == 0:
         save_model(PATH_OUT,MODEL_NAME,losses_all_train,losses_all_test,autoencoder,Variational=variational)
-    print("Loss train: ",np.mean(avg_loss))
+    print("Loss train: ",np.mean(avg_losses_all[0]))
     print("Loss test: ", np.mean(test_loses[0]))
 
 print("EPOCH",epochs)
