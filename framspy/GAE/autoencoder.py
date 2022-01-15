@@ -43,7 +43,7 @@ class Weights():
     def set_weights_for_loss(self,losses,epoch):
         # loss, reconstruction_loss, reconstruction_lossA, reconstruction_lossX, reconstruction_lossMask = losses
         custom_loss = losses[0]-losses[1]
-        new_max_loss = 2000-(10*epoch)/4
+        new_max_loss = losses[0]/4 #2000-(10*epoch)/4
         self.weight_loss_A = self.adjust_weight(new_max_loss/losses[2])
         self.weight_loss_X = self.adjust_weight(new_max_loss/losses[3])
         self.weight_custom_loss = self.adjust_weight(new_max_loss/custom_loss)

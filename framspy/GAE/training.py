@@ -229,8 +229,8 @@ for e in range(len(losses_all_train),epochs):
     avg_losses_all = np.mean(losses_all,axis=0)
     np.set_printoptions(suppress=True,precision=3)
     print(avg_losses_all)
-    autoencoder.set_weights_for_loss(avg_losses_all,e)
-    losses_all_train.append([float(keras.backend.get_value(loss[l])) for l in loss])
+    losses_all_train.append(avg_losses_all)
+    autoencoder.set_weights_for_loss(np.mean(losses_all_train[-5:],axis=0),e)
     
     test_loses = test_model(autoencoder,loader_test,steps_test,variational)
     losses_all_test.append(test_loses)
