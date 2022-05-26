@@ -1,0 +1,40 @@
+org:
+genotype:LLLLLLLLRRCFiiiiiiiiiX[|,4:1][S][Gpart]LLLLrCCCCCQQQQfffffMMMMMMMMiiX[S][Gpart][|, -1:0.899]lrrCCqqFmmmiiiiiiX[N, -3:1][G][G][N, in:0, -1:3.427, -8:1][Gpart]
+fitness:0.022207567531219625
+
+org:
+genotype:LLLLLRRCFMIX[|,13:1][Gpart]LLLrCCCCCqfffMMMMMiiX[N, 3:-0.064][N, -1:1,-2:1,-2:1][Gpart][T,rz:-0.977][S][S][N, -2:1.134, -5:1, -5:1, -7:1,fo:0.04][Gpart][|, -1:1]lCCFMMMFX[Gpart][Gpart][Gpart]
+fitness:0.02171600662174149
+
+org:
+genotype:LLLLCFMIIX[S][S][N, 4:1][N, 0:1, 4:2.582, 2:1]LLLrCCCCCQQffffMMMMiX[G][N, -3:1, 7:1][T][Gpart][|, -1:1]lrFmmIIIIX[@, -4:1][*][S][Gpart, rz:-1.453][G]
+fitness:0.024960091074082078
+
+org:
+genotype:LLLLCFMIIX[S][N,3:1][N,0:1,3:2.582,1:1]LLLrCCCCCQQffffMMMMiX[N,-2:1,7:1,-1:1][T][Gpart][|, -1:1]lrFmmIIIX[@,-4:1][*][S][Gpart,rz:-0.335][G]
+fitness:0.024884863618069637
+
+org:
+genotype:LLLLCFMIIX[S][N,3:1][N,0:1,3:2.582,1:1]LLLrCCCCCQQffffMMMMiX[N,-2:1,7:1][T][Gpart][|, -1:1]lrFmmIIIX[@,-4:1][*][S][Gpart,rz:-1.292][G]
+fitness:0.023508950777454716
+
+org:
+genotype:LLLLLmCFIIX[N,11:1]LLLrCCCCCQQQQQffffMMMiX[S][T][N,3:2.967,-1:1,-2:1][G][N, 0:-7.75, -5:2.078,6:1][N,-3:1][Gpart][|, -1:1, r:0.853]lrrrrCCCCFmmIIIIX[S][G][Gpart,ry:0.36]
+fitness:0.02298792865479558
+
+org:
+genotype:LLLLLmCFIIX[N, 3:2.808,11:1]LLLrCCCCCQQQQQffffMMMiX[S][T][N,-1:1,-2:1][G][N, 0:-7.75, -5:2.078,6:1][Gpart][|, -1:1, r:0.853]lrrrrCCCCFmmIIIIX[*][S][G][Gpart,ry:0.056]
+fitness:0.023096846290511654
+
+org:
+genotype:LLLLLmCFIIX[N, 3:2.808,12:1]LLLrCCCCCQQQQQffffMMMiX[S][T][N,3:1,-1:1,-2:1][G][N, 0:-7.75, -5:2.078,7:1][N,-3:1][Gpart][|, -1:1, r:0.853]lrrrrCCCCFmmIIIIX[*][S][G][Gpart,ry:0.056]
+fitness:0.020875553660610092
+
+org:
+genotype:LLLLLmCFIIX[S][N, 2:2.808,-1:1]LLLrCCCCCQQQQQffffMMMiX[T][N,3:1,-1:1][G][N, 0:-7.75, -4:2.078][N,-3:1][Gpart][|, -1:1, r:0.853]lrrrrCCCCFmmIIIIX[S][S][G][Gpart,ry:0.056]
+fitness:0.021260231205215366
+
+org:
+genotype:LLLLLmCFIIX[N, 2:2.808]LLLrCCCCCQQQQQffffMMMiX[T][N,3:1,-1:1][G][N, 0:-7.75, -4:2.078][N,-3:1][Gpart][|, -1:1, r:0.853]lrrrrCCCCFmmIIIIX[*][S][S][G][Gpart,ry:0.056]
+fitness:0.022030460554236308
+

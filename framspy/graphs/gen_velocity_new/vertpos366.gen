@@ -1,0 +1,20 @@
+org:
+genotype:(((XXXLX(LLLrm(X[N, fo:0.04])), X), LLLLrrcXXLXQX), cQX)
+fitness:2.3915934556722642
+
+org:
+genotype:(((XXXLXLLLrm(X[N, fo:0.04])), XLLLLrrcXXLXQX), cQX)
+fitness:2.351105797688166
+
+org:
+genotype:I((XXLrXXXCXmiX[|,r:0.909]iXLLLrX), cQX[@])
+fitness:2.4139424071709317
+
+org:
+genotype:((X), XXRXX[T,rz:0]cXXXXXXXXX)
+fitness:2.2221273104846477
+
+org:
+genotype:X
+fitness:-0.01
+

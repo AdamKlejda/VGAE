@@ -1,0 +1,33 @@
+org:
+genotype:~
+//0
+p:fr=1.472, ing=0.635, as=0.755
+p:z=-0.319
+j:1, 0
+n:d="N:in=0.0, fo=1.0, si=4.435"
+n:p=0, d=T
+c:0, 1
+~
+fitness:0.12283333333333332
+
+org:
+genotype:~
+//0
+p:0.998, 0.867, -0.367, as=0.21
+p:fr=0.411
+j:1, 0, stif=0.947, rotstif=0.946, stam=0.172
+n:p=1, d="T:ry=-1.699, rz=0.584"
+n:p=1, d=Gpart
+n:j=0, d=@
+c:2, 1
+~
+fitness:-0.010819144004799431
+
+org:
+genotype:~
+//0
+p:
+p:1
+j:0,1~
+fitness:-0.01
+

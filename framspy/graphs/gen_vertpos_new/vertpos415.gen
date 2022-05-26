@@ -1,0 +1,40 @@
+org:
+genotype:(LLLLLLLrrcccccccqFFMMMLfXX[|,7:1]LLLLLRfIX[T]LLLccLcLLLLLrrccqX[T, r:0.983], LLLccLcLLLLLrrccccqXLqXLLLLRfIX[T]cLLrLLLLcLLLLrccccqX, LLLLLLLLrrccccccqIXLLLccqX[G]mXfIX[Gpart][S][N, s:0.06, 0:1])
+fitness:12.387477819747907
+
+org:
+genotype:(LLLLLLLrrcccccccqFFMMMLfXX[|]LLLLLRfIX[T]LLLccLcLLLLLrrccqX[T, r:0.983], LLLccLcLLLLLrrccccqXLqXLLLLRfIX[T]cLLrLLLLcLLLLrccccqX, LLLLLLLLrrccccccqIXLLLccqX[G]mXfIX[Gpart][S][N, s:0.06, 0:1])
+fitness:8.133020234531466
+
+org:
+genotype:(LFMLLLLLrrccccccccqqXLLLLLLLLRccqqqqiXLrrccccccqqFmXX[T] LLLcFFX[N, si:999, 1:1.083, 4:1,-1:1], , , LLLLLcqqFFX[N, si:2.499], , , LLcLLLLrrccccqXRLLLLIXFX[@]qqfmX[T], , mX[N, s:-0.256, -3:1.953])
+fitness:157.56210902466276
+
+org:
+genotype:((XILLLLLccLLLRRcccqFXcqFXLLLccILccLLccLLqFX[N, 1:-2.971], LLLLLLLLLLLLRRccFmXLLccXcqFLccqFX[N, fo:0.122], LLLcLLLLLRRccFFFXLLLLLcFX[N, in:0]LLLLLcqFX[G]), )
+fitness:111.7131255805488
+
+org:
+genotype:(LLLLLLLcccccfMRRcccqFiXcqFX[*][N, s:0, 2:1], , LLLLLLRRccccccFXLLccqFX[N], LLLLLRRccLccLcLRRccLLLLcqFX[T][N, in:0]X, , LLLLLLLLLRRccFmX[Gpart]LLLLLcFX[T, ry:-1.821][N, in:0.8]LLLLLcQFFX[T, ry:-1.821]LLLcFX[T][G][N, -10:1, -11:2.611][T][N, -1:-2.779])
+fitness:123.64733657439314
+
+org:
+genotype:(f(cLLLLLLLRRcccccccccXccccILLLLLLcMX, , LLRccLLLLcqFX[N, s:0.343]cqFX[N], LLLLcFX, cqFX[N, fo:0.171]XcqFX[N, in:0.8, in:0.8]), LLRRccFmXLLLLLLcqFX[T, ry:0]LcFX[T, ry:0][N]LLLLLcFX[N][T, ry:-3.32][N, -3:1.717])
+fitness:141.5869677652773
+
+org:
+genotype:((LLLLLLLLLRRcccccccccccfiXfLLLLLLcFX[*], , LLLLRRccLX[*]cqFXccLLLLcqFX[N]cqFXqFX, LLRRcLLLcFX, , ), LLRRccLLLLcqFX[N,in:0.8]cqFXLLLLLLcQFX)
+fitness:44.09511105744969
+
+org:
+genotype:((LLLLLLLLLRRcccccccccccfiXfLLLLLLcFX[*], , LLLLRRccLX[*]cqFXccLLLLcqFX[N]cqFXqFX, LLRRcLLLcFX, , ), LLRRccLLLLcqFX[N]cqFXLLLLLLcQFX)
+fitness:43.33919486789339
+
+org:
+genotype:(MLRMcIXciX[N, 7:1]fLLLLLLcFXcccqFX[@, 7:1], , LLRRccLLLiXfLLLLLLcFX[N]cqFmX[N, -3:1, -1:1]LLLLLLRcX[G], , LLRRccLLLLFX[N, -1:1]LLLLLLcqFX[T][T, ry:0][N, fo:0.005, fo:0.526, -5:1.359], )
+fitness:126.57125329279614
+
+org:
+genotype:(MLRMcIXciX[N, 7:1]fLLLLLLcFXcccqFX[@, 7:1], , LLRRccLLLiXfLLLLLLcFX[N]cqFX[N, -3:1, -1:1]LLLLLLRcX[G], , LLRRccLLLLFX[N, -1:1]LLLLLLcqFX[T][T, ry:0][N, fo:0.005, fo:0.526, -5:1.359], )
+fitness:16.530741835389293
+

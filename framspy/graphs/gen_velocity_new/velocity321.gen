@@ -1,0 +1,40 @@
+org:
+genotype:LRIXXXLXLLLXLcfX[Gpart, rz:-0.953][Gpart][|, -2:5.698]
+fitness:4.157241478761037
+
+org:
+genotype:lllRMXX[T][Gpart, rz:0][Gpart][|, -2:5.698]
+fitness:5.300674885412057
+
+org:
+genotype:LXLrcQcQQfiX[|,1:1][N,1:1][T,ry:2.076]
+fitness:4.919615006266783
+
+org:
+genotype:(LLLRXLXLMiXXX[|, p:0.566, 1:1]LLX(LqX), LLqmXXLX[*]XLXLcX)
+fitness:3.2289337209860483
+
+org:
+genotype:lLLRLXMXccfX[|,1:1][N,0:1,0:1]
+fitness:3.1800568127135436
+
+org:
+genotype:XllllllllccfMX[|,1:1][N,0:1,0:1,0:1]
+fitness:3.498917867218455
+
+org:
+genotype:llcQFIX[*]XLIX[|, 1:1][S]
+fitness:1.6726047622412443
+
+org:
+genotype:llcQFIXXLIX[|,1:1][S]
+fitness:3.860159647030135
+
+org:
+genotype:(X(XXXXX), LX[S], XXXXXX[|,-1:1])
+fitness:2.4576359902322293
+
+org:
+genotype:(X[|]XXX(X), X)
+fitness:1.668722206639747
+

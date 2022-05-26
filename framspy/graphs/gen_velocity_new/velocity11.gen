@@ -1,0 +1,28 @@
+org:
+genotype:llXMX[G][|,p:0.184,-1:2.614]
+fitness:2.2828074809660515
+
+org:
+genotype:XX[|,1:1][G]
+fitness:2.2195901704827943
+
+org:
+genotype:XX[|,1:1][G]
+fitness:2.2195901704827943
+
+org:
+genotype:(XX[|](X), X)
+fitness:1.7996636676539977
+
+org:
+genotype:QX[@]X
+fitness:1.289211208273967
+
+org:
+genotype:(X, X)
+fitness:0.47992065993448096
+
+org:
+genotype:X
+fitness:0.0
+

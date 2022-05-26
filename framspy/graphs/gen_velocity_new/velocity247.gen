@@ -1,0 +1,40 @@
+org:
+genotype:l(((FiILLLRCCCQQQFFQQQI(L(QQQQfI(LrrrrQQQQQQQQQQQQQQQQFFmImmmmIIX[S]LRRRRccX[T][N,-1:2.099,2:-0.002][T, r:0.95])))), ), , LLLLLLLLrCfmiX[N,5:1][T][*][Gpart, rz:-4.047, ry:1.209][T, r:1][Gpart]LrrcFX[S][|, -2:1.326, r:0.832])
+fitness:0.021410069980667284
+
+org:
+genotype:((f(LLRRCCCQFFFFFFFFMM(LQQQQQM(LI(rrrrQQFFFQQFmmFFFFFmmmmIIIIIIIIX[*][G]RCCqqqMIX[*][*]))), )), , LLLLLrCfmiX[G][N, 1:1.909,-1:1][N, 2:1.224, fo:1, 1:1, -5:1, -4:1, -6:1][N][T][Gpart]LccFX[|, -1:1.326, r:0.81])
+fitness:0.023489992796181733
+
+org:
+genotype:LLLff(RCCCQQQFFFFFFFFMMMMII(qqFIII(qqFFM(FFIRFFFFFmmIIIIIIIX[T][N, 8:1.313, 0:1, 9:1]iX[@,-1:1][S]), ), ), rCqqfmiiX[*][G][T][Gpart, rz:0, ry:0, rz:0]LrrCCqqFX[Gpart, rz:0.786][Gpart][Gpart][Gpart,rz:-0.392][|, -5:1.326, r:0.795])
+fitness:0.028536066559207894
+
+org:
+genotype:LLf(RCCCQFFFFFFFFMII(qq(qMqqI(RqFmmmiiX[*][N, 8:1.266, 6:-0.667,s:-0.14,-1:1]llRcqiiX[*][T][S][Gpart][T][T]), ), ), rCqqqmiX[G][Gpart, ry:0.094]LrCCqFX[N, -3:1, 1:1.815,-2:-0.517][Gpart][|, -3:1.326, r:0.762])
+fitness:0.0460045410690688
+
+org:
+genotype:LL(RFFmI(RmmmmrCCCQMFMMMII(qI(Qfmii(iFmmIIIX[N, in:0.773, 7:1, 9:0.106, 3:0.613,10:1,6:1]llRciX[T][T][T][@, p:0.706, -2:1][T, r:1]), )), ), LrCqqfmiX[T][*][G][Gpart]LLrQFX[N,-2:1,-7:1][T][*][|, -4:1.326, r:0.716])
+fitness:0.036497322818713
+
+org:
+genotype:LL(RFFmI((mm(rCCCQFFMMMII(qI(fMi(FmmIIIX[N, in:0.8, 6:-2.445, 5:1,3:1]llRciX[@, p:0.918, p:0.887, 3:1][T, ry:-0.329, r:1])), ))), ), rCqqfmiX[G][T][*][G][Gpart, ry:0]LLrrQFX[Gpart, rz:-0.56][|, -2:1.326, r:0.759])
+fitness:0.030320752872253172
+
+org:
+genotype:LLf((FFmICCCQFFMMMI(I((mIIIIXlcQiX[@, 1:10.774, p:0.969, p:0.97][T, ry:-1.129][Gpart, ry:-2.985]), )), ), rCqqfmiX[G][N, 3:1][Gpart]LrrCQFX[Gpart][Gpart][|, -3:1.326, r:0.768])
+fitness:0.028616183374071475
+
+org:
+genotype:LLf(FFmICCCQFFFMMMI(I((IIIIX[N, 8:2.766, in:0.8][*][Gpart, ry:4.532]lQcqiX[@, 1:5.446, p:0.657][T][N, -5:1][N, 2:1.825, 0:1, s:0][Gpart, ry:-2.23]), ), ), rCqqfmiX[N, -6:1][Gpart]LrrQFX[Gpart][|, -2:1.326, r:0.768])
+fitness:0.021665512067548916
+
+org:
+genotype:LLf(FFmI(CCCQFFMMMII(I((IIIIX[*][Gpart, ry:4.532]lQcqiX[@, 1:5.446, p:0.85][T, ry:-0.329][N][N, 3:1.825, 0:1, s:0][Gpart, ry:-2.985]), )), ), rCqqfmiX[G][N, -7:1][Gpart]LrrQFX[Gpart][|, -2:1.326, r:0.768])
+fitness:0.016636434548241034
+
+org:
+genotype:LLf(FFmICCCQFFMMMII(I((IIIIX[N, 8:1, in:0.8][*][Gpart, ry:4.532]lQcqiX[@, 1:5.446, p:0.85][T, ry:-0.329][N, -5:1][N, 2:1.825, 0:1, s:0][Gpart, ry:-2.498]), ), ), rCqqfmiX[N, -6:1][Gpart]LrrQFX[Gpart][|, -2:1.326, r:0.768])
+fitness:0.014245784093430797
+

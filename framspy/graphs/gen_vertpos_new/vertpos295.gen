@@ -1,0 +1,40 @@
+org:
+genotype:rCCCCCQQQQQQQfiX[T][G][S][S][N, fo:1,5:1][Gpart,ry:0,rz:0][@, 1:1.241][Gpart,ry:0][Gpart, rz:0.434][Gpart, rz:0.434][|, -1:3.57]RCmmiiiiiiiX[N,-9:2.262,in:0.964,-6:1,-7:1][@, -4:0.892]
+fitness:0.32271447630227046
+
+org:
+genotype:rCCCCCQQQQfiX[T,ry:0][N, 6:1][G][@, 1:1.241][Gpart][Gpart, rz:-1][Gpart, rz:-0.309][Gpart, rz:0.434][|, -1:3.57]fmmiiiiiiiiX[G][G][T][S][@, -6:0.892]
+fitness:0.3207989787482036
+
+org:
+genotype:rCCCCCfiX[*][T][T][T][N, fo:0.021][@, 1:1.241][Gpart][Gpart][Gpart, rz:0.434][|, -1:3.57]cqmmiiiiiiiX[N, -6:3.363][@, -3:0.892]
+fitness:0.3201924250389099
+
+org:
+genotype:rCCCCCQfiX[N, 1:1, 11:1][N, s:-0.593, 3:1, -1:1][T][T][T, r:1][N, 2:-1.404, fo:0.076][@, 1:1.241][Gpart][Gpart, rz:0.434][|, -1:3.57]cccqmmiiiiiX[Gpart][G][Gpart, ry:-2.764, ry:-0.433][Gpart][@, -6:0.892]
+fitness:0.3175785736566422
+
+org:
+genotype:rCCCCCQQiX[@, 2:1.241][N, 1:-5.912, 5:-1.221,4:1,8:1][Gpart][Gpart][|, -1:4.348, r:0.965]ccccQQmmiiiiX[G][N, 2:2.502, 0:1,-1:1,2:1][N, -6:1, 0:1.53, -4:1,-1:1][T][Gpart, ry:3.25, ry:-1.043][@, -7:0.892]
+fitness:0.3140764655194258
+
+org:
+genotype:rCCCCCQiX[S][S][@, 2:1.241][N, 1:-7.516,1:1,-2:1.449][Gpart,ry:0][Gpart][|, -1:4.348, r:0.965]ccccQQmmiiiiX[G][T][Gpart, ry:3.715,ry:0.376,ry:-0.741][T][Gpart, ry:0.24, ry:-0.599][@, -7:0.892]
+fitness:0.3132022299799022
+
+org:
+genotype:rCCCCCQiX[S][S][@, 2:1.241][N, 1:-5.912,1:1,-2:1.449][Gpart][Gpart][|, -1:4.348, r:0.965]ccccQQmmiiiiX[N, -4:1,0:4.941][T][Gpart, ry:3.715,ry:1.762,ry:-0.741][T][Gpart, ry:0.24, ry:0][@, -7:0.892]
+fitness:0.3098639560847921
+
+org:
+genotype:rCCCCCQiX[S][@, 2:1.241][N, 1:-5.912,1:1,-2:1,0:1,s:0][Gpart][Gpart][|, -1:4.348, r:0.965]ccccQQmmiiiiX[N, -4:2.533,0:1][T][Gpart, ry:5.207,ry:0.569][@, -5:0.892]
+fitness:0.3085743444424486
+
+org:
+genotype:rCCCCCQiX[T][G][@, 2:1.241][N, -2:1, 1:-2.669, 1:-1.039,-3:1][Gpart][|, -1:4.348, r:0.965]cQmmiiiiX[*][G][T][@, -5:0.892]
+fitness:0.3073222092093799
+
+org:
+genotype:rCCCCCQiX[N, 3:1,1:1][G][@, 2:1.241][N, 0:4.079, -2:1, 3:1, 1:1, 0:1, 1:1][Gpart][|, -1:4.348, r:0.965]QmmiiiiX[Gpart][G][@, -4:0.892]
+fitness:0.3051836966813477
+

@@ -1,0 +1,12 @@
+org:
+genotype:(LXLLLXLX[Gpart, ry:0]LLXLLLXLLXXQMXLRXLLLLLXLLLXLcX(LLLX[N, si:1.132, fo:0.04, -1:1]), LX)
+fitness:4.4102909407019615
+
+org:
+genotype:(XLX[N, 3:1][Gpart][N, si:0.043]LXLLXLLXRXXLFXLLX(LLXXX[N, si:1.132, -1:1, 0:1, -2:1, -3:1](X[N, -1:1]), ), X)
+fitness:3.746518753170967
+
+org:
+genotype:X
+fitness:-0.01
+

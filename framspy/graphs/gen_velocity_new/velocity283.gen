@@ -1,0 +1,40 @@
+org:
+genotype:M((m(fmMX, LLLfMXllmI((LLLRQQQffffmmmX[Gpart, rz:0, ry:-0.171,rz:0]), LRCqqfii(LLLLfmIX[N, 0:-0.306, 3:-1.331, 5:1, in:0.8]lrqMMMMII(lRfMI(LCQfMMIII(LRQQmI(rrrqqqqqFFmIIIIIX[|, 2:2.134, p:0.509])))), lRCfmmIX[N, -2:1,9:1]), FIlFILrqFFmmIX[T, ry:0.197]LLLLLLLLfmiX[G][G][|, -1:3.731, p:0.59, r:1]fi(FFFmii(llQQQFmmmIXLLRIIX[|, -2:6.99, p:0.497, r:0.973, r:0.878, r:0.993, r:0.999,r:1]LRqFI(LLrqqFFFFFFFX[|, 1:4.928, r:0.846][N, 0:-2.685, -4:2.011, 0:0.428, fo:0.046, si:2])))), Fi((rqmmmiii(lcqqqFFIIIX[|, p:0.472, -11:1])))), rQfmmiii(lcqqqFMMMIIX[T][|, p:0.521, r:0.533, -13:1.411]), ), , Rfmmiii(lcqqqFMMMIIX[|, p:0.547, r:0.533, -14:1.411]))
+fitness:0.4862801832363076
+
+org:
+genotype:((m((MX, LLLMXllI((LLLRQQQffffmmmX[Gpart, rz:0, ry:-0.171,rz:0]), LRCqqii(LLLLmIX[N, 0:0.029, 0:1, 4:-0.47, 5:1]lrqMMMMII(lRRfMI(LCQMMIII(LRQQmI(rrrCqqqqqFmIIIIIX[G][|, 2:2.134, p:0.509])))), lRCmIX[N,-3:1,1:1]), FIlFILrqFFmmIX[T, ry:-2.213, ry:0.197]LLLLLLLLfmiX[G][|, -1:3.731, p:0.66,r:1]fi(FFFmii(llQQQFmmmIXLLRIIX[*][|, -3:7.833, p:0.497, r:0.973, r:0.826, r:0.993, r:0.999]LRqFI(LLrqqFFFFFFFX[|, 1:4.08, r:0.846][N, 0:-2.685, -5:2.011, 0:0.428, fo:0.046])))), Fi((rqmmmiii(lccqqqFFIIIX[|, p:0.472, -12:1])))), rQfmmiii(lcqqqFMMMIIX[|, p:0.521, r:0.533, -13:1.411]), ), ), Rfmmiii(lcqqqFMMMIIX[|, p:0.521, r:0.533, -14:1.411]), )
+fitness:0.48887843561940725
+
+org:
+genotype:((m((MX, LLLMXllI((LLLRQQQQffffmmmX[Gpart, rz:-1.425, ry:-0.171,rz:0]), LRCqqii(LLLLmIX[N, 0:1, 3:-1.331, 4:1,2:1]lrqMMMMII(lRRfMI(LCQMMIII(LRQQmI(rrrrCqqqqqFmIIIIIX[|, 2:2.134, p:0.489])))), lRCmIX[N,-2:1]), FIlFILrqFFmmIX[T, ry:-2.213, ry:1.164,ry:0]LLLLLLLLfmiX[G][|, -1:3.731, p:0.66]fi(FFFmi(llQQQFmmmIXLLRQQQFFmIIX[*][|, -3:6.99, p:0.497, r:0.973, r:0.817, r:1, r:0.999]LRqFI(LLrqqFFFFFFFX[|, 1:4.08, r:0.938][N, 0:-2.685, -5:2.011, 0:1, fo:0.046])))), Fi((rqmmmiii(lccqqqFFIIIX[|, p:0.577, -11:1])))), rQfmmiii(lcqqqFMMMIIX[|, p:0.521, r:0.533, -12:1.411]), ), ), Rfmmiii(lcqqqFMMMIIX[|, p:0.521, r:0.533, -13:1.411]), )
+fitness:0.48657703559145626
+
+org:
+genotype:((m((MX, LLLMXllI((LLLRQQQQffffmmmX[Gpart, rz:0, ry:-0.171,rz:0]), LRCqqii(LLLLmIX[N, 0:1, 3:-1.331, 4:1,2:1]lrqMMMMII(lRRfMI(LCQMMIII(LRQQmI(rrrrCqqqqqFmIIIIIX[|, 2:2.134, p:0.489])))), lRCmIX[N,-2:1]), FIlFILrqFFmmIX[T, ry:-2.213, ry:1.164,ry:0]LLLLLLLLfmiX[G][|, -1:3.731, p:0.66]fi(FFFmi(llQQQFmmmIXLLRQQQFFmIIX[*][|, -3:6.99, p:0.497, r:0.973, r:0.817, r:1, r:0.999]LRqFI(LLrqqFFFFFFFX[|, 1:4.08, r:0.938][N, 0:-2.685, -5:2.011, 0:1, fo:0.046])))), Fi((rqmmmiii(lccqqqFFIIIX[|, p:0.577, -11:1])))), rQfmmiii(lcqqqFMMMIIX[|, p:0.521, r:0.533, -12:1.411]), ), ), Rfmmiii(lcqqqFMMMIIX[|, p:0.521, r:0.533, -13:1.411]), )
+fitness:0.4859330053714937
+
+org:
+genotype:((m((MX, LLLMXllI((LLLRQQQQffffmmmX[Gpart, rz:0, ry:-0.171,rz:0]), LRCqqii(LLLLmIX[N, 0:1, 3:-1.331, 4:1,2:1,6:1]lrqMMMMII(lRRfMI(LCQMMIII(LRQQmI(rrrrCqqqqqFmIIIIIX[|, 2:2.134, p:0.489])))), lRCmIX[N,-2:1]), FIlFILrqFFmmIX[T, ry:-2.213, ry:1.164]LLLLLLLLfmiX[G][|, -1:3.731, p:0.66]fi(FFFmi(llQQQFmmmIXLLRQQQFFmIIX[N,4:1][*][|, -4:6.99, p:0.497, r:0.973, r:0.817, r:1, r:0.999]LRqFI(LLrqqFFFFFFFX[|, 1:4.08, r:0.938][N, 0:-2.685, -6:2.011, 0:1, fo:0.046])))), Fi((rqmmmiii(lccqqqFFIIIX[|, p:0.472, -12:1])))), rQfmmiii(lcqqqFMMMIIX[|, p:0.521, r:0.533, -13:1.411]), ), ), Rfmmiii(lcqqqFMMMIIX[|, p:0.521, r:0.533, -14:1.411]), )
+fitness:0.48543653521200664
+
+org:
+genotype:((m((MX, LLLMXllI((LLLRQQQffffmmmX[*][Gpart, rz:0, ry:-0.171,rz:0]), LRCqqii(LLLLmIX[N, 0:0.029, 0:1, 2:-1.331, 3:1]lrqFMMMMII(RRfMI(LCQMMIII(LRQQmI(rrrrCqqqqqFmIIIIIX[|, 1:2.134, p:0.489])))), lRCmIX), FIlFILrqFFmmIX[T, ry:1.164]LLLLLLLLfmiX[G][|, -1:3.731, p:0.66]fi(FFFm(llQQQFmmmIXLLRQQQIX[*][|, -3:6.99, p:0.497, r:0.973, r:0.878, r:1, r:0.999]LRqFI(LLrqqFFFFFFFX[|, 1:4.08, r:0.938][N, 0:-2.685, -5:2.011, 0:1])))), Fi((rqmmmiii(lccqqqFFIIIX[|, p:0.695, -10:1])))), rQfmmiii(lcqqqFMMMIIX[|, p:0.521, r:0.533, -11:1.411]), ), ), fmmiii(lcqqqFMMMIIX[|, p:0.521, r:0.533, -12:1.411]), )
+fitness:0.484066585237177
+
+org:
+genotype:((m((MX, LLLMXllI((LLLRQQQffffmmmX[*][Gpart, rz:0, ry:-0.171,rz:0]), LRCqqii(LLLLmIX[N, 0:0.029, 0:1, 3:-1.331, 4:1]lrqFMMMMII(RRfMI(LCQMMIII(LRQQmI(rrrrCqqqqqFmIIIIIX[G][|, 1:2.134, p:0.489])))), lRCmIX), FIlFILrqFFmmIX[T, ry:-1.428, ry:1.164]LLLLLLLLfmiX[G][|, -1:3.731, p:0.66]fi(FFFm(llQQQFmmmIXLLRQQQFFmIIX[*][|, -3:6.99, p:0.497, r:0.973, r:0.878, r:1, r:0.999]LRqFI(LLrqqFFFFFFFX[|, 1:4.08, r:0.938][N, 0:-3.36, -5:2.011, 0:1, fo:0.04])))), Fi((rqmmmiii(lccqqqFFIIIX[|, p:0.472, -11:1])))), rQfmmiii(lcqqqFMMMIIX[|, p:0.521, r:0.533, -12:1.411]), ), ), fmmiii(lcqqqFMMMIIX[|, p:0.521, r:0.533, -13:1.411]), )
+fitness:0.4829652669472146
+
+org:
+genotype:((m((MX, LLLXllI((LLLRQQQffffmmmX[*][Gpart, rz:0, ry:-0.171]), LRCqqii(LLLLmIXlrqFMMMMII(RRfMI(LCQMMIII(LRQQmI(rrrrCqqqqqFmIIIIIX[G][|, 1:2.134, p:0.489])))), lRCmIX), FIlFILrqFFmmIX[T, ry:-1.428, ry:1.164]LLLLLLLLfmiX[G][|, -1:3.731, p:0.66]fi(FFFm(llQQQFmmmIXLLRQQQFFmIIX[*][|, -3:6.99, p:0.497, r:0.973, r:0.878, r:1, r:0.999]LRqFI(LLrqqFFFFFFFX[|, 1:4.08, r:0.938][N, 0:-3.36, -5:2.011, 0:1, fo:0.04])))), rFi((rqmmmiii(lccqqqFFIIIX[|, p:0.472, -10:1])))), rQfmmiii(lcqqqFMMMIIX[|, p:0.521, r:0.533, -11:1.411]), ), ), fmmiii(lcqqqFMMMIIX[|, p:0.521, r:0.533, -12:1.411]), )
+fitness:0.41474837630238504
+
+org:
+genotype:((((MX, LLLX[T]llI((LLLRCQQQffffmmX[N, 11:1][*][Gpart, rz:0]), LRCqqii(LLLLqIIX[N, 0:0.029, -4:1]lrqFMMMMIII(RRfM(LCQMMIII(LRQmI(rrrrCqqqqqFmmIIIIX[|, 1:2.134, p:0.568])))), lCmX), F(IlFILrqFFmmIX[T, ry:-2.286]LLLLLLLLfmiX[G][|, -1:2.78, p:0.66]fi(FFFm(llQQQFmmIXLLRQQFFmIIX[Gpart][|, -3:6.99, p:0.478, r:0.993, r:0.954, r:1]qLRF(LLrqqFFFFFFX[|, 1:4.08, r:0.824, r:0.935][N, 0:-3.947, -5:2.011, fo:0.043, 0:1]))))), i(rmiiim(I(lccqqqFMMIIX[|, p:0.469, -10:1, r:0.737])))))), f(rmiiim(lcqqqFMMIIX[|, p:0.672, r:0.54, -11:1.411])), )
+fitness:0.4237101410582953
+
+org:
+genotype:(((i(MX, LLX[T]llI((LLLCQQQffffmX[*][Gpart, rz:2.292, rz:0]), LRCqqii(LLLLqIIX[N, fo:1, 0:0.029, 2:1]lrqFMMMMIII(RRfM(LCQMMIII(LRQmI(rrrrCqqqqqFFFFmmIIIIX[|, 1:2.134, p:0.647])))), lCmmX), F(IlFILrqFFmIX[T, ry:-2.286]LLLLLLLLfmmiX[G][|, -1:2.78, p:0.66]fi(FFFm(llQQQFmmIXLLRQQFFmIIX[N, -2:1, 3:1][|, -3:6.99, p:0.478, r:0.993, r:0.949, r:1]qLRF(LLrqqFFFFFFX[|, 1:4.08, r:0.824, r:1][N, 0:-3.947, -5:0.857, fo:0.043, 0:1]))))), (i(rmiiim(I(lccqqqFMMIIIX[|, p:0.469, -10:1, r:0.737]))))))), frmiiim(lcqqqFMMIIX[|, p:0.495, r:0.559, -11:1.411]), )
+fitness:0.41807359180632286
+

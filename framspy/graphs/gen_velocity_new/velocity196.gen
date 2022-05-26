@@ -1,0 +1,40 @@
+org:
+genotype:(ccX[*]CXXX, fXX(qX[@, p:1,-1:1]c(XRXLcQmXXXX)))
+fitness:0.09481056928634643
+
+org:
+genotype:((Lc(LX[*]XLQXX), XXXX[|, -1:1]MXX[|,-2:1]), X)
+fitness:0.14557815194129944
+
+org:
+genotype:cq(((XfXX[T]X(, XX), XXX[|](XccLcQXXXX))))
+fitness:0.1058974727988243
+
+org:
+genotype:(c((LXLCXXXXXXL(c(X[*]LXXX), , (XX), ))), LX[|,-1:1])
+fitness:0.11695756018161774
+
+org:
+genotype:c(r(XCXXX[T]X, XXXXX[|,-1:1](c(X[|,-2:1]LX))))
+fitness:0.1430642545223236
+
+org:
+genotype:cQX((XX, XXXX[|]((XLXXX), X)))
+fitness:0.1164882868528366
+
+org:
+genotype:(((XLXXXXXX, ), LX[T]X), XX[|, -1:1], X)
+fitness:0.0851547122001648
+
+org:
+genotype:(((LXXXX(,XXX), LX[T]X), XX[|,-1:1], X))
+fitness:0.12673368752002717
+
+org:
+genotype:Lm(X[|,1:1]X[T,ry:0](XX), X)
+fitness:0.07431079596281051
+
+org:
+genotype:R(X[|], XLX)
+fitness:0.23523126542568207
+

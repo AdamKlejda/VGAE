@@ -1,0 +1,32 @@
+org:
+genotype:mXLrcQQFFFmX[|]
+fitness:6267.02
+
+org:
+genotype:c(R(XX[|,9:1](X[N, fo:0.04, in:0.8, 0:0.98, fo:0.04, fo:0.04, 0:0.408, 1:1][N, fo:0.04, in:0.8, 0:0.98, fo:0.04, fo:0.04, 0:1, 1:1, 4:6.251, 1:1]), RX[N, fo:0.04, in:0.8, 0:0.98, fo:0.04, fo:0.04, 0:-0.681, -1:1], RX[N, fo:0.04, in:0.8, 0:0.98, fo:0.04, fo:1, 0:1, 1:1, -2:1, 0:1,si:2]), RqX[N, fo:0.04, in:0.8, 0:0.98, fo:0.04, fo:0.04, 0:-0.681, -1:1][N, fo:0.04, in:0.8, 0:0.98, fo:0.04, fo:1, 0:1, 1:1, -2:1]RX[N, fo:0.04, in:0.8, 0:0.98, fo:0.04, fo:0.04, 0:-0.681, -1:1][Gpart, ry:-1.111, rz:0][N, fo:0.04, -2:1, -3:1, -4:1])
+fitness:6002.473333333333
+
+org:
+genotype:(X, X[N, fo:0.128, in:0.871, 1:1][Gpart, ry:0, rz:0][@, -1:4.073, p:0.858])
+fitness:6212.933333333333
+
+org:
+genotype:XX[|,1:1][G][@,p:1,-1:1,p:1]
+fitness:6251.553333333333
+
+org:
+genotype:XmX[|,1:1][T]
+fitness:126.01333333333334
+
+org:
+genotype:XX[G][@,-1:1]
+fitness:37.12
+
+org:
+genotype:(X, X)
+fitness:38.00666666666667
+
+org:
+genotype:X
+fitness:0.0
+

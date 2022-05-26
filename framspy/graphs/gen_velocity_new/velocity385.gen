@@ -1,0 +1,28 @@
+org:
+genotype:(FX, iX[|, 3:1][Gpart, ry:0][N, 1:1, -1:1][N, -1:1, -2:1][@, -1:4.094, p:1])
+fitness:6484.426666666666
+
+org:
+genotype:rXFX[|,1:1][Gpart,rz:-3.139][@, -1:-0.249]
+fitness:6503.393333333333
+
+org:
+genotype:XFX[|,1:1][Gpart,rz:0][@, -1:-0.249]
+fitness:6505.24
+
+org:
+genotype:XFX[|,1:1][Gpart,rz:0]X
+fitness:6512.806666666666
+
+org:
+genotype:X[|,1:1][Gpart,rz:0]X
+fitness:74.34
+
+org:
+genotype:CXX
+fitness:29.286666666666665
+
+org:
+genotype:X
+fitness:0.0
+

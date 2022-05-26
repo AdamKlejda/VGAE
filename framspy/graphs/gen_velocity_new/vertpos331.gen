@@ -1,0 +1,16 @@
+org:
+genotype:((, X[Gpart]LLLrCXLqXXLLXLLXXL(XLLLLRFXX(LLXX)), X), X)
+fitness:4.108138985137145
+
+org:
+genotype:(XXLLXLrmX[S]XLLXLLLXrCX(X[@, -1:1, p:1]LLX[*][S]XLXRX), X,)
+fitness:3.8414383324732384
+
+org:
+genotype:(XXmXLXXLLrqXXX(X(XLX), XX[S]), FX)
+fitness:3.1254215119282405
+
+org:
+genotype:X
+fitness:-0.01
+

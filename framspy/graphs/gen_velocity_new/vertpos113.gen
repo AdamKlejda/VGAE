@@ -1,0 +1,40 @@
+org:
+genotype:(, LLLLLLrCCX[N, 10:1,12:1,9:0.914,s:0][S]LLLLLcI(LLLrrccIX[T][S][N, si:3.906, 5:1, 1:1,6:1,fo:0.04]LLII(LF(LLLIIX[Gpart]LLLcffIX[*][|, 1:21, r:0.967, r:1][Gpart, rz:-1.309, ry:0.349][S][Gpart]), , C(, , LLMXLLLLrFX), , LLMX, LLLLrCqFXLrqFIX[@, -3:3.634]X, ), , RCqX[*][T], , Lf(LLLRqqqffX)), , )
+fitness:(48.87384830861396, 2.6134144107524193)
+
+org:
+genotype:(, LLLLLLrCCX[N, 10:1,12:1,9:0.914,s:0][S]LLLLLcI(LLLrrccIX[T][S][N, si:3.906, 5:1, 1:1,6:1,fo:0.04]LLII(LF(LLLIIX[Gpart]LLLcffIX[*][|, 1:17.417, r:0.967, r:1][Gpart, rz:-1.309, ry:0.349][S][Gpart]), , C(, , LLMXLLLLrFX), , LLMX, LLLLrCqFXLrqFIX[@, -3:3.634]X, ), , RCqX[*][T], , Lf(LLLRqqqffX)), , )
+fitness:(53.027850250491156, 2.613245730926476)
+
+org:
+genotype:(, LLLLLLrCCX[N, 10:1,13:1,11:1,9:0.914,s:0][S]LLLLLcI(LLLrrccIX[T][S][N, si:3.906, 5:1, 1:1,6:1,fo:0.04]LLII(LF(LLLIIX[Gpart]LLLcffIX[*][|, 1:17.417, r:0.967, r:1][Gpart, rz:-1.309, ry:0.349][S][Gpart]), , C(, , LLMXLLLLrFX), , LLMX, LLLLrCqFXLrqFIX[N,-3:1][@, -4:3.634]X, ), , RCqX[*][T], , Lf(LLLRqqqffX)), , )
+fitness:(34.894283812575424, 2.6130083059180262)
+
+org:
+genotype:(, LLLLLLrCCX[N, 10:1,13:1,11:1,9:0.914,s:0][S]LLLLLcI(LLLrrccIX[T][S][N, si:-999, 5:1, 1:1,6:1,fo:0.04]LLII(LF(LLLIIX[Gpart]LLLcffIX[*][|, 1:17.417, r:0.967, r:1][Gpart, rz:-1.309, ry:0.349][S][Gpart]), , C(, , LLMXLLLLrFX), , LLMX, LLLLrCqFXLrqFIX[N,-3:1][@, -4:3.634]X, ), , RCqX[*][T], , Lf(LLLRqqqffX)), , )
+fitness:(39.57079260479877, 2.6129384751001137)
+
+org:
+genotype:(, LLLLLLrCCX[N, 7:1, 2:1,10:1,8:1][S]LLLLLcI(LLLrrccIX[T]LLII(LF(LLLIIXLLLcffIX[*][|, 1:16.989, r:0.967, r:0.954][Gpart, rz:-1.327, ry:0.167][S][Gpart]), , C(, , LLMXLLLLrFX), , LLMX, LLLLrCFXLrqFIX[N,-3:1][@, -4:3.634]X, ), , RCqX[*][T], , Lf(LLLRqqqffX)), , )
+fitness:(47.711355031390106, 2.6126395055635934)
+
+org:
+genotype:(, LLLLLLrCCX[N, 8:1, 2:1, 12:1, 10:1][S]LLLLLcI(LLLrrccIX[T][S]LLII(LF(LLLIIXLLLcffIX[*][|, 1:16.989, r:0.967, r:0.954][Gpart, rz:-1.327, ry:0.167][S][Gpart]), , C(, , LLMXLLLLrFX), , LLMX[S], LLLLrCFXLrqFIX[N, -4:1][@, -5:3.634]X, ), , RCqX[*][T], , Lf(LLLRqqqffX)), , )
+fitness:(47.15475508949769, 2.6125711826427214)
+
+org:
+genotype:(, LLLLLLrCCX[N, 8:1, 2:1,11:1,9:1][S]LLLLLcI(LLLrrccIX[T][S]LLII(LF(LLLIIXLLLcffIX[*][|, 1:16.989, r:0.967, r:0.954][Gpart, rz:-1.327, ry:0.167][S][Gpart]), , C(, , LLMXLLLLrFX), , LLMX, LLLLrCFXLrqFIX[N,-3:1][@, -4:3.634]X, ), , RCqX[*][T], , Lf(LLLRqqqffX)), , )
+fitness:(41.75984372662633, 2.612537788797642)
+
+org:
+genotype:(, LLLLLLrCCX[N, 8:1, 2:1,11:1,9:1][S]LLLLLcI(LLLrrccIX[T][S]LLII(LF(LLLIIXLLLcffIX[*][|, 1:16.989, r:0.967, r:0.954][Gpart, rz:-1.327, ry:0.167][S][Gpart]), , C(, , LLMXLLLLrFX), , LLMX, LLLLrCFXLrqFIX[N,-3:1][@, -4:3.634]X, ), , RCqX[*][T], , Lf(LLLRqqqffX)), , )
+fitness:(45.5307872204196, 2.6125345514732223)
+
+org:
+genotype:(, LLLLLLrCCX[N, 9:1, 2:1,12:1,10:1][S]LLLLLcI(LLLrrccIX[T][S]LLII(LF(LLLIIX[Gpart]LLLcffIX[*][|, 1:16.989, r:0.967, r:0.954][Gpart, rz:-1.327, ry:0.167][S][Gpart]), , C(, , LLMXLLLLrFX), , LLMX, LLLLrCFXLrqFIX[N,-3:1][@, -4:3.634]X, ), , RCqX[*][T], , Lf(LLLRqqqffX)), , )
+fitness:(41.640748825434656, 2.612364835150617)
+
+org:
+genotype:(, LLLLLLrCCX[N, 9:1, 2:1,12:1,10:1][S]LLLLLcI(LLLrrccIX[T][S]LLII(LF(LLLIIX[Gpart]LLLcffIX[*][|, 1:16.989, r:0.967, r:1][Gpart, rz:-1.327, ry:0.167][S][Gpart]), , C(, , LLMXLLLLrFX), , LLMX, LLLLrCFXLrqFIX[N,-3:1][@, -4:3.634]X, ), , RCqX[*][T], , Lf(LLLRqqqffX)), , )
+fitness:(42.5917846510293, 2.6122519181266286)
+

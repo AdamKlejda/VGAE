@@ -1,0 +1,40 @@
+org:
+genotype:LFFMiX[Gpart][|,10:1]LFii(, (,cccccqqqmmiiiiiiiX[T, r:1], LccQQFFMMIX[*][|, p:0.455, -4:2.549, r:0.964]), RRcccccccIX[|, 6:2.127][S][*]LLLLLLLiXLLLLLCX[N, -5:3.812][|, -7:1][@, 1:-1.158][G]LLLLLLLLRfX[@, p:0.662,-4:1])
+fitness:3.6439532770604472
+
+org:
+genotype:LFFMiX[Gpart][|,10:1]LFii(, (rcccccqqqmmiiiiiiiX[T, r:1], LccQQFFMMIX[*][|, p:0.52, -4:2.549, r:0.964]), RRcccccccIX[|, 6:2.127][S][*]LLLLLLLiXLLLLLCX[N, -5:1][|, -7:1][@, 1:-1.158][G]LLLLLLLLRfX[@, p:0.662])
+fitness:3.6201959185027177
+
+org:
+genotype:LFFMiX[Gpart][|,10:1]LFii(, (cccccqqqmmiiiiiiiX[T, r:1], LccQQFFMMIX[*][|, p:0.52, -4:2.549, r:0.964]), RRcccccccIX[|, 6:2.127][S][*]LLLLLLLiXLLLLLCX[N, -5:1][|, -7:1][@, 1:-1.158][G]LLLLLLLLRfX[@, p:0.662])
+fitness:3.6198381310580285
+
+org:
+genotype:LFFMiX[Gpart][|]LFii(, (cccccqqqmmiiiiiiiX[T, r:1], LccQQFFMMIX[*][|, p:0.52, -4:2.549, r:0.964]), RRcccccccIX[|, 6:2.127][S][*]LLLLLLLiXLLLLLCX[N, -5:1][|, -7:1][@, 1:-1.158][G]LLLLLLLLRfX[@, p:0.662])
+fitness:3.618045422078054
+
+org:
+genotype:LFFMiX[Gpart][|]LFii(, (cccccqqqmmiiiiiiiX[T, r:1], LccQQFFMMIX[*][|, p:0.52, -4:2.549, r:1]), RRcccccccIX[|, 6:2.127][S][*]LLLLLLLiXLLLLLCX[N, -5:1][|, -7:1][@, 1:-1.158][G]LLLLLLLLRfX[@, p:0.662])
+fitness:3.6177583047410304
+
+org:
+genotype:LFFMiX[Gpart][|]LFii(, (cccccqqqmmiiiiiiiX[T, r:1], LcQFFMMIX[*][|, p:0.633, -4:3.152, r:0.798]), RRcccccccIX[|, 6:2.127][S][*]LLLLLLLFiXLLLLCX[N, -5:1][|, -7:1][@, 1:-1.158][G]LLLLLLLLRfX[@, p:0.662])
+fitness:2.6905820413176467
+
+org:
+genotype:LFfMX[Gpart][S][|, r:0.991]LFii(,((ccccqqfmiiimiiiiX[T], LcQFMIX[*][|, p:0.47, -5:2.346])), RRcccccccIX[|, 5:1][S][*]LLLLLLLFXLLLLCX[|,-6:1][@, 1:-1.158][G]LLLLLLLLX)
+fitness:2.687752358068861
+
+org:
+genotype:LFfMX[Gpart][S][|, r:0.991]LFii(,((ccccqqfmiiimiiiiX[T], LcQFMIX[*][|, p:0.42, -5:2.346])), RRcccccccIX[|, 5:1][S][*]LLLLLLLFXLLLLCX[|,-6:1][@, 1:-1.158][G]LLLLLLLLX)
+fitness:2.687062727856604
+
+org:
+genotype:LFfMX[Gpart][S][|, r:0.991]LFii(,(ccccqqfmiiimiiiiX[T], LcQFMIX[*][|, p:0.42, -5:2.346]), RRcccccccIX[|, 5:1][S][*]LLLLLLLFXLLLLCX[|,-6:1][@, 1:-1.158][G]LLLLLLLLX)
+fitness:1.9567879036423783
+
+org:
+genotype:LFFiX[Gpart][S][|, r:0.991,-1:1]Fii(, (ccccqqfmiiimiiiX[T], LcQFMIX[*][|, p:0.327, -5:3.464]), RRcccccccIX[|,3:1][S][*]LLLLLLLFX[T,r:1]LLLLCX[|,-7:1][@, 1:-1.529][G]LLLLLLLLX[@, p:0.658])
+fitness:2.3624872861360853
+

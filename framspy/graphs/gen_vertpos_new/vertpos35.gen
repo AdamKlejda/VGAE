@@ -1,0 +1,40 @@
+org:
+genotype:((((LF((XLILLL(LLLLLRRQfffffffffffIXLLLLLLrq(CCFX, XrIXRRcqMIIXLLrCqqqiiiX), X, )), ), , , , )),  ), , , , , , , , , )
+fitness:4.790249546504071
+
+org:
+genotype:((((LF((XLILLL(LLLLLRRQfffffffffffIXLLLLLLrq(CCFX, XrIXRRcqMIIXLLrCqqqiiiX), X, )), ), , , , )), , ), , , , , , , , , )
+fitness:4.790239821784018
+
+org:
+genotype:(F((((, LMi(IFfiLLLLLLLLLffffffffffiLLRRQQQfIfIIXLLLLLLLLLrrrI(X, X[G]LLrXrMX), , , , , LLLLLRRRcfX, , , QX[T], , , ), , , , , , , ), , , ), ), , , , , , , ), LLLLLRRcffMX(, , , , , , , , (, , X, , ), , , , , LLLLLLLRRcfMX[G]X(, , , miX, ), , ), , , , , , )
+fitness:9.686194789745938
+
+org:
+genotype:(LiLLLLFf(((LLRRXLLrqMII(XLcqIX, (, QQXXXLLLLLrrFX), ), X[T]QFFrqFmX(, iX), ), (cQXX)), X), , , , , )
+fitness:7.938829882027624
+
+org:
+genotype:mLLLLLLLLL((LLRRMIXLLrqfM(XX(, , LQMX), XXXXLiX), X, ), , LX)
+fitness:6.309632450357217
+
+org:
+genotype:mLLLLLLLLL((LLRRMIXLLrqfM(XX(, , LQMX), XXXXLiX), X, ), , X)
+fitness:6.283660292964674
+
+org:
+genotype:XLLLLLLLL(LLRRMIXLLLF(LX, qfXLRXRMLRRQXIX), X, iX[G], , X)
+fitness:14.325032726577406
+
+org:
+genotype:XLLLLLLLL(LLRRMIXLLLF(X, qfXLRXRMLRRQXIX), X, iX[G], , X)
+fitness:11.113561318437501
+
+org:
+genotype:XLLLLLLL(LLRRMIXLLLF(X, qfXLRXRMLRRQXIX), X, iX[G], , X)
+fitness:4.980128430309325
+
+org:
+genotype:LLLL(LLLL(LLRRXLLLLrfi(ii(, (rrQQX, qXXXX[*]), X)), XX), , mXX)
+fitness:19.41033249193515
+

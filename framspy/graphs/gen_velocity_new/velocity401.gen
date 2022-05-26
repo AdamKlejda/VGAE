@@ -1,0 +1,40 @@
+org:
+genotype:(II((iii(((((, IimMi((ilMMMMMMMiiX[N][T, r:0.708, rz:0, rz:0, ry:0,ry:0](FLLRQFFiFiiXrrrrrCCCCFFFFFFMMMMMMMMiX[T, ry:-0.813, rz:-1.108, r:0.917][N, -1:1, 0:0.809, -2:1, -1:1.031, -1:1.129, -1:1, 3:-0.265, s:0.689, in:0.817][|, -1:1])), lRRCQQffffX[Gpart][G][|, r:1][@, 1:1][Gpart, rz:0.156, ry:-0.027]), )))))), , ))
+fitness:0.03985923332172038
+
+org:
+genotype:((II((iii((, (IimMi((((ilMMMMMMMMMMMiiX[N,1:1][N, s:0.189, 7:1][T, r:0.708, rz:0, rz:0]FLLRQFFiFiiX[G][N, 4:1.577, -2:1.108, 7:1, in:0, 0:1][N, -3:1.108, -1:-1.721, in:0.887, 5:1,1:1,-5:1]rrrrrCCCCFFFFFFMMMMMMMMiX[*][T, ry:-0.813, rz:-1.108, r:0.917][N, -1:1, 0:0.809, -6:1, -1:1.031, -1:1.129, -1:1, 3:-0.265, s:0.989, in:0.817][|, -1:1]))), lRRCQQffffX[Gpart][G][|][@, 1:1][Gpart, rz:0.156, ry:-0.027]), )))))), , )
+fitness:0.039706424028672443
+
+org:
+genotype:(II((((iii(, (IimMi(((((i(lMMMMMMMMiX[N, in:0, s:0.118, 2:1, in:0.8][T, r:0.649, rz:0]FLLRQFFiFiiX[S][N, 1:6.425, -2:1.108, 5:1, -1:-1.721, in:0.8, 4:1.363,0:1]rrrrrCCCCFFFFFFMMMMMMMMiX[T, ry:-0.813, rz:-1.108, r:0.862, r:0.917][N, -1:1, 0:0.809, -4:1, -1:1.031, -1:1.129, -1:1, 5:-0.265, s:0.726, in:0.817][|, -1:1]))))), (lRRCQfffffX[*][T][G][G][|][@, 1:1][Gpart, rz:0.156, ry:-0.027]))), ))))), , )
+fitness:0.03969090269161898
+
+org:
+genotype:((II((((((ii((, (IimMi((((i(i(lMMMMMMMiX[N, in:0, s:0.036, in:0, 3:1, 14:1, 10:1][T, r:0.649, rz:0]F(LLRQFFiiiX[Gpart][S][N, 2:-8.58, 1:5.624, -3:1.108, 1:1, -1:1, in:0.8, 4:1.363]rrrrrCCCCCFFFFFMMMMMMMiX[T, ry:-0.813, rz:-1.108, r:0.907, r:1, r:0.917][N, -1:1, 0:0.809, -5:1, -1:1.031, -1:1.129, -1:1, 5:-0.265, s:0.726, in:0.817][|, -1:1]))))), lRRQfffffX[*][T][G][G][|][@, 1:1][Gpart, rz:0.156, ry:-0.027])) )))))))))), , )
+fitness:0.03966445642049868
+
+org:
+genotype:(II(((((i(ii(((, (, IimMi(((((i((i(lMMMMMMMiX[N, in:0, s:0.036, in:0, 3:1][T, r:0.649]F(LLRQFFiFiiX[Gpart][S][N, 2:-8.58, 1:5.624, -3:1.108, 5:1, 1:1, -1:1, in:0.8, 4:1]rrrrrCCCCCFFFFFFMMMMMMMMiX[T, ry:-0.813, rz:-1.108, r:0.881, r:1, r:0.925][N, -1:1, 0:0.809, -5:1, -1:1.031, -1:1.129, -1:1, 5:-0.265, s:0.726, in:0.817][|, -1:1])))))), lRRQfffffX[*][T][G][G][|][@, 1:1][Gpart, rz:0.156, ry:-0.027])), )))))))) ))), , )
+fitness:0.03965643152264605
+
+org:
+genotype:((i(((, (, I(i((imMi((i((Mi(((ilMMMiX[T, r:0.649, rz:0]FLLRQFFiFiiX[S][N, 3:-8.58, 0:1, -2:1.19, 6:1, 2:1, -1:1, 5:1, 1:1]rrrrrCCCCCFFFFFFMMMMMMMMiX[Gpart,rz:0][T, ry:-0.813, rz:-1.108, r:1, r:1][N, -1:1, 0:0.809, -5:1, -1:1.031, -1:1.129, -1:1, 5:-0.265, s:0.776, in:0.817][|, -1:1]))))), lRRQfffffX[*][T][G][G][|][@, 1:1][Gpart, rz:0.156, ry:-0.027])), ))))))), ), , , )
+fitness:0.03957807695386174
+
+org:
+genotype:((i((((((, (, I(i((((imMi(i((i((lMMMMMMiX[N, in:0.907, 7:0.539, s:0.036, in:0.8,si:2][T, r:0.649, rz:0]F(LLRQFFiFiiX[Gpart][S]rrrrrCCCCCqFFFFFMMMMMMMMiX[T, ry:-0.813, rz:-1.108,r:0.952][N, -1:1, 0:0.809, -4:1, -1:1, -1:1.129, -1:1, 4:-0.265, s:0.776, in:0.817][|, -1:1]))))), lRRQfffffX[T][G][G][|][@, 1:1][Gpart, rz:0.156, ry:-0.027])), ))))))))), ))), )
+fitness:0.039526334767952066
+
+org:
+genotype:((i(((((((, (, I(i((((imMi(i((i((lMMMMMMiX[N, in:0.907, 8:2.562, s:0.036, in:0.8][T, r:0.649, rz:0]F(LLRQFFiFiiX[Gpart][S][N, 2:-8.58, 1:5.251, 0:1, -3:1, 5:1, 1:1, -1:1, in:0.8]rrrrrCCCCCqFFFFFMMMMMMMMiX[T, ry:-0.813, rz:-1.108][N, -1:1, 0:0.809, -5:1, -1:1, -1:1.129, -1:1, 4:-0.265, s:0.776, in:0.817][|, -1:1]))))), lRRQfffffX[T][G][G][|][@, 1:1][Gpart, rz:0.156, ry:-0.027]))), ))))))))) ))), )
+fitness:0.039378074122840945
+
+org:
+genotype:i(((((, (, I((((, imMi(((I(((MilMMMX[N, 11:1, in:0, 1:1][N, 8:1, in:0][T, r:0.649]LLRQFFiFiiX[N, 3:-8.58, 8:-0.95, -3:1, 0:1, -1:1, 7:1, -2:1]rrrrrCCCCCqFFFFFMMMMMMMMX[S][T, ry:-0.813, rz:-1.108][N, -1:1, 0:0.809, -4:1, -1:1, -1:1.129, -1:1, 5:-0.265, s:0.776, in:0.817,-2:1][|, -1:1]))))), (lRRQfffffX[Gpart][T][G][G][|,r:1][@, 1:1][Gpart, rz:0.156, ry:-0.006])), )))))))), ), , )
+fitness:0.03936177606787486
+
+org:
+genotype:(i(((, I((, imMi((((MilMMX[N, 8:1, in:0][S][T, r:0.649]LLRQFFiFiiX[N, 2:-8.58, 1:5.251, 6:-0.95, -3:1, 0:1, -1:1.816, 5:1, -2:1]rrrrrCCCCCqqFFFFFFFMMMMMMMMX[T, ry:-0.813, rz:-1.108][N, -1:1, 0:0.809, -3:1, -1:1, -1:1.129, -1:1, 4:-0.265, s:0.776, in:0.817][|, -1:1]))), lRRQfffffX[T][G][G][|, r:0.692][@, 1:1][Gpart, rz:0.156, ry:-0.006])), )))), , , )
+fitness:0.039216984284349055
+

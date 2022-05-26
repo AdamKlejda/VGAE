@@ -1,0 +1,28 @@
+org:
+genotype:LR(XX,LRX(XQXXX,X[N]X), X)
+fitness:2.201495594928662
+
+org:
+genotype:LR(XX,LX(XQXXX,X[N]X), X)
+fitness:2.1827198712776106
+
+org:
+genotype:LR((X), LXXX(XQXXLXXLXX, X[N]iX), X)
+fitness:2.839201712012291
+
+org:
+genotype:Lq(XLXXX((XQXqXLXX(LX), XXiX)), X)
+fitness:2.818615264693896
+
+org:
+genotype:LR(XLXXX(XQXXLRXX(LX(X), XiX)), X)
+fitness:1.7720096147060393
+
+org:
+genotype:LR(XLXXX(XQXX(LXXLfXXXiX), ), X)
+fitness:1.468191672762235
+
+org:
+genotype:X
+fitness:-0.01
+

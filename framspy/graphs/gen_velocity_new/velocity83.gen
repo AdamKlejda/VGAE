@@ -1,0 +1,32 @@
+org:
+genotype:(llllrCMfMX[G][Gpart](XXX), LXX[|, -2:2.237]XX[|, -2:1])
+fitness:1.979393932322661
+
+org:
+genotype:(((XX[|, 1:1]X), XXXXXX[*]LX), XXX)
+fitness:2.445572481950124
+
+org:
+genotype:(lX, LX[|])
+fitness:1.5465725872913996
+
+org:
+genotype:(X, X[|, p:0.25])
+fitness:1.421266451254487
+
+org:
+genotype:(X, X[|])
+fitness:3.069234580422441
+
+org:
+genotype:cXX
+fitness:2.144307824065909
+
+org:
+genotype:XX
+fitness:0.2891313834240039
+
+org:
+genotype:X
+fitness:0.0
+

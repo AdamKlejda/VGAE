@@ -1,0 +1,40 @@
+org:
+genotype:(XLLLLLLLQIIIX[Gpart, rz:-1.611]LLLLLLLLrqMX[N, 4:0.295]LLLLLLLLLRRmmmmmiX[*]LLLLLLLLqmmIILLLLLLRRmmmmmiiiX[Gpart], LLLLLLLLRRRRRRFmmmmmiiX[N]LLLLLLLLrqmmIILLLLLLRX(LLLLLLLLLrqffmmmmmmmX[T][N, fo:0.022][N]LLLLLLLLrqmmIILLLLLLRRmmmmmiiXLLLLLLLLqFmmmmmmmiX, LLLLLLLRRRRRmIIX[G][*][Gpart][Gpart][Gpart][Gpart]), LLLLLRFFMiX[N, 0:2.78])
+fitness:64.14367092277668
+
+org:
+genotype:(XLLLLLLLQIIIX[Gpart, rz:-1.611]LLLLLLLLrqMX[N, 4:0.295]LLLLLLLLLRRmmmmmiX[*]LLLLLLLLqmmIILLLLLLRRmmmmmiiiX[Gpart], LLLLLLLLRRRRRRFmmmmmiiX[N]LLLLLLLLrqmmIILLLLLLRX(LLLLLLLLLrqffmmmmmmmX[T][N, fo:0.022][N]LLLLLLLLrqmmIILLLLLLRRmmmmmiiXLLLLLLLLqFmmmmmmmiX, LLLLLLLRRRRRmIIX[G][*][Gpart][Gpart][Gpart][Gpart]), LLLLLRFFMiX[N, 0:2.78, -10:1])
+fitness:64.14367092277668
+
+org:
+genotype:(XLLLLLLLQIIIX[Gpart, rz:-1.611]LLLLLLLLrqMX[N, 4:0.295]LLLLLLLLLRRmmmmmiX[*]LLLLLLLLqmmIILLLLLLRRmmmmmiiiX[Gpart], LLLLLLLLRRRRRRFmmmmmiiX[N]LLLLLLLLrqmmIILLLLLLRX(LLLLLLLLLrqffmmmmmmmX[T][N, fo:0.022][N]LLLLLLLLrqmmIILLLLLLRRmmmmmiiXLLLLLLLLqFmmmmmmmiX, LLLLLLLRRRRRmIIX[G][*][Gpart][Gpart][Gpart, rz:0]LLLLLRFFMiXmmiiX[T]), LLLLLRFFMiX[N, 0:2.78, -10:1])
+fitness:72.01799422994925
+
+org:
+genotype:(LLrrFiXLLLLFIX((LLLLLLrmXLLLRmmiLmmiX), LLLLLLLCmmIXLLLLLRRmmmiiX[S][S]), LLLLrrrFXLLLLRRRmmmmmiiXLLLLXLLLLRRmiX[G][|, 8:1][G][S]LLfIX[|]LLLLLIX[N, -5:-0.424, -7:1][@, -7:-0.783][N, 5:0.793, -4:1][|, 3:-0.439]LLrfffmiX[Gpart][|], MiX[Gpart][T, r:0.953], )
+fitness:72.70553486803895
+
+org:
+genotype:(LiXLLLFIX,LLLRmXLLRmmX[S](LLX[|](LLRqiX[T][Gpart, ry:2.132]), LLRIX[T]LLLrIX[@, -2:1][N, -2:1][|, -7:1]LrXLrXLrFX[Gpart]LqXrX), CX[@, p:0.925, -7:1][T])
+fitness:56.568356520600474
+
+org:
+genotype:(LiXLLLFIX,LLLRmXLLRmmX[S](LLX[|](LLRqiX[T][Gpart, ry:3.577]), LLRIX[T]LLLrIX[@, -2:1][N, -2:1][|, -7:1]LrXLrXLrFX[Gpart]LqXrX), CX[@, p:0.925, -7:1][T])
+fitness:56.568356520600474
+
+org:
+genotype:(iX(LLQFIXLXmXLXLLCXLLIX), rXrXLQX(X[S]rfXX, CX))
+fitness:59.42038966618221
+
+org:
+genotype:L((LLQIXLXXLRcXLLX(LLQXCXqfXLXLXX), rfXX), CX)
+fitness:39.46982959153215
+
+org:
+genotype:(LLQCX[N]X(LLQXCXXLXLXX), rfXXCX)
+fitness:46.71015341919466
+
+org:
+genotype:(LLQCXX(LLQXCXfXLXLXX), rfXXCX)
+fitness:46.73840738415185
+

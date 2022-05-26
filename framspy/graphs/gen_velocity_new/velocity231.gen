@@ -1,0 +1,24 @@
+org:
+genotype:RX[N, 2:1]IX[Gpart, rz:0][Gpart][|, -1:1]
+fitness:6561.32
+
+org:
+genotype:XX[G][|,p:0.25,-1:1]
+fitness:6573.893333333333
+
+org:
+genotype:XX[N, 1:1][Gpart][|, -1:1]
+fitness:177.82666666666665
+
+org:
+genotype:cX[*]X
+fitness:26.3
+
+org:
+genotype:XX
+fitness:22.826666666666668
+
+org:
+genotype:X
+fitness:0.0
+

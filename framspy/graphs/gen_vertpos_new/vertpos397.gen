@@ -1,0 +1,200 @@
+org:
+genotype:~
+//0
+p:fr=0.928, ing=0.401, as=0.65
+p:1.0, fr=3.589, ing=0.754, as=0.893
+j:0, 1, stif=0.917, rotstif=0.267, stam=0.502
+n:j=0, d=|
+n:j=0, d=@
+n:p=1, d=T:r=0.943
+n:d=*
+n:p=0, d="Gpart:ry=-2.548, rz=0.138"
+n:j=0, d=G
+n:p=1, d=S
+n:p=0, d="Gpart:ry=-1.27, rz=1.6"
+n:d=*
+n:p=0, d="Gpart:ry=-2.822, rz=-0.584"
+n:p=1, d="T:r=0.837, rz=-0.454"
+n:d=*
+n:d="N:in=0.758, fo=0.159, s=0.203"
+n:d="N:in=0.0, si=-0.784, s=-0.123"
+c:0, 2, 7.85
+c:1, 3, 2.556
+c:12, 6
+c:13, 2, 3.539
+c:13, 13
+~
+fitness:0.3072412919548978
+
+org:
+genotype:~
+//0
+p:fr=0.928, ing=0.417, as=0.004
+p:1.0, fr=3.518, ing=0.736, as=0.057
+j:0, 1, stif=0.917, rotstif=0.729, stam=0.319
+n:j=0, d=|
+n:j=0, d=@
+n:p=1, d=T:r=0.895
+n:d=*
+n:p=1, d=S
+n:d=*
+n:p=0, d="Gpart:ry=-1.918, rz=-0.006"
+n:j=0, d=G
+n:p=0, d=T:r=0.898
+n:p=1, d=S
+n:p=1, d=T:ry=0.534
+n:
+c:0, 2, 7.85
+c:1, 3, 6.043
+c:11, 6
+c:11, 8
+c:11, 9, 0.468
+c:11, 4, 5.444
+~
+fitness:0.3069194324986969
+
+org:
+genotype:~
+//0
+p:fr=0.928, ing=0.581, as=0.309
+p:1.0, fr=3.518, ing=0.817, as=0.093
+j:0, 1, stif=0.917, rotstif=0.9, stam=0.115
+n:p=1, d=S
+n:j=0, d=|
+n:j=0, d=@
+n:p=1, d=T:r=0.895
+n:d=*
+n:p=1, d=S
+n:d=*
+n:p=0, d="Gpart:ry=0.441, rz=-0.006"
+n:j=0, d=G
+n:p=0, d=T
+n:p=1, d=S
+n:d=*
+c:1, 3, 7.85
+c:2, 4, 3.171
+~
+fitness:0.3068885087260658
+
+org:
+genotype:~
+//0
+p:fr=0.928, ing=0.553, as=0.282
+p:1.0, fr=3.518, ing=0.666, as=0.037
+j:0, 1, stif=0.917, rotstif=0.922, stam=0.396
+n:p=1, d=S
+n:j=0, d=|
+n:j=0, d=@
+n:p=1, d=T:r=0.895
+n:d=*
+n:d=*
+c:1, 3, 7.85
+c:2, 4
+~
+fitness:0.3037291873691445
+
+org:
+genotype:~
+//0
+p:fr=0.997, ing=0.553, as=0.282
+p:1.0, fr=3.393, ing=0.666, as=0.14
+j:0, 1, stif=0.992, rotstif=0.981, stam=0.31
+n:p=1, d=S
+n:j=0, d=|
+n:j=0, d=@
+n:p=1, d=T:r=0.932
+n:d=*
+n:p=1, d=S
+n:d=*
+c:1, 3, 7.85
+c:2, 4
+~
+fitness:0.29467310514748507
+
+org:
+genotype:~
+//0
+p:fr=0.928, ing=0.553, as=0.282
+p:1.0, fr=3.518, ing=0.666, as=0.14
+j:0, 1, stif=0.992, rotstif=0.975, stam=0.321
+n:p=1, d=S
+n:j=0, d=|
+n:j=0, d=@
+n:p=1, d=T:r=0.932
+n:d=*
+n:p=1, d=S
+c:1, 3, 7.85
+c:2, 4
+~
+fitness:0.28902689233565515
+
+org:
+genotype:~
+//0
+p:fr=0.624, ing=0.624, as=0.282
+p:1.0, fr=3.518, ing=0.666, as=0.248
+j:0, 1, stif=0.992, rotstif=0.748, stam=0.243
+n:p=1, d=S
+n:j=0, d=|
+n:j=0, d=@:p=0.943
+n:p=1, d=T
+n:d=*
+n:p=1, d=S
+n:d=*
+c:1, 3, 5.907
+c:2, 4, 3.145
+~
+fitness:0.2856790693222594
+
+org:
+genotype:~
+//0
+p:fr=0.624, ing=0.566, as=0.282
+p:1.0, fr=3.518, ing=0.666, as=0.248
+j:0, 1, stif=0.992, rotstif=0.656, stam=0.237
+n:p=1, d=S
+n:j=0, d=|
+n:j=0, d=@
+n:p=1, d=T:r=0.932
+n:d=*
+n:p=1, d=S
+c:1, 3, 5.907
+c:2, 4
+~
+fitness:0.28732951791649314
+
+org:
+genotype:~
+//0
+p:fr=0.624, ing=0.566, as=0.282
+p:1.0, fr=3.518, ing=0.666, as=0.248
+j:0, 1, stif=0.992, rotstif=0.748, stam=0.237
+n:p=1, d=S
+n:j=0, d=|
+n:j=0, d=@
+n:p=1, d=T
+n:d=*
+n:p=1, d=S
+c:1, 3, 5.907
+c:2, 4
+~
+fitness:0.2804751079261929
+
+org:
+genotype:~
+//0
+p:fr=0.611, ing=0.566, as=0.1
+p:1.0, fr=3.518, ing=0.753, as=0.205
+j:0, 1, stif=0.976, rotstif=0.468, stam=0.237
+n:p=1, d=S
+n:j=0, d=|
+n:j=0, d=@
+n:p=1, d=T
+n:d=*
+n:j=0, d=G
+n:d=*
+c:1, 3, 1.828
+c:2, 4, 3.829
+~
+fitness:0.27762191937724057
+

@@ -1,0 +1,40 @@
+org:
+genotype:LLLLLLLLrFF(LLQf(LLrrrrrcccqFFFFFFFqFFFFFFmiiiiiiX[G][S][Gpart][Gpart][S][S][N, si:-0.644, fo:0.793, -1:-2.922, -5:2.819, 3:1,-6:1][S][@, 3:2.262], LLLLLLRRRCQQQQQQQQFFFFFFFmmmIX[S][*][G][G][|, -1:3.356, p:0.993, r:0.83]))
+fitness:0.021807433154729394
+
+org:
+genotype:LLLLLLLLFFFFFFFFIi((rcFmiiiiiX[*][G][@, 2:2.228], LLLLLRiX[N, 2:1, 4:1, 2:1][G][G][S][G][N, 1:1, -2:1, -2:1, -2:-2.24,-8:1][G][|, -1:3.356, p:0.987, r:0.839]))
+fitness:0.021288864335601072
+
+org:
+genotype:LLLLLLLCFFFFFFFFi(LrFFmiiX[S][N, 1:1, 9:1.318][N][T, rz:-0.678][N, -4:1][@, 3:2.228], LLLLLrrQFMX[T][G][G][G][G][|, -1:3.356, p:0.979, r:0.843])
+fitness:0.02121717910669327
+
+org:
+genotype:LLLLLLLLRFFFFFFF((LRririiIrQFQFFFiX[N, 7:1, 9:1][S][T][G][N, -4:1,fo:0.04][@, 2:2.228]), LLLLRCQQFIX[Gpart][G][G][N, fo:1, si:999, in:0, s:0.344, in:0.815, -3:2.04, 1:1, -3:1][G][|, -1:3.356, p:0.998, r:0.847])
+fitness:0.02131104127916917
+
+org:
+genotype:LLLLLLLLFFFFFFFiii((I(((LrqqFmiiiiX[Gpart][@, 5:2.228])), LLLLLQQQFFFFX[N,5:1][T][*][*][G][N,-5:3.887,-4:2.536][G][|, -1:3.356, p:0.899, r:0.808])),)
+fitness:0.02085164247021668
+
+org:
+genotype:LLLLLLLLFFFFFFFiii((rI(((LrrrCqqFFmiiiiX[Gpart][Gpart][G][S][G][@, 5:2.228]))), LLLLcccQQQQQFFFFFX[T][*][*][N, 1:-4.036, -7:1, -3:1, 0:1][G][|, -1:3.356, p:0.955, r:0.828]))
+fitness:0.022278253012908054
+
+org:
+genotype:LLLLLLLLLFFFFFFFiiiirI(LrrrrCCqqFFmiiiiX[T,rz:0][S][G][@, 3:2.228], LLLLLLLLcQQQFFFFFX[S][*][G][N, 1:-4.036,-3:1][G][|, -1:3.356, p:0.949, r:0.828])
+fitness:0.02206224998961227
+
+org:
+genotype:LLLLLLLQFFFFFFFFiii(FI(LrrCqqmiiiiX[*][@, 4:2.228]), LLLLLLLLrcQQFFFFIX[*][G][*][G][N, -1:1, -1:3.09, in:0][N, 1:-1.989][G][|, -1:3.356, p:0.949, r:0.828])
+fitness:0.020415082947167262
+
+org:
+genotype:LLLLLLQFFFFFFFFiii(((LrrCqqmiiiX[T][N, 10:1, 3:1,-1:1][Gpart][S][G][@, 5:2.228]), LLLLLLLLcQQQFFFFIX[Gpart][T][S][N, -1:3.617, -1:3.09, -8:1, -1:1][G][G][G][|, -1:3.356, p:0.955, r:0.843]))
+fitness:0.021582434569465545
+
+org:
+genotype:LLLLLFFFFFFFFi(((((r((iLLLqmiX[S][N, in:0.939, fo:0.101][Gpart][@, 3:2.3])))))), rLLLLcQQQFIIIX[S][S][G][N, -6:-4.605, -6:0.201][N, 0:1, -7:1][G][|, -1:3.356, p:0.998, r:0.843])
+fitness:0.020187291814193355
+

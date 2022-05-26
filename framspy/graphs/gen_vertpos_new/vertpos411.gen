@@ -1,0 +1,12 @@
+org:
+genotype:XX(rXX(, X),XX)
+fitness:0.030283265635474094
+
+org:
+genotype:X[@,1:1,p:1][*][|,-1:1]
+fitness:0.02
+
+org:
+genotype:X
+fitness:-0.01
+

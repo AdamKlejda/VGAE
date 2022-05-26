@@ -1,0 +1,40 @@
+org:
+genotype:XX[Gpart][N, 1:1, si:2][S][|, 1:4.732][N, -2:1, -4:1, fo:0.04, -3:1]
+fitness:6300.3
+
+org:
+genotype:XX[Gpart][N, 1:1, si:2][S][|, 1:4.732][N, -2:1, -4:1, fo:0.04, -3:1]
+fitness:6300.3
+
+org:
+genotype:CX[|,3:1][*][@, 1:1][Gpart, ry:0, ry:-1.587]
+fitness:6322.153333333334
+
+org:
+genotype:XX[T][|, 1:4.732][Gpart,ry:0]
+fitness:6331.1
+
+org:
+genotype:XX[S][G][|, p:0.25, -1:1]
+fitness:6332.586666666667
+
+org:
+genotype:CX[|,1:1][*]X
+fitness:33.98
+
+org:
+genotype:X[|,1:1][Gpart]X
+fitness:28.933333333333334
+
+org:
+genotype:X[|,1:1][*]
+fitness:18.30666666666667
+
+org:
+genotype:XX
+fitness:17.213333333333335
+
+org:
+genotype:X
+fitness:0.0
+

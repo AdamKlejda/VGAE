@@ -1,0 +1,40 @@
+org:
+genotype:rrfMX[S][S][N, -1:1]LRRccQmmX[N, 4:1][S][N,-5:1][G][N, 0:0.527][T][T][T, r:0.923][|, -2:2.684, p:0.323]
+fitness:0.583204279042056
+
+org:
+genotype:rrQfImX[N,in:0.8]LRccQMX[T,rz:0.827][*][T][T,rz:-0.383][|, -1:2.684, p:0.323]
+fitness:0.5807824765177743
+
+org:
+genotype:rrQQfiX[N, 2:1,2:1,1:1]LRcccQMMiiX[*][T][T][T][|, -2:2.684, p:0.323]
+fitness:0.5652237475011744
+
+org:
+genotype:rrQfX[T][S][N, 6:1,-1:1,1:1]LRcccQMX[N,1:1][G][N, 2:1.808,-1:1,-5:1][T][T][T][|, -2:2.684, p:0.323]
+fitness:0.5540215472087814
+
+org:
+genotype:rrQQfX[N, 2:1,2:1]LRccQMMX[*][T][T][T][|, -2:2.684, p:0.323]
+fitness:0.5531086047087789
+
+org:
+genotype:rrQfX[S]LRccQX[G][N, 2:1.808,-1:1][T][T][T][|, -2:3.464, p:0.337,r:1]
+fitness:0.5531073403113
+
+org:
+genotype:rrQQfX[N, 2:1,2:1]LRccQMMX[T][T][|, -2:2.684,p:0.323]
+fitness:0.5427800045417663
+
+org:
+genotype:rrQfX[N, 5:1]LRccQMMiX[N,3:1][N, 2:1.808,-1:1][T][T][T][|, -2:2.684, p:0.323]
+fitness:0.34745817869071616
+
+org:
+genotype:rrfXLRccQiX[G][T][T][T][|, -2:3.259]
+fitness:0.34863846023429007
+
+org:
+genotype:rrQfX[G]LRccQX[G][T,ry:0][T][|, -2:2.684]
+fitness:0.32224059314410136
+

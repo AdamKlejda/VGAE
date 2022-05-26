@@ -1,0 +1,32 @@
+org:
+genotype:(LXlllqXqCqFFX[|, 1:1]X[*]X)
+fitness:3.0586819268763064
+
+org:
+genotype:lllllllRqMXX[*][|,-1:1]
+fitness:3.777743620450298
+
+org:
+genotype:llllllRqqfX[*]X[|, -1:1]
+fitness:3.7588954418338836
+
+org:
+genotype:lllllllRqqfX[*]X[|, -1:1]
+fitness:3.777743620450298
+
+org:
+genotype:lXX[*][|,-1:1]
+fitness:3.6022333300362033
+
+org:
+genotype:X[|,1:1][G]X
+fitness:3.027070920616388
+
+org:
+genotype:cXX
+fitness:1.4345969778982302
+
+org:
+genotype:X
+fitness:0.0
+

@@ -1,0 +1,40 @@
+org:
+genotype:LLLLLLLLrFmmmmiX[|, 4:3.713][@]LLLLrCCCCqfIX[T][*][*][G][Gpart][|, 5:1.463, p:0.982, r:0.885]lCCqFIIIX[Gpart][Gpart][T][@, 1:0.852][Gpart, rz:-0.723]
+fitness:0.02177562440441055
+
+org:
+genotype:LLLLLLLLrFmmmmiX[|][@, 5:1]LLLLLrCCCCqfIX[T][*][*][G][Gpart][*][|, 4:1.463, p:0.982, r:0.922]lCCqFIIIX[Gpart][T][@, 1:0.852][Gpart, rz:-0.723]
+fitness:0.02310544083849818
+
+org:
+genotype:LLLLLLLLFmmmmmmmIIIIIIXLLrCCCCqqfmmIX[T]LLLLrCCCCqqfmmX[*][|, 5:1.463, p:0.973]lCCQQQmIX[G][T][N, fo:0.252, 0:6.593, si:2,-4:1][@, 1:1.144][Gpart, rz:-0.533]
+fitness:0.04937846247258215
+
+org:
+genotype:LLLLLLLLRRRFmmmmmIIIIX[Gpart,ry:0][*]LLLLLLrCCCCqqfmX[S][*][Gpart][N, in:0.773, 1:1, 1:-1.479, -2:1][T][|, 4:1.463, p:0.993, r:0.863]lCQmIX[*][*][@, 1:1.144][Gpart, rz:-0.515]
+fitness:0.028674659884712263
+
+org:
+genotype:LLLLLLLLRRRFmmmmmIIIIIX[G][@, 3:1][S][*][N, si:2.645, 2:1][S]LLLLLrCCCCqqfmX[Gpart][|, 4:1.463, p:0.97, r:0.863]lCQmIX[G][*][@, 1:1.144][Gpart, rz:-0.515, ry:0]
+fitness:0.026712957366752492
+
+org:
+genotype:LLLLLLLLRRRFmmmmmIIIIIX[@,3:1][S][*][N, si:2.645][S]LLLLLrCCCCqqfmX[|, 4:1.463, p:0.97, r:0.863]lCQmIX[G][*][@, 1:1.144][Gpart, rz:-0.515,ry:0]
+fitness:0.02669791581146091
+
+org:
+genotype:LLLLLLLLRRRFmmmmIIIIIIX[|,3:1][N,7:1][@][S][N, in:0.896,1:1]LLLLrCCCCqqfmX[Gpart][Gpart,ry:0][|, 7:1.463, p:0.986, r:0.854]lCCFmIX[G][S][S][Gpart, ry:3.154][*][@, 1:1.144][Gpart, rz:-0.406]
+fitness:0.0256217823379495
+
+org:
+genotype:LLLLLLLLRRFmmmmmmmmIIIX[@][G]LLLLrCCCCqqfmiX[Gpart][G][N, 5:3.061][N, -1:1, in:0][|, 3:1.491, p:0.952, r:0.814]lCqFmIX[N][@, 1:0.984][Gpart, rz:-0.663]
+fitness:0.02584475139772678
+
+org:
+genotype:LLLLLLLRRFmmIIIX[|,3:1][T][G][G][N,-2:1,3:1,-1:1][Gpart,rz:0][S]LLLLrCCCCqqffmmiiiX[G][G][N,-6:1][|, 3:1.491, p:0.976, r:0.814]lFFmIX[*][@, 1:0.984][Gpart, rz:-0.464]
+fitness:0.02510831757497788
+
+org:
+genotype:LLLLLLLRRFmmIIIX[|,3:1][T][G][G][N,-2:1,3:1][Gpart,rz:0][S]LLLLrCCCCqqffmmiiiX[G][G][N][|, 3:1.491, p:0.976, r:0.814]lFFmIX[*][@, 1:0.984][Gpart, rz:-0.464]
+fitness:0.022725032270026157
+

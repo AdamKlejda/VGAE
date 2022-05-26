@@ -1,0 +1,40 @@
+org:
+genotype:LLLLLLLLRCQQQfffMMMMX[Gpart][*]LLLLLLLLLQQmmmiiX[T][N, 4:0.611, 3:-0.223,10:1][|, 3:0.647, p:0.987, r:0.849]LLLLLcQfffffffiiiX[N, si:999, -2:1, -4:-3.23, 8:1, 4:1, 0:1, 8:1][Gpart][Gpart, ry:-0.448, rz:0]LLLLLLLLLLLrqffffmmX[N, 1:-0.709, 4:1][T, rz:2.014][|, 1:-0.801, p:0.995][*][*]LLLLLLLLRRcqfffffffmmmmmmmIIX[*][S]
+fitness:1.1633397477512304
+
+org:
+genotype:LLLLLLLLRCQQQfffMMMMIX[T][*]LLLLLLLLLQQmmmiiX[N, -1:1,6:1][T][|, 3:0.647, p:0.987, r:0.849]LLLLLcQfffffffMiiiX[N, si:-3.426, -2:1, -5:1, 5:1, 8:1, 5:4.293][Gpart][Gpart, ry:-0.448]LLLLLLLLLLLrqffffmmX[S][N, 1:3.234, -1:0.85, 5:1, -9:0.115, -4:1,-8:1][T][|, 1:-0.801, p:0.995, r:0.982, r:1][*]LLLLLLLLRRcqfffffffmmmmmmmIIX[G][S]
+fitness:1.1632354240961384
+
+org:
+genotype:LLLLLLLLRCQQQfffMMMMX[*]LLLLLLLLLQQmmmiiX[N, s:0.056, si:2][T, rz:0][|, 3:0.647, p:0.987, r:0.849]LLLLLcQfffffffMMiiiX[N, si:-3.426, -2:1, -4:1][Gpart][Gpart, ry:-0.448, rz:0]LLLLLLLLLLLrqffffmmX[N,1:1][N, 1:1.201,si:2,1:-0.223,4:1,0:-0.951,-1:1][T, rz:-2.532][|, 1:-0.801, p:0.995][*]LLLLLLLLRRcqfffffffmmmmmmIIX[T][S]
+fitness:1.1632250163450601
+
+org:
+genotype:LLLLLLLLRCQQQfffMMMMX[N,3:1][*]LLLLLLLLLQQmmmiiX[S][Gpart][T][N, si:-999, 4:2.534, in:0, 2:0.193][|, 3:0.647, p:0.987, r:0.849]LLLLLcQfffffffMMiiiX[N, si:-3.426][Gpart][Gpart, ry:-0.448]LLLLLLLLLLLrqffffmmX[N, -2:-1.609,-6:1,-10:1][T, rz:-1.542][|, 1:-0.801, p:0.995][*]LLLLLLLLRcqfffffffmmmmmmIIX
+fitness:1.163210912109026
+
+org:
+genotype:LLLLLLLLRCQQQfffMMMMX[*]LLLLLLLLLQQmmmiiX[T][N, si:-999, 4:2.534, in:0, 2:0.193][|, 3:0.647, p:0.987, r:0.849]LLLLLcQfffffffMMiiX[N, si:-3.426][Gpart][Gpart, ry:-0.448]LLLLLLLLLLLrqffffmmX[N, -2:-1.609][N, 1:1][T, rz:-1.542][|, 1:-0.801, p:0.995][*]LLLLLLLLRcqfffffffmmmmmmIIX[S]
+fitness:1.1631008648323653
+
+org:
+genotype:LLLLLLLLRCQQQfffMMMMX[*]LLLLLLLLLQQmmmiiX[T][N, si:-999, 4:2.534, in:0, 2:0.193][|, 3:0.647, p:0.953, r:0.849]LLLLLcQfffffffMMiiX[N, si:999, 3:0.045][Gpart][Gpart, ry:-0.448]LLLLLLLLLLLrqffffmmX[N, -2:-1.609][N, 2:1][T][T, rz:-0.691][|, 1:-0.801, p:0.995][*]LLLLLLLLRccqfffffffmmmmmIIX[S]
+fitness:1.1629377210889955
+
+org:
+genotype:LLLLLLLLRCQQQfffMMMMX[*]LLLLLLLLLQQmmmiiX[Gpart][T][N, si:-999, 4:2.534, in:0, 2:0.193, -1:0.815,10:1][|, 3:0.647, p:0.953, r:0.849]LLLLLcQfffffffMMiiX[N, si:999,4:1][Gpart][Gpart, ry:-0.448]LLLLLLLLLLLrqffffmmX[N, -2:-1.609][N, 2:1,-8:1][T][T, rz:-0.691][|, 1:-0.801, p:0.995][*]LLLLLLLLRccqfffffffmmmmmIX
+fitness:1.1628765824101823
+
+org:
+genotype:LLLLLLLLRCQQQfffMMMMX[*]LLLLLLLLLQQmmmiiX[T][N, si:-999, 5:2.534, in:0, 3:0.193, -1:0.815, 10:1][|, 4:0.647, p:0.953, r:0.849]LLLLLcQfffffffMMiiX[N, -2:1][N, si:999][Gpart, ry:0][Gpart, ry:-0.448]LLLLLLLLLLLrqffffmmX[N, -2:-1.609][T][T, rz:-0.691][|, 1:-0.801, p:0.995][*]LLLLLLLLRccqfffffffmmmmmIX
+fitness:1.16279686020982
+
+org:
+genotype:LLLLLLLLRCQQQfffMMMMX[*]LLLLLLLLLQQmmmiiX[T][N, si:-999, 4:2.534, in:0, 2:0.193, -1:0.815,10:1][|, 3:0.647, p:0.953, r:0.849]LLLLLcQfffffffMMiiX[N, si:999][Gpart,ry:0][Gpart, ry:-0.448]LLLLLLLLLLLrqffffmmX[N, -2:-1.609][N, 2:1][T][T, rz:-0.691][|, 1:-0.801, p:0.995][*]LLLLLLLLRccqfffffffmmmmmIX
+fitness:1.1627830788779507
+
+org:
+genotype:LLLLLLLLRCQQQfffMMMMX[*]LLLLLLLLLQQmmmiiX[T][N, si:-999, 4:2.534, in:0, 2:0.193, -1:0.815,10:1][|, 3:0.647, p:0.953, r:0.849]LLLLLcQfffffffMMiiX[N, si:999][Gpart,ry:0][Gpart, ry:-0.448]LLLLLLLLLLLrqffffmmX[N, -2:-1.609][N, 2:1][T][T, rz:-0.691][|, 1:-0.801, p:0.995][*]LLLLLLLLRccqfffffffmmmmmIX
+fitness:1.1623845692635315
+
