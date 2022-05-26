@@ -8,11 +8,11 @@ import argparse
 import math
 from math import floor
 
-from GAE.GraphDataset import GraphDataset
-from GAE.autoencoder import EncoderGAE,EncoderVGAE, DecoderX, DecoderA, VGAE, GAE, Weights
-from GAE.utils import *
-from GAE.custom_layers import ConvTypes
-from GAE.LossManager import LossManager, LossTypes
+from GAE.frams_interface.GraphDataset import GraphDataset
+from GAE.architecture.autoencoder import EncoderGAE,EncoderVGAE, DecoderX, DecoderA, VGAE, GAE, Weights
+from GAE.architecture.utils import *
+from GAE.architecture.base.custom_layers import ConvTypes
+from GAE.architecture.base.LossManager import LossManager, LossTypes
 
 # os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
@@ -140,7 +140,7 @@ if parsed_args.loss is not LossTypes.No:
 else:
     custom_loss = None
 
-train, test = GraphDataset(parsed_args.pathframs, parsed_args.pathdata,max_examples=999999,fitness=fitness,size_of_adj=parsed_args.adjsize).read()
+train, test = GraphDataset(parsed_args.pathframs, parsed_args.pathdata,max_examples=200,fitness=fitness,size_of_adj=parsed_args.adjsize).read()
 # train, test = GraphDataset(parsed_args.pathframs, parsed_args.pathdata,max_examples=500,fitness=fitness,size_of_adj=parsed_args.adjsize).read()
 
 loader_train = data.BatchLoader(train, batch_size=parsed_args.batchsize)

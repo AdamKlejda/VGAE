@@ -1,7 +1,7 @@
 from re import A, S
 
 from tensorflow.python.ops.gen_control_flow_ops import no_op
-from GAE.utils import gen_f0_from_tensors,FramsManager
+from GAE.frams_interface.manager import gen_f0_from_tensors,FramsManager
 from FramsticksLib import *
 from scipy.spatial import distance
 from enum import Enum

@@ -7,12 +7,12 @@ import sys
 import argparse
 # from math import floor
 
-from GAE.GraphDataset import GraphDataset
-from GAE.autoencoder import EncoderGAE,EncoderVGAE, DecoderX, DecoderA, VGAE, GAE
-from GAE.utils import *
+from GAE.frams_interface.GraphDataset import GraphDataset
+from GAE.architecture.autoencoder import EncoderGAE,EncoderVGAE, DecoderX, DecoderA, VGAE, GAE
+from GAE.architecture.utils import *
 from GAE.custom_layers import *
-from GAE.LossManager import LossManager, LossTypes
-from GAE.framasToGraph import FramsTransformer
+from GAE.architecture.base.LossManager import LossManager, LossTypes
+from GAE.frams_interface.framasToGraph import FramsTransformer
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 

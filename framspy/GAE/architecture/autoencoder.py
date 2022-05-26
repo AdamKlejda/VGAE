@@ -1,9 +1,10 @@
 import re
+import tensorflow as tf
 from tensorflow.keras.models import Model
 import tensorflow.keras.layers as layers
-import tensorflow as tf
 from tensorflow import keras
-from GAE.custom_layers import *
+from GAE.architecture.base.custom_layers import *
+from GAE.architecture.base.weights import Weights
 
 class Sampling(layers.Layer):
 
@@ -13,52 +14,6 @@ class Sampling(layers.Layer):
         dim = tf.shape(z_mean)[1]
         epsilon = tf.keras.backend.random_normal(shape=(batch, dim))
         return z_mean + tf.exp(0.5 * z_log_var) * epsilon
-
-class Weights():
-    # new weight = capped(max/cur)
-    min_weight = 1.0
-    max_weight = 5.0
-    weight_loss_A = 1.0
-    weight_loss_X = 1.0
-    weight_custom_loss = 1.0
-    weight_mask_loss = 1.0
-
-    # def __init__(self,min_weight=0.1,max_weight=10.0,weight_loss_A=1.0,weight_loss_X=1.0,weight_custom_loss=1.0,weight_mask_loss=1.0):
-    #     self.min_weight = min_weight
-    #     self.max_weight = max_weight
-    #     self.weight_loss_A = weight_loss_A
-    #     self.weight_loss_X = weight_loss_X
-    #     self.weight_custom_loss = weight_custom_loss
-    #     self.weight_mask_loss = weight_mask_loss
-    
-    def adjust_weight(self,weight):
-        # takes weight as an imput and makes sure that the it is in the allowed range of min_weight and max_weight
-        if weight > self.max_weight:
-            return self.max_weight
-        elif weight < self.min_weight:
-            return self.min_weight
-        else:
-            return weight
-
-    def set_weights_for_loss(self,losses,epoch):
-        # loss, reconstruction_loss, reconstruction_lossA, reconstruction_lossX, reconstruction_lossMask = losses
-        
-        custom_loss = losses[0]-losses[1]
-        new_max_loss = losses[0]/4 #2000-(10*epoch)/4
-        self.weight_loss_A = self.adjust_weight(new_max_loss/losses[2])
-
-        self.weight_loss_X = self.adjust_weight(new_max_loss/losses[3])
-        
-        if custom_loss > 0:
-            self.weight_custom_loss = self.adjust_weight(new_max_loss/custom_loss)
-        
-        self.weight_mask_loss = self.adjust_weight(new_max_loss/losses[4])
-
-    def print_weights_for_loss(self):
-        print("weight_loss_A: ",self.weight_loss_A)
-        print("weight_loss_X: ",self.weight_loss_X)
-        print("weight_custom_loss: ",self.weight_custom_loss)
-        print("weight_mask_loss: ",self.weight_mask_loss)
         
 class EncoderVGAE(Model):
     def __init__(self, latent_dim,n_hidden,num_conv, num_dense,convtype=ConvTypes.GCNConv):
@@ -274,7 +229,7 @@ class DecoderX(Model):
         return decodedX
 
 class VGAE(keras.Model,Weights):
-    def __init__(self, encoder, decoderA, decoderX,custom_loss=None, **kwargs):
+    def __init__(self, encoder, decoderA, decoderX, custom_loss=None, **kwargs):
         super(VGAE, self).__init__(**kwargs)
         
         self.encoder = encoder
@@ -282,8 +237,8 @@ class VGAE(keras.Model,Weights):
         self.decoderX = decoderX
         self.custom_loss = custom_loss
 
-    def call(self,data,training=False):
-        x_true,a_true,y_true = data
+    def call(self, data, training=False):
+        x_true, a_true, y_true = data
         z_mean, z_log_var, z = self.encoder.call([x_true,a_true])
 
         reconstructionA = self.decoderA.call(z)
@@ -292,8 +247,7 @@ class VGAE(keras.Model,Weights):
     
     def test_step(self, data):
         
-        x_true,a_true,y_true = data
-
+        x_true, a_true, y_true = data
         z_mean, z_log_var, z = self.encoder.call([x_true,a_true])
 
         reconstructionA = self.decoderA.call(z)

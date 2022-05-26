@@ -1,15 +1,13 @@
 from framsfiles import reader as framsreader
-from GAE.framasToGraph import FramsTransformer
-from GAE.utils import * 
+from GAE.frams_interface.framasToGraph import FramsTransformer
+from GAE.frams_interface.manager import * 
 from FramsticksLib import *
-
 from spektral.data import Dataset
 
 
 import fnmatch
 import os
 import numpy as np
-import random 
 from sklearn.model_selection import train_test_split
 
 class GraphData(Dataset):
