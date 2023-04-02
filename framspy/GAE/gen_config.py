@@ -1,11 +1,11 @@
 PATH_FRAMS="~/"
-PATH_DATA ="graphs/gen/"
+PATH_DATA ="graphs/gen_vertpos_new/"
 PATH_OUT = "models/"
-PATH_CONFIGS = "configs/"
+PATH_CONFIGS = "ae_configs/"
 EPOCHS = 200
 BATCH_SIZE = 256
 ADJ_SIZE = 15
-NUM_FEATURES = 3
+NUM_FEATURES = 4
 LEARNING_RATE = 0.01
 
 def create_file(variational,convtype,latentdim, nhidden, convenc, denseenc, densedeca, convdecx, densedecx, loss):
@@ -31,14 +31,14 @@ def create_file(variational,convtype,latentdim, nhidden, convenc, denseenc, dens
 
 latentdim = [15]
 nhidden = [64]
-convenc = [1,2]
+convenc = [2]
 denseenc = [2]
 densedeca = [1]
 convdecx = [1]
 densedecx = [2]
-convtypes = ["gcsconv","gcnconv","armaconv","gatconv",]
-variational=['True','False']
-loss= ['parts','fitness','dissim','None'] #
+convtypes = ["gcsconv"]#,"gcnconv","armaconv","gatconv",]
+variational=['True']#,'False']
+loss= ['None']#'parts','fitness','dissim'] #
 for v in variational:
     for l in latentdim:
         for nh in nhidden:

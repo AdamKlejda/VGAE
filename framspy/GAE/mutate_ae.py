@@ -5,15 +5,15 @@ from tensorflow import keras
 import os
 import sys
 import argparse
-# from math import floor
+import math
 
-from GAE.GraphDataset import GraphDataset
-from GAE.autoencoder import EncoderGAE,EncoderVGAE, DecoderX, DecoderA, VGAE, GAE
-from GAE.utils import *
+from GAE.frams_interface.GraphDataset import GraphDataset
+from GAE.architecture.autoencoder import EncoderGAE,EncoderVGAE, DecoderX, DecoderA, VGAE, GAE
+from GAE.architecture.utils import *
 from GAE.custom_layers import *
-from GAE.custom_layers import ConvTypes
-from GAE.LossManager import LossManager, LossTypes
-from GAE.framasToGraph import FramsTransformer
+from GAE.architecture.base.LossManager import LossManager, LossTypes
+from GAE.frams_interface.framasToGraph import FramsTransformer
+from GAE.frams_interface.manager import gen_f0_from_tensors, FramsManager
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
@@ -22,64 +22,10 @@ def ensureDir(string):
         return string
     else:
         raise NotADirectoryError(string)
-        
-def get_convType(name):
-    if name =="gcnconv":
-        return ConvTypes.GCNConv
-    elif name =="armaconv":
-        return ConvTypes.ARMAConv
-    elif name =="eccconv":
-        return ConvTypes.ECCConv
-    elif name =="gatconv":
-        return ConvTypes.GATConv
-    elif name =="gcsconv":
-        return ConvTypes.GCSConv
-    
-def get_Loss(name):
-    if name =="joints":
-        return LossTypes.joints
-    elif name =="parts":
-        return LossTypes.parts
-    elif name =="fitness":
-        return LossTypes.fitness
-    elif name =="dissim":
-        return LossTypes.dissim
-    elif name =="None":
-        return LossTypes.No
-    elif name == "No":
-        return LossTypes.No
-
-
-def load_config(pathconfig):
-    with open(pathconfig) as file:
-        lines = file.readlines()
-        lines = [line.rstrip() for line in lines]
-    params_dict = {} 
-    params_dict['pathframs']="/home/inf131778/Framsticks50rc19/"
-    params_dict['pathdata']=lines[1]
-    params_dict['pathout']="/home/inf131778/VGAE/framspy/models_vertpos/"
-    params_dict['batchsize']=int(lines[3])
-    params_dict['adjsize']=int(lines[4])
-    params_dict['numfeatures']=int(lines[5])
-    params_dict['latentdim']=int(lines[6])
-    params_dict['nhidden']=int(lines[7])
-    params_dict['convenc']=int(lines[8])
-    params_dict['denseenc']=int(lines[9])
-    params_dict['densedeca']=int(lines[10])
-    params_dict['convdecx']=int(lines[11])
-    params_dict['densedecx']=int(lines[12])
-    params_dict['learningrate']=float(lines[13])
-    params_dict['epochs']=int(lines[14])
-    params_dict['convtype']=get_convType(lines[15])
-    params_dict['variational']=lines[16]
-    params_dict['loss']=get_Loss(lines[17])
-    params_dict['trainid']=lines[18]
-    return params_dict
-
-             
+                    
              
 class AE_evolalg:
-    def __init__(self,path_config) -> None:
+    def __init__(self,path_config,train_id) -> None:
         self.params_dict = load_config(path_config)
 
         self.frams_manager = FramsManager(self.params_dict['pathframs'])
@@ -110,7 +56,7 @@ class AE_evolalg:
         self.model_name = ("model_enc_"+str(self.params_dict['convenc'])+"_"+str(self.params_dict['denseenc'])+
                     "_deca"+str(self.params_dict['densedeca'])+
                     "_decx"+str(self.params_dict['convdecx'])+"_"+str(self.params_dict['densedecx'])+
-                    "_train_id_"+str(self.params_dict['trainid'])
+                    "_train_id_"+str(train_id)
                     )
                     
         if self.params_dict['loss'] is not LossTypes.No:
@@ -165,8 +111,8 @@ class AE_evolalg:
         else:
             self.autoencoder = GAE(encoder,decoderA,decoderX,custom_loss)
 
-        opt = keras.optimizers.Adam(learning_rate=current_learning_rate)
-        self.autoencoder.compile(optimizer=opt)
+        self.opt = keras.optimizers.Adam(learning_rate=current_learning_rate)
+        self.autoencoder.compile(optimizer=self.opt)
 
         (x,a),y = next(loader_train)
         _ = self.autoencoder.train_step([(tf.convert_to_tensor(x)),
@@ -232,8 +178,51 @@ class AE_evolalg:
         print(len(geno),len(idx))
         return idx, geno
 
+    def train_autoencoder(self, training_population):
 
+        train, test = GraphDataset(path_frames=self.params_dict['pathframs'],size_of_adj=self.params_dict['adjsize'],max_examples=500).convert(training_population)
 
+        loader_train = data.BatchLoader(train, batch_size=self.params_dict['batchsize'])
+        loader_test = data.BatchLoader(test, batch_size=self.params_dict['batchsize'])
+
+        steps_train = math.ceil(train.n_graphs/self.params_dict['batchsize'])
+        steps_test = math.ceil(test.n_graphs/self.params_dict['batchsize'])
+        e = 0
+
+        losses_all_train = []
+        losses_all_test = []
+        while True:
+            if current_learning_rate > parsed_args.learningrate * pow(0.7,math.floor(e/40)):
+                current_learning_rate = parsed_args.learningrate * pow(0.7,math.floor(e/40))
+                self.opt.lr.assign(current_learning_rate)
+            print("EPOCH",e)
+            loss=None
+            losses_all = []
+            for _ in range(steps_train):        
+                (x,a),y= next(loader_train)
+                loss = self.autoencoder.train_step([tf.convert_to_tensor(x),
+                                            tf.convert_to_tensor(a),
+                                            y])
+                losses_all.append([float(keras.backend.get_value(loss[l])) for l in loss])
+                if tf.math.is_nan(loss['loss']):
+                    print("LOSS == NAN")
+                    break
+                
+            if tf.math.is_nan(loss['loss']):
+                print("LOSS == NAN")
+                break
+            avg_losses_all = np.mean(losses_all,axis=0)
+            np.set_printoptions(suppress=True, precision=3)
+            print(avg_losses_all)
+            losses_all_train.append(avg_losses_all)
+            self.autoencoder.set_weights_for_loss(np.mean(losses_all_train[-5:],axis=0),e)
+            
+            test_loses = test_model(self.autoencoder,loader_test, steps_test, self.variational)
+            losses_all_test.append(test_loses)
+            if e%5 == 0:
+                save_model(self.path_out, self.model_name, losses_all_train, losses_all_test, autoencoder, Variational=self.variational)
+            print("Loss train: ",np.mean(avg_losses_all[0]))
+            print("Loss test: ", np.mean(test_loses[0]))
 
 def parseArguments():
     parser = argparse.ArgumentParser(

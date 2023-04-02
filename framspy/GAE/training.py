@@ -8,11 +8,11 @@ import argparse
 import math
 from math import floor
 
-from GAE.GraphDataset import GraphDataset
-from GAE.autoencoder import EncoderGAE,EncoderVGAE, DecoderX, DecoderA, VGAE, GAE
-from GAE.utils import *
-from GAE.custom_layers import ConvTypes
-from GAE.LossManager import LossManager, LossTypes
+from GAE.frams_interface.GraphDataset import GraphDataset
+from GAE.architecture.autoencoder import EncoderGAE,EncoderVGAE, DecoderX, DecoderA, VGAE, GAE, Weights
+from GAE.architecture.utils import *
+from GAE.architecture.base.custom_layers import ConvTypes
+from GAE.architecture.base.LossManager import LossManager, LossTypes
 
 # os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
@@ -45,22 +45,6 @@ def save_config(parsed_args,path_args):
         file.write(str(parsed_args.trainid)+"\n")       #trainid
 
 
-def test_model(autoencoder,data_loader,steps_test,variational):
-    loss_all =[]
-    for _ in range(steps_test):
-        (x,a),y= next(data_loader)
-        if variational:
-            total_loss,reconstruction_loss,reconstruction_lossA,reconstruction_lossX,reconstruction_lossMask,kl_loss = autoencoder.test_step([(tf.convert_to_tensor(x)),
-                                    tf.convert_to_tensor(a),
-                                    y])
-            loss_all.append([total_loss,reconstruction_loss,reconstruction_lossA,reconstruction_lossX,reconstruction_lossMask,kl_loss])
-
-        else:
-            total_loss,reconstruction_loss,reconstruction_lossA,reconstruction_lossX,reconstruction_lossMask = autoencoder.test_step([(tf.convert_to_tensor(x)),
-                                    tf.convert_to_tensor(a),
-                                    y])
-            loss_all.append([total_loss,reconstruction_loss,reconstruction_lossA,reconstruction_lossX,reconstruction_lossMask])
-    return np.array(loss_all).mean(axis=0)
 
 def parseArguments():
     parser = argparse.ArgumentParser(
@@ -140,7 +124,7 @@ if parsed_args.loss is not LossTypes.No:
 else:
     custom_loss = None
 
-train, test = GraphDataset(parsed_args.pathframs, parsed_args.pathdata,max_examples=999999,fitness=fitness,size_of_adj=parsed_args.adjsize).read()
+train, test = GraphDataset(parsed_args.pathframs, parsed_args.pathdata, max_examples=1000000, fitness=fitness, size_of_adj=parsed_args.adjsize).read()
 
 loader_train = data.BatchLoader(train, batch_size=parsed_args.batchsize)
 loader_test = data.BatchLoader(test, batch_size=parsed_args.batchsize)
@@ -206,31 +190,36 @@ steps_test = math.ceil(test.n_graphs/parsed_args.batchsize)
 
 for e in range(len(losses_all_train),epochs):
 
-    if current_learning_rate > parsed_args.learningrate * pow(0.7,floor(e/40)):
-        current_learning_rate = parsed_args.learningrate * pow(0.7,floor(e/40))
+    if current_learning_rate > parsed_args.learningrate * pow(0.9,floor(e/30)):
+        current_learning_rate = parsed_args.learningrate * pow(0.9,floor(e/30))
         opt.lr.assign(current_learning_rate)
     print("EPOCH",e)
     loss=None
-    avg_loss = []
+    losses_all = []
     for _ in range(steps_train):        
         (x,a),y= next(loader_train)
         loss = autoencoder.train_step([tf.convert_to_tensor(x),
                                       tf.convert_to_tensor(a),
                                       y])
-        avg_loss.append(loss['loss'])
+        losses_all.append([float(keras.backend.get_value(loss[l])) for l in loss])
         if tf.math.is_nan(loss['loss']):
             print("LOSS == NAN")
             break
+        
     if tf.math.is_nan(loss['loss']):
         print("LOSS == NAN")
         break
-    losses_all_train.append([float(keras.backend.get_value(loss[l])) for l in loss])
+    avg_losses_all = np.mean(losses_all,axis=0)
+    np.set_printoptions(suppress=True,precision=3)
+    print(avg_losses_all)
+    losses_all_train.append(avg_losses_all)
+    autoencoder.set_weights_for_loss(np.mean(losses_all_train[-5:],axis=0),e)
     
     test_loses = test_model(autoencoder,loader_test,steps_test,variational)
     losses_all_test.append(test_loses)
     if e%5 == 0:
         save_model(PATH_OUT,MODEL_NAME,losses_all_train,losses_all_test,autoencoder,Variational=variational)
-    print("Loss train: ",np.mean(avg_loss))
+    print("Loss train: ",np.mean(avg_losses_all[0]))
     print("Loss test: ", np.mean(test_loses[0]))
 
 print("EPOCH",epochs)

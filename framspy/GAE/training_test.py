@@ -211,46 +211,46 @@ epochs = parsed_args.epochs
 
 ranges = [0.0001,0.000333,0.001,0.00333,0.01,0.0333,0.1,0.333,1,3.333]
 
-(x,a),y = next(loader_train)
+# (x,a),y = next(loader_train)
 
-if variational == True:
-    z_mean, z_log_var, z_training  = autoencoder.encoder([tf.convert_to_tensor(x),
-                             tf.convert_to_tensor(a)])
-else:
-    z_training = autoencoder.encoder([tf.convert_to_tensor(x),
-                             tf.convert_to_tensor(a)])
-z_random = np.random.uniform(-10,10,size = (NUM_EXAMP,parsed_args.latentdim))
+# if variational == True:
+#     z_mean, z_log_var, z_training  = autoencoder.encoder([tf.convert_to_tensor(x),
+#                              tf.convert_to_tensor(a)])
+# else:
+#     z_training = autoencoder.encoder([tf.convert_to_tensor(x),
+#                              tf.convert_to_tensor(a)])
+# z_random = np.random.uniform(-10,10,size = (NUM_EXAMP,parsed_args.latentdim))
 
-def generate_shifted(z, ranges,name):
-    for r in ranges:
-        shift = np.random.uniform(-r,r,size = (NUM_EXAMP,parsed_args.latentdim))
-        shifted_z = z+shift
-        dec_a = autoencoder.decoderA(tf.convert_to_tensor(z))
-        dec_x = autoencoder.decoderX([tf.convert_to_tensor(z),dec_a])
+# def generate_shifted(z, ranges,name):
+#     for r in ranges:
+#         shift = np.random.uniform(-r,r,size = (NUM_EXAMP,parsed_args.latentdim))
+#         shifted_z = z+shift
+#         dec_a = autoencoder.decoderA(tf.convert_to_tensor(z))
+#         dec_x = autoencoder.decoderX([tf.convert_to_tensor(z),dec_a])
         
-        shifted_dec_a = autoencoder.decoderA(tf.convert_to_tensor(shifted_z))
-        shifted_dec_x = autoencoder.decoderX([tf.convert_to_tensor(shifted_z),shifted_dec_a])
-        df_all = pd.DataFrame()
-        for i in range(NUM_EXAMP):
-            data_temp = {
+#         shifted_dec_a = autoencoder.decoderA(tf.convert_to_tensor(shifted_z))
+#         shifted_dec_x = autoencoder.decoderX([tf.convert_to_tensor(shifted_z),shifted_dec_a])
+#         df_all = pd.DataFrame()
+#         for i in range(NUM_EXAMP):
+#             data_temp = {
 
-                'decA' :[dec_a[i].numpy()],
-                'decX' :[dec_x[i].numpy()],
-                'z':[z[i]],
-                'shifted_dec_a' :[shifted_dec_a[i].numpy()],
-                'shifted_dec_x' :[shifted_dec_x[i].numpy()],
-                'shifted_z' :[shifted_z[i]],
-            }
+#                 'decA' :[dec_a[i].numpy()],
+#                 'decX' :[dec_x[i].numpy()],
+#                 'z':[z[i]],
+#                 'shifted_dec_a' :[shifted_dec_a[i].numpy()],
+#                 'shifted_dec_x' :[shifted_dec_x[i].numpy()],
+#                 'shifted_z' :[shifted_z[i]],
+#             }
 
-            data_df = pd.DataFrame(data_temp)
-            df_all = df_all.append(data_df)
+#             data_df = pd.DataFrame(data_temp)
+#             df_all = df_all.append(data_df)
 
-        df_all.to_pickle(path_save+"/{0}_{1}_{2}.pkl".format(name,-r,r))
+#         df_all.to_pickle(path_save+"/{0}_{1}_{2}.pkl".format(name,-r,r))
 
-generate_shifted(z_training,ranges,"z_training")
-print("generated z_training")
-generate_shifted(z_random,ranges,"z_random")
-print("generated z_random")
+# generate_shifted(z_training,ranges,"z_training")
+# print("generated z_training")
+# generate_shifted(z_random,ranges,"z_random")
+# print("generated z_random")
 
 # num_of_examples = 10
 # steps = 11
@@ -295,30 +295,30 @@ print("generated z_random")
 # steps_train = math.ceil(train.n_graphs/parsed_args.batchsize)
 # steps_test = math.ceil(test.n_graphs/parsed_args.batchsize)
 
-# num_of_examples = 200
+num_of_examples = 10
 
-# x,a = next(loader_train)           
-# dec_x, dec_a= autoencoder.call([tf.convert_to_tensor(x),tf.convert_to_tensor(a)])
+(x,a),y = next(loader_train)           
+dec_x, dec_a= autoencoder.call([tf.convert_to_tensor(x),tf.convert_to_tensor(a),y])
 
-# df_all = pd.DataFrame()
-# for i in range(num_of_examples):
-#     data_temp = {
-#         'trueA':[a[i]],
-#         'trueX':[x[i]],
-#         'decA' :[dec_a[i].numpy()],
-#         'decX' :[dec_x[i].numpy()],
-#     }
-#     data_df = pd.DataFrame(data_temp)
-#     df_all = df_all.append(data_df)
-#     np.set_printoptions(precision=0,suppress=True)
-#     print("TRUE A")
-#     print(a[i])
-#     print("RECONSTRUCTED A")
-#     print(dec_a[i])
-#     np.set_printoptions(precision=2,suppress=True)
+df_all = pd.DataFrame()
+for i in range(num_of_examples):
+    data_temp = {
+        'trueA':[a[i]],
+        'trueX':[x[i]],
+        'decA' :[dec_a[i].numpy()],
+        'decX' :[dec_x[i].numpy()],
+    }
+    data_df = pd.DataFrame(data_temp)
+    df_all = df_all.append(data_df)
+    np.set_printoptions(precision=0,suppress=True)
+    print("TRUE A")
+    print(a[i])
+    print("RECONSTRUCTED A")
+    print(dec_a[i])
+    np.set_printoptions(precision=2,suppress=True)
 
-#     print("TRUE X")
-#     print(x[i])
-#     print("RECONSTRUCTED X")
-#     print(dec_x[i])
-#     print("\n\n\n\n")
+    print("TRUE X")
+    print(x[i])
+    print("RECONSTRUCTED X")
+    print(dec_x[i])
+    print("\n\n\n\n")
