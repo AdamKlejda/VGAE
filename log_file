@@ -1,0 +1,126 @@
+{'pathframs': '/home/adam/Framsticks/Framsticks50rc19', 'pathdata': 'graphs/gen/', 'pathout': 'models/', 'batchsize': 256, 'adjsize': 15, 'numfeatures': 4, 'latentdim': 15, 'nhidden': 64, 'convtype': <ConvTypes.GCSConv: 'gcsconv'>, 'convenc': 1, 'denseenc': 2, 'densedeca': 1, 'convdecx': 1, 'densedecx': 2, 'learningrate': 0.01, 'epochs': 100, 'trainid': 1, 'variational': 'False', 'loss': <LossTypes.dissim: 'dissim'>, 'debug': False}
+VMNeuronManager.autoload: Neuro classes added: SeeLight PIDP Nn SeeLight2 S1 S0 PIDV Delay Light Thr 
+UserScripts.autoload: 19 user scripts added.
+Using Framsticks version: 5.0
+Home (writable) dir     : /home/adam/Framsticks/Framsticks50rc19/data
+Resources dir           : /home/adam/Framsticks/Framsticks50rc19/data
+
+Using Framsticks version: 5.0
+Home (writable) dir     : /home/adam/Framsticks/Framsticks50rc19/data
+Resources dir           : /home/adam/Framsticks/Framsticks50rc19/data
+
+Available objects: ['CheckpointEvent', 'Collision', 'CrCollision', 'Creature', 'CreatureSettings', 'CreatureSignals', 'CreatureSnapshot', 'Dictionary', 'ExpProperties', 'ExpState', 'ExtValue', 'File', 'FunctionReference', 'GenMan', 'GenManStats', 'GenePool', 'GenePools', 'Geno', 'Genotype', 'Interface', 'Joint', 'Loader', 'Math', 'MechJoint', 'MechPart', 'MessageCatcher', 'Model', 'ModelGeometry', 'ModelSymmetry', 'Neuro', 'NeuroClass', 'NeuroClassLibrary', 'NeuroDef', 'NeuroSignals', 'NeuronsSimEnabled', 'ODE', 'Orient', 'Part', 'Population', 'Populations', 'Ref', 'Signal', 'SignalView', 'SimilMeasure', 'SimilMeasureDistribution', 'SimilMeasureGreedy', 'SimilMeasureHungarian', 'Simulator', 'SlaveSimulators', 'StopEvent', 'String', 'UserScripts', 'Vector', 'WireframeAppearance', 'World', 'WorldMap', 'WorldSignals', 'XYZ', '__builtins__', '__cached__', '__doc__', '__file__', '__loader__', '__name__', '__package__', '__spec__', 'c_api', 'ctypes', 'home_dir', 'init', 'os', 're', 'res_dir', 'sim_params', 'stats', 'sys']
+
+Performing a basic test 1/2... OK.
+Performing a basic test 2/2... OK.
+Using settings: ['eval-allcriteria_new.sim']
+Simulator.load: Loading from 'eval-allcriteria_new.sim'
+Loader.load: Comments read from file follow:
+Loader.load:  Sample settings for evaluating many criteria of performance of a Framsticks creature.
+Loader.load:  See the "evalcount" parameter if you want to speed the evaluation up or have a more stable result.
+Loader.load:  Other important parameters are "Energy0" and "perfperiod".
+Loader.load:  Put this file in the "data" subdirectory within the Framsticks distribution.
+Simulator.load: Settings loaded from 'eval-allcriteria_new.sim'
+Using Framsticks version: 5.0
+Home (writable) dir     : /home/adam/Framsticks/Framsticks50rc19/data
+Resources dir           : /home/adam/Framsticks/Framsticks50rc19/data
+
+Using Framsticks version: 5.0
+Home (writable) dir     : /home/adam/Framsticks/Framsticks50rc19/data
+Resources dir           : /home/adam/Framsticks/Framsticks50rc19/data
+
+Available objects: ['CheckpointEvent', 'Collision', 'CrCollision', 'Creature', 'CreatureSettings', 'CreatureSignals', 'CreatureSnapshot', 'Dictionary', 'ExpProperties', 'ExpState', 'ExtValue', 'File', 'FunctionReference', 'GenMan', 'GenManStats', 'GenePool', 'GenePools', 'Geno', 'Genotype', 'Interface', 'Joint', 'Loader', 'Math', 'MechJoint', 'MechPart', 'MessageCatcher', 'Model', 'ModelGeometry', 'ModelSymmetry', 'Neuro', 'NeuroClass', 'NeuroClassLibrary', 'NeuroDef', 'NeuroSignals', 'NeuronsSimEnabled', 'ODE', 'Orient', 'Part', 'Population', 'Populations', 'Ref', 'Signal', 'SignalView', 'SimilMeasure', 'SimilMeasureDistribution', 'SimilMeasureGreedy', 'SimilMeasureHungarian', 'Simulator', 'SlaveSimulators', 'StopEvent', 'String', 'UserScripts', 'Vector', 'WireframeAppearance', 'World', 'WorldMap', 'WorldSignals', 'XYZ', '__builtins__', '__cached__', '__doc__', '__file__', '__loader__', '__name__', '__package__', '__spec__', 'c_api', 'ctypes', 'home_dir', 'init', 'os', 're', 'res_dir', 'sim_params', 'stats', 'sys']
+
+Performing a basic test 1/2... OK.
+Performing a basic test 2/2... OK.
+Using settings: ['eval-allcriteria_new.sim']
+Simulator.load: Loading from 'eval-allcriteria_new.sim'
+Loader.load: Comments read from file follow:
+Loader.load:  Sample settings for evaluating many criteria of performance of a Framsticks creature.
+Loader.load:  See the "evalcount" parameter if you want to speed the evaluation up or have a more stable result.
+Loader.load:  Other important parameters are "Energy0" and "perfperiod".
+Loader.load:  Put this file in the "data" subdirectory within the Framsticks distribution.
+Simulator.load: Settings loaded from 'eval-allcriteria_new.sim'
+Using Framsticks version: 5.0
+Home (writable) dir     : /home/adam/Framsticks/Framsticks50rc19/data
+Resources dir           : /home/adam/Framsticks/Framsticks50rc19/data
+
+[Errno 2] No such file or directory: 'graphs/gen/142-checkpoint.gen'
+pass
+[Errno 2] No such file or directory: 'graphs/gen/57-checkpoint.gen'
+pass
+[Errno 2] No such file or directory: 'graphs/gen/0-checkpoint.gen'
+pass
+[Errno 2] No such file or directory: 'graphs/gen/145-checkpoint.gen'
+pass
+[Errno 2] No such file or directory: 'graphs/gen/250-checkpoint.gen'
+pass
+[Errno 2] No such file or directory: 'graphs/gen/195-checkpoint.gen'
+pass
+[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+NEXT
+Trying to load the model
+PATH: models/dissim/GAE/numfeatures4/adjsize15/batchsize256/latentdim15/nhidden64/learningrate0.01/convtypeGCSConv/model_enc_1_2_deca1_decx1_2_train_id_1
+Error while loading weights  Unable to open file (unable to open file: name = 'models/dissim/GAE/numfeatures4/adjsize15/batchsize256/latentdim15/nhidden64/learningrate0.01/convtypeGCSConv/model_enc_1_2_deca1_decx1_2_train_id_1/model.hdf5', errno = 2, error message = 'No such file or directory', flags = 0, o_flags = 0)
+Error while loading Losses  [Errno 2] No such file or directory: 'models/dissim/GAE/numfeatures4/adjsize15/batchsize256/latentdim15/nhidden64/learningrate0.01/convtypeGCSConv/model_enc_1_2_deca1_decx1_2_train_id_1/losses_test.npy'
+EPOCH 0
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+Unable to repair gen
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
+NEXT
