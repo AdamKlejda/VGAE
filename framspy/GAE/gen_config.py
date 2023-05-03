@@ -1,5 +1,5 @@
 PATH_FRAMS="~/"
-PATH_DATA ="graphs/gen/"
+PATH_DATA ="graphs/gen_vertpos_new/"
 PATH_OUT = "models/"
 PATH_CONFIGS = "../../configs/"
 EPOCHS = 200
